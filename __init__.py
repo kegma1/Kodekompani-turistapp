@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, session, redirect
 import secrets
 
 
@@ -12,7 +12,12 @@ def index():
 
 @app.route("/signup", methods = ["GET", "POST"])
 def sign_up():
-    return render_template("usercreation.html", title="sign up")
+    from form.signup import SignUpForm
+    signup_form = SignUpForm(request.form)
+    if request.method == "POST" and signup_form.validate():
+        print(signup_form)
+
+    return render_template("signup.html", title="sign up", form=signup_form)
 
 if __name__ == "__main__":
     app.run()
