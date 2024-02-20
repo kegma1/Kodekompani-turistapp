@@ -111,6 +111,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+turistapp/
 
 # Spyder project settings
 .spyderproject
@@ -129,3 +130,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# db config
+db_connection_config.py
+
+# vscode settings
+.vscode/

@@ -1,0 +1,16 @@
+blinker
+click
+colorama
+Flask
+Flask-Login
+Flask-SQLAlchemy
+greenlet
+itsdangerous
+Jinja2
+MarkupSafe
+mysql-connector
+mysql-connector-python
+protobuf
+SQLAlchemy
+typing_extensions
+Werkzeug
