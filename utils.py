@@ -35,6 +35,13 @@ class User(Base):
                            primaryjoin=id==Friend.user_id,
                            secondaryjoin=id==Friend.friend_id)
 
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.age_group = "0-100"
+        self.encrypted_password = password
+
+
 class Attraction(Base):
     __tablename__ = 'attractions'
     id = Column(Integer, primary_key=True)
@@ -67,4 +74,3 @@ def create_tables():
 
 if __name__ == "__main__":
     create_tables()
-    

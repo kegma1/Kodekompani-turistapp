@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, session, redirect
+from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
-
+from utils import Session, User
 
 app = Flask(__name__)
 
@@ -15,8 +16,13 @@ def sign_up():
     from form.signup import SignUpForm
     signup_form = SignUpForm(request.form)
     if request.method == "POST" and signup_form.validate():
-        print(signup_form)
-
+        new_user = User(
+            signup_form.username.data,
+            signup_form.email.data,
+            generate_password_hash(signup_form.password.data)
+        )
+        Session.add(new_user)
+        Session.commit()
     return render_template("signup.html", title="sign up", form=signup_form)
 
 if __name__ == "__main__":
