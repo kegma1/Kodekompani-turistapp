@@ -1,5 +1,3 @@
-db_login.py
-db_connection_config.py
 *.mwb.bak
 # Byte-compiled / optimized / DLL files
 __pycache__/

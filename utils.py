@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 
 # Import database configuration variables
-# from eks_db_login import HOST, USER, PASSWORD, DATABASE
+# from db_connection_config import HOST, USER, PASSWORD, DATABASE
 from db_connection_config import HOST, USER, PASSWORD, DATABASE
 
 # Database URL and Engine Setup
