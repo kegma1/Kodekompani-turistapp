@@ -1,5 +1,29 @@
 {% extends "base.html" %}
 {% block body %}
+<section>
+    <table>
+        <tr>
+            <th> ID: </th>
+            <th> Username: </th>
+            <th> Email: </th>
+            <th> Age group: </th>
+            <th> Attraction: </th>
+            <th> Achievements: </th>
+            <th> Friends: </th>
+        </tr>
+    {% for user in users %}
+        <tr>
+            <td> {{ user.id }} </td>
+            <td> {{ user.username }} </td>
+            <td> {{ user.email }} </td>
+            <td> {{ user.age_group }} </td>
+            <td> {{ user.attractions }} </td>
+            <td> {{ user.achievements }} </td>
+            <td> {{ user.friends }} </td>
+        </tr>
+    {% endfor %}
+    </table>
 
-
+    <a href="{{ url_for("index") }}">back to menu</a>
+</section>
 {% endblock %}
