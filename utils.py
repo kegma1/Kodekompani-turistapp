@@ -12,7 +12,7 @@ engine = create_engine(DATABASE_URL, echo=True)
 
 # Session and Base Setup
 session_factory = sessionmaker(bind=engine)
-Session = scoped_session(session_factory)
+db_session = scoped_session(session_factory)
 Base = declarative_base()
 
 # Model Definitions

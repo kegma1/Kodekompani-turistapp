@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError
-from utils import Session, User
+from utils import db_session, User
 
 class SignUpForm(Form):
     username = StringField("Username", [validators.data_required(), validators.Length(min=1, max=255)])
@@ -8,10 +8,10 @@ class SignUpForm(Form):
     confirm = PasswordField("Confirm password")
 
     def validate_username(self, username):
-        if Session.query(User.id).filter_by(username=username.data).first() is not None:
+        if db_session.query(User.id).filter_by(username=username.data).first() is not None:
             raise ValidationError("Username is already taken.")
 
 
     def validate_email(self, email):
-        if Session.query(User.id).filter_by(email=email.data).first() is not None:
+        if db_session.query(User.id).filter_by(email=email.data).first() is not None:
             raise ValidationError("Email is already taken.")
