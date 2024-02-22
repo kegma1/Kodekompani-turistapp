@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError
-from werkzeug.security import check_password_hash
+from utils import Session, User
 
 class SignUpForm(Form):
     username = StringField("Username", [validators.data_required(), validators.Length(min=4, max=255)])
@@ -8,7 +8,10 @@ class SignUpForm(Form):
     confirm = PasswordField("Confirm password")
 
     def validate_username(self, username):
-        pass # cant validate username without database
+        if Session.query(User.id).filter_by(username=username.data).first() is not None:
+            raise ValidationError("Username is allready taken.")
+
 
     def validate_email(self, email):
-        pass # cant validate email without database
+        if Session.query(User.id).filter_by(email=email.data).first() is not None:
+            raise ValidationError("Username is allready taken.")

@@ -23,6 +23,7 @@ def sign_up():
         )
         Session.add(new_user)
         Session.commit()
+        return redirect(url_for("index"))
     return render_template("signup.html", title="sign up", form=signup_form)
 
 if __name__ == "__main__":
