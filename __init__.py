@@ -27,5 +27,10 @@ def sign_up():
         
     return render_template("signup.html", title="sign up", form=signup_form)
 
+@app.route("/login", methods = ["GET", "POST"])
+def login(): 
+    pass
+    
+
 if __name__ == "__main__":
     app.run()
