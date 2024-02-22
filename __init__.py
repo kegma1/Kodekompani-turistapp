@@ -29,7 +29,10 @@ def sign_up():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login(): 
-    pass
+    from form.login import LogInForm
+    login_form = LogInForm(request.form)
+    
+    return redirect(url_for("/login"), title="Login", form = login_form)
     
 
 if __name__ == "__main__":

@@ -9,9 +9,9 @@ class SignUpForm(Form):
 
     def validate_username(self, username):
         if Session.query(User.id).filter_by(username=username.data).first() is not None:
-            raise ValidationError("Username is allready taken.")
+            raise ValidationError("Username is already taken.")
 
 
     def validate_email(self, email):
         if Session.query(User.id).filter_by(email=email.data).first() is not None:
-            raise ValidationError("Username is allready taken.")
+            raise ValidationError("Email is already taken.")
