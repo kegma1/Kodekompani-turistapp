@@ -1,5 +1,5 @@
 from __main__ import app, request, User, generate_password_hash, Session, redirect, render_template, url_for
-from form.signup import SignUpForm
+from form.signup_form import SignUpForm
 
 @app.route("/signup", methods = ["GET", "POST"])
 def sign_up():
