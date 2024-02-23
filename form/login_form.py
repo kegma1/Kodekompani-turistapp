@@ -15,8 +15,6 @@ class LogInForm(Form):
         
     def validate_password(self, password):
         user_password = db_session.query(User.encrypted_password).filter_by(username= self.username.data).first()
-        print()
-        
         if user_password is not None and not check_password_hash(user_password[0], password.data):
             raise ValidationError("Password is not correct.")  
         
