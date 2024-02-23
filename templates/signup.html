@@ -6,6 +6,9 @@
     <form method="post">
         <dl>
             {{ render_field(form.username) }}
+            {{ render_field(form.first_name) }}
+            {{ render_field(form.last_name) }}
+            {{ render_field(form.year) }}
             {{ render_field(form.email) }}
             {{ render_field(form.password) }}
             {{ render_field(form.confirm) }}

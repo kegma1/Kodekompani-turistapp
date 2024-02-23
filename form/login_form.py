@@ -2,7 +2,6 @@ from wtforms import Form, StringField, PasswordField, validators, ValidationErro
 from utils import db_session, User
 from werkzeug.security import check_password_hash
 
-
 class LogInForm(Form):
     pass_min = 8
     pass_max = 255
@@ -15,8 +14,6 @@ class LogInForm(Form):
         
     def validate_password(self, password):
         user_password = db_session.query(User.encrypted_password).filter_by(username= self.username.data).first()
-        print()
-        
         if user_password is not None and not check_password_hash(user_password[0], password.data):
             raise ValidationError("Password is not correct.")  
         

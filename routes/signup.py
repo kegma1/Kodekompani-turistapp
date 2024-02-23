@@ -6,6 +6,8 @@ def sign_up():
     signup_form = SignUpForm(request.form)
     
     if request.method == "POST" and signup_form.validate():
+        full_name = f'{signup_form.first_name.data} {signup_form.last_name.data}'
+        
         new_user = User(
             signup_form.username.data,
             signup_form.email.data,
