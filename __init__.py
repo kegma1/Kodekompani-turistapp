@@ -10,6 +10,7 @@ import routes.index
 import routes.signup
 import routes.login
 import routes.admin
+import routes.profile
     
 
 if __name__ == "__main__":
