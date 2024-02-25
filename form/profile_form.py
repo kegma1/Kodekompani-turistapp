@@ -20,6 +20,3 @@ class ProfileForm(Form):
             raise ValidationError("Can't change to the previous username")
         if db_session.query(User.id).filter_by(username=username.data).first() is not None:
             raise ValidationError("Username is already taken.")
-        
-    def add_placeholder(self, field, val):
-        setattr(self, field, val)

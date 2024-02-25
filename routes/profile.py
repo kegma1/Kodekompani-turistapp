@@ -15,9 +15,7 @@ def profile():
 
         return redirect(url_for("index"))
 
-    print('TEST RESULT')    
-    print(info.username, info.email)
-    profile_form.add_placeholder("username", info.username)
-    profile_form.add_placeholder("email", info.email)
+    profile_form.username.data = info.username
+    profile_form.email.data = info.email
     return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email)
     
