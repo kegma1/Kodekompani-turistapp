@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 
@@ -26,8 +26,13 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
+    age = Column(String(20))
     age_group = Column(String(20))
+    full_name = Column(String(40))
+    bio = Column(String(150))
     encrypted_password = Column(String(255), nullable=False)
+    isAdmin = Column(Boolean)
+    profile_pic = Column(LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
     friends = relationship("User", 
@@ -40,7 +45,6 @@ class User(Base):
         self.email = email
         self.age_group = "0-100"
         self.encrypted_password = password
-
 
 class Attraction(Base):
     __tablename__ = 'attractions'
