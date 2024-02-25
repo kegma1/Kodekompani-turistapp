@@ -51,7 +51,7 @@ article, section {
 }
 
 .menu-container {
-    position: fixed;
+    position: relative;
     top: 0;
     right: 0;
     z-index: 100;
@@ -81,7 +81,7 @@ article, section {
 
 .menu-toggle {
     background: none;
-    border: none;
-    font-size: 24px; /* size of the hamburger icon */
+    border: lawngreen;
+    font-size: 48px; /* size of the hamburger icon */
     cursor: pointer;
 }
