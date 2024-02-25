@@ -4,11 +4,11 @@ body {
     color: whitesmoke;
     padding: 1vw;
     
-    background-image: url('/static/Backgound_Narvik_more_blurred.png');
+/*     background-image: url('/static/Backgound_Narvik_more_blurred.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; */
 }
 
 #ContentBody {
@@ -51,28 +51,37 @@ article, section {
 }
 
 .menu-container {
-    position: relative;
+    position: fixed;
     top: 0;
     right: 0;
-    z-index: 100;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    transform: translateX(0%);
+    transition: transform 0.3s ease-in-out; 
+}
+
+.menu-container.open {
+    transform: translateX(0);
 }
 
 .menu-items {
     display: none;
-    position: absolute;
+    position: fixed; /* Use 'fixed' instead of 'absolute' to cover the entire screen */
+    top: 0;
     right: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 200px; /* or any desired width */
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: #000000;
 }
 
 .menu-items a {
     display: block;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    color: white;
+    margin-bottom: 1em;
+    font-size: 2em;
     text-decoration: none;
-    color: #333;
 }
 
 .menu-items a:last-child {
@@ -84,4 +93,14 @@ article, section {
     border: lawngreen;
     font-size: 48px; /* size of the hamburger icon */
     cursor: pointer;
+    z-index: 1000;
+    display: block;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
+
+
