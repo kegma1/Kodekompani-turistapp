@@ -8,7 +8,6 @@ def login():
     
     if request.method == "POST" and login_form.validate():
         session['user'] = login_form.username.data
-        print(session['user'])
         return redirect(url_for("index"))
 
     
