@@ -4,6 +4,11 @@ body {
     color: whitesmoke;
     padding: 1vw;
     
+    background-image: url('/static/Backgound_Narvik_more_blurred.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #ContentBody {
@@ -43,4 +48,40 @@ article, section {
     margin-bottom: 1vw;
     width: max-content;
     border-radius: 10px;
+}
+
+.menu-container {
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.menu-items {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px; /* or any desired width */
+}
+
+.menu-items a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-items a:last-child {
+    border-bottom: none;
+}
+
+.menu-toggle {
+    background: none;
+    border: lawngreen;
+    font-size: 48px; /* size of the hamburger icon */
+    cursor: pointer;
 }
