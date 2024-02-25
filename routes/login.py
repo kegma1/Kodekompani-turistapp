@@ -1,4 +1,4 @@
-from __main__ import app, request, generate_password_hash, redirect, render_template, url_for
+from __main__ import app, request, generate_password_hash, redirect, render_template, url_for, session
 from form.login_form import LogInForm
 from utils import db_session, User
 
@@ -7,6 +7,8 @@ def login():
     login_form = LogInForm(request.form)
     
     if request.method == "POST" and login_form.validate():
+        session['user'] = login_form.username.data
+        print(session['user'])
         return redirect(url_for("index"))
 
     
