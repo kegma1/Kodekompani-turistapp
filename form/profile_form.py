@@ -22,4 +22,4 @@ class ProfileForm(Form):
             raise ValidationError("Username is already taken.")
         
     def add_placeholder(self, field, val):
-        field.default = val
+        setattr(self, field, val)
