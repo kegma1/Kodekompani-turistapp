@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 
@@ -26,10 +26,9 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
-    age = Column(String(20))
-    age_group = Column(String(20))
-    full_name = Column(String(40))
-    bio = Column(String(150))
+    age = Column(DATE)
+    full_name = Column(String(63))
+    bio = Column(String(255))
     encrypted_password = Column(String(255), nullable=False)
     isAdmin = Column(Boolean)
     profile_pic = Column(LargeBinary)
