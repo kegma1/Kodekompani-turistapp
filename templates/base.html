@@ -11,7 +11,6 @@
     </head>
     <body>
         <div id="menu-container" class="menu-container">
-            <button id="menu-toggle" class="menu-toggle">☰</button>
             <div id="menu-items" class="menu-items">
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('profile') }}">Profile</a>
@@ -20,7 +19,8 @@
                 <!-- add more links as needed -->
             </div>
         </div>
-        <script src="{{ url_for('static', filename='menu-toggle.js') }}" defer></script>
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+        <script src="{{ url_for('static', filename='scripts/menu-toggle.js') }}" defer></script>
         <div id="ContentBody">
             {% block body %}
             {% endblock %}

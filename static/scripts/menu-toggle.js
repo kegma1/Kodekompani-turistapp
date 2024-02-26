@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const menuToggle = document.getElementById('menu-toggle');
-    const menuItems = document.getElementById('menu-items');
+    const menuItems = document.getElementById('menu-container');
 
     // Explicitly set the initial display style of menuItems to 'none'
     menuItems.style.display = 'none';
