@@ -4,11 +4,11 @@ body {
     color: whitesmoke;
     padding: 1vw;
     
-/*     background-image: url('/static/Backgound_Narvik_more_blurred.png');
+    background-image: url('/static/Backgound_Narvik_more_blurred.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; */
+    background-attachment: fixed;
 }
 
 #ContentBody {
