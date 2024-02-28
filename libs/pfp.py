@@ -56,4 +56,5 @@ def make_profile(username:str, canvas_size:int, pixel_size:int):
 
 if __name__ == "__main__":
     res = make_profile("Kegma1", 400, 50)
+    print(res.read())
     Image.open(res).show()

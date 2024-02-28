@@ -16,3 +16,4 @@ typing_extensions
 Werkzeug
 wtforms
 Pillow
+Flask-WTF

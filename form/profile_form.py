@@ -1,11 +1,13 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, FileField, TextAreaField
+from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, TextAreaField
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
-from __main__ import session
+from flask import session
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 
 
-class ProfileForm(Form):
+class ProfileForm(FlaskForm):
     username = StringField("Username:", [validators.data_required(), validators.Length(min=3, max=50, message= "Username length must be between 3 and 50 charecters.")])
     first_name = StringField("First name:")
     last_name = StringField("Last name:")
@@ -15,10 +17,10 @@ class ProfileForm(Form):
     password = PasswordField("Password:")
     confirm = PasswordField("Confirm password:")
     bio = TextAreaField("Description:")
-    picture = FileField("Profile Picture:")
+    picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg"])])
 
     def validate_username(self, username):
-        if username == session['user']:
+        if username.data == session['user']:
             pass
         elif db_session.query(User.id).filter_by(username=username.data).first() is not None:
             raise ValidationError("Username is already taken.")

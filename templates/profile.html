@@ -3,7 +3,7 @@
 <section>
     <h1>Edit Profile</h1>
     {% from "macros/_form_helper.html" import render_field %}
-    <form method="post">
+    <form method="post" action="{{ url_for("profile") }}" enctype="multipart/form-data">
         <dl>
             {{ render_field(form.username) }}
             {{ render_field(form.first_name) }}
@@ -15,7 +15,8 @@
             {{ render_field(form.bio) }}
             {{ render_field(form.picture) }}
         </dl>
-
+        
+        {{ form.hidden_tag() }}
         <input type="submit" value="Submit">
     </form>
     <a href="{{ url_for("index") }}">back to menu</a>

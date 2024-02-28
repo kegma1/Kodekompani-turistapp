@@ -1,11 +1,16 @@
-from __main__ import app, request, User, generate_password_hash, db_session, redirect, render_template, url_for, session
+from __main__ import app
+from flask import request,  redirect, render_template, url_for, session
 from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
+from werkzeug.security import generate_password_hash
 from form.profile_form import ProfileForm
+from PIL import Image
+from io import BytesIO
 
 @app.route("/profile", methods = ["GET", "POST"])
 def profile():
     profile_form = ProfileForm(request.form)
     info = db_session.query(User).filter_by(username = session['user']).first()
+
 
     if request.method == "POST" and profile_form.validate():
         info.username = profile_form.username.data
@@ -13,7 +18,18 @@ def profile():
         info.email = profile_form.email.data
         full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
         info.full_name = full_name
-        info.profile_pic = profile_form.picture.data
+
+        if "picture" in request.files and request.files["picture"]:
+            
+            buffer = BytesIO()
+            image = Image.open(request.files["picture"].stream)
+            image = image.resize((200, 200))
+            
+            image.save(buffer, format="PNG", quality=20, optimize=True)
+
+            buffer.seek(0)
+            info.profile_pic = buffer.read()
+
         info.bio = profile_form.bio.data
         db_session.commit()
 
