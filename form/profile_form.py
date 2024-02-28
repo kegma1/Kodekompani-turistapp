@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, TextAreaField
+from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, TextAreaField, BooleanField
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
@@ -18,6 +18,7 @@ class ProfileForm(FlaskForm):
     confirm = PasswordField("Confirm password:")
     bio = TextAreaField("Description:")
     picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg"])])
+    keep_picture = BooleanField("Reset profil picture")
 
     def validate_username(self, username):
         if username.data == session['user']:

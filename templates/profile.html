@@ -16,6 +16,7 @@
 
             {{ render_field(form.picture) }}
             <img src="data:image/png;base64,{{ profile_picture }}" alt="Profile picture">
+            {{ render_field(form.keep_picture) }}
         </dl>
         
         {{ form.hidden_tag() }}

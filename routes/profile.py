@@ -6,6 +6,7 @@ from form.profile_form import ProfileForm
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode
+from libs.pfp import make_profile
 
 @app.route("/profile", methods = ["GET", "POST"])
 def profile():
@@ -22,7 +23,7 @@ def profile():
         full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
         info.full_name = full_name
 
-        if "picture" in request.files and request.files["picture"]:
+        if "picture" in request.files and request.files["picture"] and not profile_form.keep_picture.data:
             
             buffer = BytesIO()
             image = Image.open(request.files["picture"].stream)
@@ -32,6 +33,9 @@ def profile():
 
             buffer.seek(0)
             info.profile_pic = buffer.read()
+        elif profile_form.keep_picture.data:
+            default_picture = make_profile(info.username, 200, 50)
+            info.profile_pic = default_picture.read()
 
         info.bio = profile_form.bio.data
         db_session.commit()
