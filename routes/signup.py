@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import session, redirect, render_template, url_for, request
-from libs.db_utils import User, db_session
+from db_utils import User, db_session
 from werkzeug.security import generate_password_hash
 from form.signup_form import SignUpForm
 

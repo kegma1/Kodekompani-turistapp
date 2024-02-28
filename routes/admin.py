@@ -1,5 +1,5 @@
 from __main__ import app, redirect, render_template, url_for
-from libs.db_utils import Friend, User, UserAttraction, UserAchievement, db_session
+from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 
 @app.route("/admin", methods = ["GET", "POST"]) # Needs more checks for admin privileges in the future
 def admin():

@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField
-from libs.db_utils import db_session, User
+from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
 from __main__ import session

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 from datetime import date
-from libs.db_utils import db_session, User
+from db_utils import db_session, User
 app = Flask(__name__)
 
 app.secret_key = secrets.token_urlsafe(16)

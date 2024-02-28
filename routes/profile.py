@@ -1,5 +1,5 @@
 from __main__ import app, request, User, generate_password_hash, db_session, redirect, render_template, url_for, session
-from libs.db_utils import Friend, User, UserAttraction, UserAchievement, db_session
+from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 from form.profile_form import ProfileForm
 
 @app.route("/profile", methods = ["GET", "POST"])

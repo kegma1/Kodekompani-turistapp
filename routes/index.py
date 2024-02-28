@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import render_template, session
-from libs.db_utils import db_session, User
+from db_utils import db_session, User
 from io import BytesIO
 from PIL import Image
 
