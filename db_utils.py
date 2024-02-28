@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
-#from libs.pfp import make_profile
+from libs.pfp import make_profile
 
 # Import database configuration variables
 # from db_connection_config import HOST, USER, PASSWORD, DATABASE
