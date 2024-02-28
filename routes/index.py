@@ -12,8 +12,8 @@ def index():
 
     if "is_logged_in" in session and session["is_logged_in"]:
         pfp_data = db_session.query(User.profile_pic).filter_by(username=session["user"]).first()
-        # print(pfp_data)
-        # pfp = pfp_data
+        print(pfp_data)
+        pfp = Image.open(BytesIO(pfp_data))
         is_logged_in = True
         username = session["user"]
 
