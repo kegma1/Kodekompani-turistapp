@@ -6,7 +6,7 @@ class SignUpForm(Form):
     username = StringField("Username:", [validators.data_required(), validators.Length(min=1, max=50, message= "Username length must be between 1 and 50 charecters.")])
     first_name = StringField("First name:", [validators.data_required(), validators.Length(min=1, max=50, message= "First name required.")])
     last_name = StringField("Last name:", [validators.data_required(), validators.Length(min=1, max=50, message= "Last name required.")])
-    year = DateField("Year o' birth:", [validators.data_required()])
+    year = DateField("Date o' birth:", [validators.data_required()])
     email = EmailField("Email address:", [validators.data_required()])
     password = PasswordField("Password:", [validators.data_required(), validators.equal_to("confirm", message="Passwords must match"), validators.Length(min = 8, max=255)])
     confirm = PasswordField("Confirm password:")
