@@ -6,7 +6,7 @@ from __main__ import session
 
 
 class ProfileForm(Form):
-    username = StringField("Username:", [validators.data_required(), validators.Length(min=1, max=50, message= "Username length must be between 1 and 50 charecters.")])
+    username = StringField("Username:", [validators.data_required(), validators.Length(min=3, max=50, message= "Username length must be between 3 and 50 charecters.")])
     first_name = StringField("First name:")
     last_name = StringField("Last name:")
     year = DateField("Year o' birth:")

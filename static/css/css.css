@@ -4,7 +4,7 @@ body {
     color: whitesmoke;
     padding: 1vw;
     
-    background-image: url('/static/Backgound_Narvik_more_blurred.png');
+    background-image: url('/static/assets/Backgound_Narvik_blurred.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -73,7 +73,12 @@ article, section {
     bottom: 0;
     left: 0;
     text-align: center;
-    background-color: #000000;
+    /* background-color: #000000; */
+    background-image: url('/static/assets/Backgound_Narvik_more_blurred.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .menu-items a {

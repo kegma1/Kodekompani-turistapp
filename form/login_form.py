@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash
 class LogInForm(Form):
     pass_min = 8
     pass_max = 255
-    username = StringField("Username", [validators.data_required(), validators.Length(min=1, max=255)])
+    username = StringField("Username", [validators.data_required(), validators.Length(min=3, max=255)])
     password = PasswordField("Password", [validators.data_required(), validators.Length(min = pass_min, max= pass_max, message=f"Password requires length of {pass_min} to {pass_max}.")])
     
     def validate_username(self, username):
