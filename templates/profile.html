@@ -13,7 +13,9 @@
             {{ render_field(form.password) }}
             {{ render_field(form.confirm) }}
             {{ render_field(form.bio) }}
+
             {{ render_field(form.picture) }}
+            <img src="data:image/png;base64,{{ profile_picture }}" alt="Profile picture">
         </dl>
         
         {{ form.hidden_tag() }}

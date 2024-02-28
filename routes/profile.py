@@ -5,11 +5,14 @@ from werkzeug.security import generate_password_hash
 from form.profile_form import ProfileForm
 from PIL import Image
 from io import BytesIO
+from base64 import b64encode
 
 @app.route("/profile", methods = ["GET", "POST"])
 def profile():
     profile_form = ProfileForm(request.form)
     info = db_session.query(User).filter_by(username = session['user']).first()
+
+    profile_picture = b64encode(info.profile_pic).decode("utf-8")
 
 
     if request.method == "POST" and profile_form.validate():
@@ -44,5 +47,5 @@ def profile():
     profile_form.email.data = info.email
     profile_form.year.data = info.age
     profile_form.bio.data = info.bio
-    return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email)
+    return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email, profile_picture = profile_picture)
     
