@@ -132,6 +132,7 @@ dmypy.json
 
 # db config
 db_connection_config.py
+libs/db_connection_config.py
 
 # vscode settings
 .vscode/
