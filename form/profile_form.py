@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField
+from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, FileField, TextAreaField
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
@@ -14,9 +14,11 @@ class ProfileForm(Form):
     old_password = PasswordField("Old Password:")
     password = PasswordField("Password:")
     confirm = PasswordField("Confirm password:")
+    bio = TextAreaField("Description:")
+    picture = FileField("Profile Picture:")
 
     def validate_username(self, username):
         if username == session['user']:
-            raise ValidationError("Can't change to the previous username")
-        if db_session.query(User.id).filter_by(username=username.data).first() is not None:
+            pass
+        elif db_session.query(User.id).filter_by(username=username.data).first() is not None:
             raise ValidationError("Username is already taken.")

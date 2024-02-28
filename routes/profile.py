@@ -11,11 +11,22 @@ def profile():
         info.username = profile_form.username.data
         session['user'] = profile_form.username.data
         info.email = profile_form.email.data
+        full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
+        info.full_name = full_name
+        info.profile_pic = profile_form.picture.data
+        info.bio = profile_form.bio.data
         db_session.commit()
 
         return redirect(url_for("index"))
 
+    fullName = info.full_name.split()
+    first_name = fullName[0]
+    last_name = fullName[1]
     profile_form.username.data = info.username
+    profile_form.first_name.data = first_name
+    profile_form.last_name.data = last_name
     profile_form.email.data = info.email
+    profile_form.year.data = info.age
+    profile_form.bio.data = info.bio
     return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email)
     
