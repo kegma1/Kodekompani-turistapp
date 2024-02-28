@@ -1,6 +1,6 @@
 from __main__ import app, request, generate_password_hash, redirect, render_template, url_for, session
 from form.login_form import LogInForm
-from utils import db_session, User
+from libs.db_utils import db_session, User
 
 @app.route("/login", methods = ["GET", "POST"])
 def login(): 

@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField, validators, ValidationError
-from utils import db_session, User
+from libs.db_utils import db_session, User
 from werkzeug.security import check_password_hash
 
 class LogInForm(Form):
