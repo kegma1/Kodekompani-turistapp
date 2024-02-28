@@ -7,6 +7,7 @@ def login():
     login_form = LogInForm(request.form)
     
     if request.method == "POST" and login_form.validate():
+        session["is_logged_in"] = True
         session['user'] = login_form.username.data
         return redirect(url_for("index"))
 

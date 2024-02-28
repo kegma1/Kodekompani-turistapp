@@ -2,6 +2,10 @@
 
 {% block body %}
 <section>
+    {% if is_logged_in %}
+        <img src="data:image/png;base64, {{ pfp }}" alt="Profile picture">
+        <p> {{ username }} </p>
+    {% endif %}
     <h1>Hallo, Verden!</h1><br>
     <a href="{{ url_for("profile")}}">Edit Profile</a><br>
     <a href="{{ url_for("login")}}">Login </a><br>

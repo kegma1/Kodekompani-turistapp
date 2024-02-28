@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
+from libs.pfp import make_profile
 
 # Import database configuration variables
 # from db_connection_config import HOST, USER, PASSWORD, DATABASE
@@ -39,11 +40,16 @@ class User(Base):
                            primaryjoin=id==Friend.user_id,
                            secondaryjoin=id==Friend.friend_id)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, full_name, data_of_birth):
         self.username = username
         self.email = email
-        self.age_group = "0-100"
+        self.age = data_of_birth
         self.encrypted_password = password
+        self.isAdmin = False
+        self.profile_pic = make_profile(username, 400, 50).read()
+        self.full_name = full_name
+        self.bio = ""
+
 
 class Attraction(Base):
     __tablename__ = 'attractions'

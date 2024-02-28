@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 from io import BytesIO
 
 # randomize list of valid characters
-chars = list("lcj5m9p27wnx6v0a_sr34f*oy8.ebdzgq1tihu-k ")
+chars = list("lcj5m9p27wnx6v0a_sr34f*oy8.ebdzgq1tihu-k")
 
 
 def remap(x, in_min, in_max, out_min, out_max):
@@ -53,6 +53,7 @@ def make_profile(username:str, canvas_size:int, pixel_size:int):
         buffered.seek(0)
 
         return buffered
-    
-res = make_profile("OlaNorman420", 400, 50)
-Image.open(res).show()
+
+if __name__ == "__main__":
+    res = make_profile("Kegma1", 400, 50)
+    Image.open(res).show()
