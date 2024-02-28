@@ -34,7 +34,7 @@ def profile():
             buffer.seek(0)
             info.profile_pic = buffer.read()
         elif profile_form.keep_picture.data:
-            default_picture = make_profile(info.username, 200, 50)
+            default_picture = make_profile(info.username, 200, 25)
             info.profile_pic = default_picture.read()
 
         info.bio = profile_form.bio.data

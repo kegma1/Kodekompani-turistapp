@@ -46,7 +46,7 @@ class User(Base):
         self.age = data_of_birth
         self.encrypted_password = password
         self.isAdmin = False
-        self.profile_pic = make_profile(username, 200, 50).read()
+        self.profile_pic = make_profile(username, 200, 25).read()
         self.full_name = full_name
         self.bio = ""
 
