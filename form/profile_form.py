@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField
+from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, FileField
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 from datetime import date, timedelta
@@ -14,6 +14,7 @@ class ProfileForm(Form):
     old_password = PasswordField("Old Password:")
     password = PasswordField("Password:")
     confirm = PasswordField("Confirm password:")
+    picture = FileField("Profile Picture:")
 
     def validate_username(self, username):
         if username == session['user']:
