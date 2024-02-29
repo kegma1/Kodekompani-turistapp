@@ -17,7 +17,7 @@ class ProfileForm(FlaskForm):
     password = PasswordField("Password:")
     confirm = PasswordField("Confirm password:")
     bio = TextAreaField("Description:")
-    picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg"])])
+    picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"])])
     keep_picture = BooleanField("Reset profil picture")
 
     def validate_username(self, username):
