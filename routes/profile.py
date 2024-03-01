@@ -13,9 +13,6 @@ def profile():
     profile_form = ProfileForm(request.form)
     info = db_session.query(User).filter_by(username = session['user']).first()
 
-    profile_picture = info.profile_pic
-
-
     if request.method == "POST" and profile_form.validate():
         info.username = profile_form.username.data
         session['user'] = profile_form.username.data
@@ -23,18 +20,9 @@ def profile():
         info.full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
 
         if "picture" in request.files and request.files["picture"] and not profile_form.keep_picture.data:
-            
-            buffer = BytesIO()
-            image = Image.open(request.files["picture"].stream)
-            image = image.resize((200, 200))
-            
-            image.save(buffer, format="JPG", quality=20, optimize=True)
-
-            buffer.seek(0)
-            info.profile_pic = buffer.read()
+            info.profile_pic = request.files["picture"].stream
         elif profile_form.keep_picture.data:
-            default_picture = make_profile(info.username, 200, 25)
-            info.profile_pic = default_picture.read()
+            info.profile_pic = None
 
         info.bio = profile_form.bio.data
         db_session.commit()
@@ -50,5 +38,5 @@ def profile():
     profile_form.email.data = info.email
     profile_form.year.data = info.age
     profile_form.bio.data = info.bio
-    return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email, profile_picture = profile_picture)
+    return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email, profile_picture = info.profile_pic)
     

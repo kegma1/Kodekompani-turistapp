@@ -3,6 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from libs.pfp import make_profile
 from base64 import b64encode
+from io import BytesIO
+from PIL import Image
 
 # Import database configuration variables
 # from db_connection_config import HOST, USER, PASSWORD, DATABASE
@@ -54,6 +56,21 @@ class User(Base):
     @property
     def profile_pic(self):
         return b64encode(self._profile_pic).decode('utf-8')
+    
+    @profile_pic.setter
+    def profile_pic(self, new_pic):
+        if new_pic:
+            buffer = BytesIO()
+            image = Image.open(new_pic)
+            image = image.resize((200, 200))
+            
+            image.save(buffer, format="PNG", quality=20, optimize=True)
+
+            buffer.seek(0)
+            self._profile_pic = buffer.read()
+        else:
+            default_picture = make_profile(self.username, 200, 25)
+            self._profile_pic = default_picture.read()
 
 class Attraction(Base):
     __tablename__ = 'attractions'
