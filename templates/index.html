@@ -5,6 +5,10 @@
     {% if is_logged_in %}
         <img src="data:image/png;base64,{{ pfp }}" alt="Profile picture">
         <p> {{ username }} </p>
+        {% if bio %}
+        <p> {{ bio }} </p>
+        {% endif %}
+
     {% endif %}
     <h1>Hallo, Verden!</h1><br>
     <a href="{{ url_for("profile")}}">Edit Profile</a><br>
