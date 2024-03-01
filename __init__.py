@@ -13,5 +13,8 @@ import routes.login
 import routes.admin
 import routes.profile
 
+import routes.map_test
+
 if __name__ == "__main__":
     app.run()
+
