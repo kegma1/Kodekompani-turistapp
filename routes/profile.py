@@ -20,8 +20,7 @@ def profile():
         info.username = profile_form.username.data
         session['user'] = profile_form.username.data
         info.email = profile_form.email.data
-        full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
-        info.full_name = full_name
+        info.full_name = f'{profile_form.first_name.data} {profile_form.last_name.data}'
 
         if "picture" in request.files and request.files["picture"] and not profile_form.keep_picture.data:
             

@@ -7,19 +7,31 @@
             <th> Username: </th>
             <th> Email: </th>
             <th> Age group: </th>
+            <th> bio: </th>
             <th> Attraction: </th>
             <th> Achievements: </th>
             <th> Friends: </th>
+            <th> Is admin?: </th>
+            <th> Profile pic: </th>
         </tr>
     {% for user in users %}
         <tr>
             <td> {{ user.id }} </td>
             <td> {{ user.username }} </td>
             <td> {{ user.email }} </td>
-            <td> {{ user.age_group }} </td>
+            <td> {{ user.age }} </td>
+            <td> {{ user.bio }} </td>
             <td> {{ user.attractions }} </td>
             <td> {{ user.achievements }} </td>
             <td> {{ user.friends }} </td>
+            {% if user.isAdmin == 0 %}
+                <td> No </td>
+            {% else %}
+                <td> Yes </td>
+            {% endif %}
+            <td> 
+                <img src="data:image/png;base64,{{ user.profile_pic }}" alt="Profile picture">
+            </td>
         </tr>
     {% endfor %}
     </table>
