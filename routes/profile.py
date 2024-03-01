@@ -13,7 +13,7 @@ def profile():
     profile_form = ProfileForm(request.form)
     info = db_session.query(User).filter_by(username = session['user']).first()
 
-    profile_picture = b64encode(info.profile_pic).decode("utf-8")
+    profile_picture = info.profile_pic
 
 
     if request.method == "POST" and profile_form.validate():
@@ -28,7 +28,7 @@ def profile():
             image = Image.open(request.files["picture"].stream)
             image = image.resize((200, 200))
             
-            image.save(buffer, format="PNG", quality=20, optimize=True)
+            image.save(buffer, format="JPG", quality=20, optimize=True)
 
             buffer.seek(0)
             info.profile_pic = buffer.read()

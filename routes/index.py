@@ -15,7 +15,7 @@ def index():
         bio = data.bio
 
         if data.profile_pic:
-            pfp = b64encode(data.profile_pic).decode("utf-8")
+            pfp = data.profile_pic
 
         is_logged_in = True
         username = session["user"]

@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boole
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from libs.pfp import make_profile
+from base64 import b64encode
 
 # Import database configuration variables
 # from db_connection_config import HOST, USER, PASSWORD, DATABASE
@@ -32,7 +33,7 @@ class User(Base):
     bio = Column(String(255))
     encrypted_password = Column(String(255), nullable=False)
     isAdmin = Column(Boolean)
-    profile_pic = Column(LargeBinary)
+    _profile_pic = Column("profile_pic" ,LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
     friends = relationship("User", 
@@ -46,10 +47,13 @@ class User(Base):
         self.age = data_of_birth
         self.encrypted_password = password
         self.isAdmin = False
-        self.profile_pic = make_profile(username, 200, 25).read()
+        self._profile_pic = make_profile(username, 200, 25).read()
         self.full_name = full_name
         self.bio = ""
-
+        
+    @property
+    def profile_pic(self):
+        return b64encode(self._profile_pic).decode('utf-8')
 
 class Attraction(Base):
     __tablename__ = 'attractions'

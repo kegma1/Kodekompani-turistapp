@@ -49,7 +49,7 @@ def make_profile(username:str, canvas_size:int, pixel_size:int):
                 draw.rectangle([x0, y0, x1, y1], fill=fill_color)
 
         buffered = BytesIO()
-        image.save(buffered, format="PNG")
+        image.save(buffered, format="JPG")
         buffered.seek(0)
 
         return buffered
