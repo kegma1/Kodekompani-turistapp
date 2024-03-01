@@ -3,10 +3,6 @@ from flask import request,  redirect, render_template, url_for, session
 from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 from werkzeug.security import generate_password_hash
 from form.profile_form import ProfileForm
-from PIL import Image
-from io import BytesIO
-from base64 import b64encode
-from libs.pfp import make_profile
 
 @app.route("/profile", methods = ["GET", "POST"])
 def profile():
