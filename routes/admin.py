@@ -58,7 +58,7 @@ def admin_del_bio(id):
     
 @app.route("/funi")
 def funi():
-    return render_template("funi.html")
+    return render_template("iocularis.html")
 
 def is_admin():
     return True if ("is_logged_in" in session 
