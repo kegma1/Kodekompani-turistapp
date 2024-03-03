@@ -40,7 +40,7 @@ def admin_del_admin(id):
     if is_admin():
         user = db_session.query(User).filter_by(id = id).first()
         user.isAdmin = not user.isAdmin
-        session['user'] = user.isAdmin
+        session['admin'] = user.isAdmin
         db_session.commit()
         
         return redirect(url_for("admin"))
