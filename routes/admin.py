@@ -16,40 +16,46 @@ def admin():
                             title = "Admin Page")
     return redirect(url_for("funi"))
 
-@app.route("/admin_del_user/<id>", methods = ["GET", "POST"])
-def admin_del_user(id):
+@app.route("/admin_del_user/<change_id>", methods = ["GET", "POST"])
+def admin_del_user(change_id):
     if is_admin():
-        db_session.query(User).filter_by(id = id).delete()
-        db_session.commit()
+        curr_user = get_curr_user()
+        
+        # FIX YO
+        if curr_user.id != change_id:
+            db_session.query(User).filter_by(id = change_id).delete()
+            db_session.commit()
         
         return redirect(url_for("admin"))
     return redirect(url_for("funi"))
 
-@app.route("/admin_del_pfp/<id>", methods = ["GET", "POST"])
-def admin_del_pfp(id):
+@app.route("/admin_del_pfp/<change_id>", methods = ["GET", "POST"])
+def admin_del_pfp(change_id):
     if is_admin():
-        user = db_session.query(User).filter_by(id = id).first()
+        user = get_change_user(change_id)
         user.profile_pic = None
         db_session.commit()
         
         return redirect(url_for("admin"))
     return redirect(url_for("funi"))
 
-@app.route("/admin_del_admin/<id>", methods = ["GET", "POST"])
-def admin_del_admin(id):
+@app.route("/admin_del_admin/<change_id>", methods = ["GET", "POST"])
+def admin_del_admin(change_id):
     if is_admin():
-        user = db_session.query(User).filter_by(id = id).first()
-        user.isAdmin = not user.isAdmin
-        session['admin'] = user.isAdmin
+        change = get_change_user(change_id)
+        change.isAdmin = not change.isAdmin
+
+        if session['user'] == change.username:
+            session['admin'] = change.isAdmin
         db_session.commit()
         
         return redirect(url_for("admin"))
     return redirect(url_for("funi"))
 
-@app.route("/admin_del_bio/<id>", methods = ["GET", "POST"])
-def admin_del_bio(id):
+@app.route("/admin_del_bio/<change_id>", methods = ["GET", "POST"])
+def admin_del_bio(change_id):
     if is_admin():
-        user = db_session.query(User).filter_by(id = id).first()
+        user = get_change_user(change_id)
         user.bio = ""
         db_session.commit()
         
@@ -60,9 +66,16 @@ def admin_del_bio(id):
 def funi():
     return render_template("iocularis.html")
 
+def get_curr_user():
+    return db_session.query(User).filter_by(username = session['user']).first()
+
+def get_change_user(change_id):
+    return db_session.query(User).filter_by(id = change_id).first()
+
 def is_admin():
     return True if ("is_logged_in" in session 
                     and session["is_logged_in"] 
-                    and session['admin'] == 1) else False
+                    and session['admin']) else False
+
 
         
