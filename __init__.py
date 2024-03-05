@@ -11,6 +11,7 @@ import routes.index
 import routes.signup
 import routes.login
 import routes.admin
+import routes.admin_sights
 import routes.profile
 
 import routes.map_test

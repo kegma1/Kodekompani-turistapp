@@ -35,6 +35,7 @@ class User(Base):
     bio = Column(String(255))
     encrypted_password = Column(String(255), nullable=False)
     isAdmin = Column(Boolean)
+    isDeleted = Column(Boolean, default= False)
     _profile_pic = Column("profile_pic" ,LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
