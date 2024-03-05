@@ -22,7 +22,7 @@ def admin_del_user(change_id):
         curr_user = get_curr_user()
         
         # FIX YO
-        if curr_user.id != change_id:
+        if curr_user.id == change_id:
             db_session.query(User).filter_by(id = change_id).delete()
             db_session.commit()
         
