@@ -13,7 +13,7 @@ import routes.login
 import routes.admin
 import routes.admin_sights
 import routes.profile
-
+import routes.view_attractions
 import routes.map_test
 
 if __name__ == "__main__":
