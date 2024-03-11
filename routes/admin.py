@@ -4,9 +4,12 @@ from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode
+from helpers import require_login
 from libs.admin_fn import is_admin, get_curr_user, get_change_user
 
-@app.route("/admin", methods = ["GET", "POST"]) # Needs more checks for admin privileges in the future
+# Needs more checks for admin privileges in the future
+@app.route("/admin", methods = ["GET", "POST"]) 
+@require_login
 def admin():
     if is_admin():
         return render_template("admin.html", 
