@@ -8,5 +8,4 @@ from libs.admin_fn import is_admin
 
 @app.route("/admin_sights")
 def sights():
-    if is_admin():
-        return render_template("admin_sights.html")
+    return render_template("admin_sights.html")
