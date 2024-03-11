@@ -4,7 +4,7 @@ from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode
-from helpers import require_login
+from libs.helpers import require_login
 from libs.admin_fn import is_admin, get_curr_user, get_change_user
 
 # Needs more checks for admin privileges in the future
