@@ -36,6 +36,7 @@ class User(Base):
     encrypted_password = Column(String(255), nullable=False)
     isAdmin = Column(Boolean)
     isDeleted = Column(Boolean, default= False)
+    xp_collected = Column(Integer)
     _profile_pic = Column("profile_pic" , LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
