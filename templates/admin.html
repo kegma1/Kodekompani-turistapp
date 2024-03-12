@@ -8,10 +8,9 @@
             <th> Email: </th>
             <th> Age group: </th>
             <th> bio: </th>
-            <th> Attraction: </th>
-            <th> Achievements: </th>
             <th> Friends: </th>
             <th> Is admin?: </th>
+            <th> Deleted?: </th>
             <th> Profile pic: </th>
         </tr>
     {% for user in users %}
@@ -21,14 +20,9 @@
             <td> {{ user.email }} </td>
             <td> {{ user.age }} </td>
             <td> {{ user.bio }} </td>
-            <td> {{ user.attractions }} </td>
-            <td> {{ user.achievements }} </td>
             <td> {{ user.friends }} </td>
-            {% if user.isAdmin == 0 %}
-                <td> No </td>
-            {% else %}
-                <td> Yes </td>
-            {% endif %}
+            {% if user.isAdmin == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
+            {% if user.isDeleted == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
             <td> 
                 <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture" width="100", height="100"/>
             </td>

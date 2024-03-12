@@ -23,11 +23,10 @@ def admin():
 @require_login
 @require_admin
 def admin_del_user(change_id):
-    curr_user = get_curr_user()
-    
-    # FIX YO
-    if curr_user.id == change_id:
-        db_session.query(User).filter_by(id = change_id).delete()
+    change = get_change_user(change_id)
+
+    if session['user'] != change.username:
+        change.isDeleted = not change.isDeleted
         db_session.commit()
     
     return redirect(url_for("admin"))
@@ -47,11 +46,17 @@ def admin_del_pfp(change_id):
 @require_admin
 def admin_del_admin(change_id):
     change = get_change_user(change_id)
-    change.isAdmin = not change.isAdmin
-
-    if session['user'] == change.username:
-        session['admin'] = change.isAdmin
-    db_session.commit()
+    curr = get_curr_user()
+    admins = db_session.query(User).filter_by(isAdmin = True).all()
+    
+    if len(admins) > 1:
+        if session['user'] != change.username:
+            change.isAdmin = not change.isAdmin
+            db_session.commit()
+    else:
+        if session['user'] != change.username and change.isAdmin == False and curr.isAdmin == True:
+            change.isAdmin = True
+            db_session.commit()
     
     return redirect(url_for("admin"))
 
