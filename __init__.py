@@ -10,6 +10,7 @@ app.secret_key = secrets.token_urlsafe(16)
 import routes.index
 import routes.signup
 import routes.login
+import routes.logout
 import routes.admin
 import routes.admin_sights
 import routes.profile
