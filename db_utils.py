@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from libs.pfp import make_profile
@@ -36,7 +36,7 @@ class User(Base):
     encrypted_password = Column(String(255), nullable=False)
     isAdmin = Column(Boolean)
     isDeleted = Column(Boolean, default= False)
-    _profile_pic = Column("profile_pic" ,LargeBinary)
+    _profile_pic = Column("profile_pic" , LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
     friends = relationship("User", 
@@ -81,13 +81,19 @@ class Attraction(Base):
     category = Column(String(50))
     age_recommendation = Column(String(20))
     location_coordinates = Column(String(100))
+    address = Column(String(100))
+    image_path = Column(String(255)) # path to image
+    achievements = relationship('Achievement', back_populates='attraction')
 
 class Achievement(Base):
     __tablename__ = 'achievements'
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     description = Column(String(255))
-    criteria = Column(String(255))
+    pass_code = Column(String(255))
+    xp_reward = Column(Integer)
+    attraction_id = Column(Integer, ForeignKey('attractions.id'))
+    attraction = relationship('Attraction', back_populates='achievements')
 
 class UserAttraction(Base):
     __tablename__ = 'user_attractions'
@@ -107,6 +113,19 @@ def create_tables():
 def delete_tables():
     Base.metadata.drop_all(engine)
 
+def insert_test_data():
+    with engine.connect() as con:
+        with open("./testdata.sql") as file:
+            queries = file.read().split(';')
+
+            for query in queries:
+                if query.strip():  # Skip empty queries
+                    con.execute(text(query))
+        con.commit()
+
+
 if __name__ == "__main__":
+    delete_tables()
     create_tables()
-    #delete_tables()
+    insert_test_data()
+

@@ -136,3 +136,6 @@ libs/db_connection_config.py
 
 # vscode settings
 .vscode/
+
+attraction_images
+attraction_images/*
