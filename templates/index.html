@@ -11,14 +11,18 @@
 
     {% endif %}
     <h1>Hallo, Verden!</h1><br>
-    <a href="{{ url_for("profile")}}">Edit Profile</a><br>
+    <a href="{{ url_for("sign_up")}}">Sign up</a><br>
+    <br>
     <a href="{{ url_for("login")}}">Login </a><br>
     <a href="{{ url_for("logout") }}">Log Out</a><br>
+    <br>
+    <a href="{{ url_for("profile")}}">Edit Profile</a><br>
     <a href="{{ url_for("sign_up")}}">Sign up</a><br>
     <a href="{{ url_for("map_test")}}">MAP TEST</a><br>
     <a href="{{ url_for("admin")}}">ADMIN</a><br>
     <a href="{{ url_for("view_attractions")}}">view_attractions test</a><br>
     <a href="https://youtu.be/dQw4w9WgXcQ?si=JHy6sufDJF2QDlSB?autoplay=1">Misc</a><br>
+
 </section>
 {% endblock %}
 
