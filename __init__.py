@@ -19,3 +19,6 @@ import routes.map_test
 if __name__ == "__main__":
     app.run()
 
+# user1 = user1pass
+# user2 = user2pass
+# admin1 = admin1pass
