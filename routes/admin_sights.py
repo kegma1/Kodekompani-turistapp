@@ -4,9 +4,10 @@ from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode
-from libs.admin_fn import is_admin
+from libs.helpers import require_admin, require_login
 
 @app.route("/admin_sights")
+@require_login
+@require_admin
 def sights():
-    if is_admin():
-        return render_template("admin_sights.html")
+    return render_template("admin_sights.html")
