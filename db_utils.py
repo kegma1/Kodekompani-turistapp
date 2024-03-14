@@ -83,8 +83,25 @@ class Attraction(Base):
     age_recommendation = Column(String(20))
     location_coordinates = Column(String(100))
     address = Column(String(100))
-    image_path = Column(String(255)) # path to image
+    _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
     achievements = relationship('Achievement', back_populates='attraction')
+
+    @property
+    def image(self):
+        return b64encode(self._image).decode('utf-8')
+    
+    @image.setter
+    def image(self, new_pic):
+
+        buffer = BytesIO()
+        image = Image.open(new_pic)
+        image = image.resize((500, 500))
+        
+        image.save(buffer, format="PNG", quality=20, optimize=True)
+
+        buffer.seek(0)
+        self._image = buffer.read()
+
 
 class Achievement(Base):
     __tablename__ = 'achievements'
@@ -116,7 +133,7 @@ def delete_tables():
 
 def insert_test_data():
     with engine.connect() as con:
-        with open("./testdata.sql") as file:
+        with open("./testdata.sql", "r", encoding="utf-8") as file:
             queries = file.read().split(';')
 
             for query in queries:
