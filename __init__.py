@@ -14,7 +14,8 @@ import routes.logout
 import routes.admin
 import routes.admin_sights
 import routes.profile
-import routes.view_attractions
+import routes.attractions_list
+import routes.attraction_page
 import routes.map_test
 
 if __name__ == "__main__":
