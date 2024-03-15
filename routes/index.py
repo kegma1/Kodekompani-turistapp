@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import render_template, session
-from db_utils import db_session, User
+from db_utils import db_session, User, Attraction
 from base64 import b64encode
 
 @app.route("/", methods = ["GET"])
@@ -29,7 +29,9 @@ def index():
         is_logged_in = True
         username = session["user"]
         fullname = data.full_name
+        
+    attractions = db_session.query(Attraction).all()
 
     return render_template("index.html", title="Home page", pfp=pfp, bio = bio or None, 
                            is_logged_in=is_logged_in, username=username, xp=xp, user_status=user_status,
-                           fullname = fullname) 
+                           fullname = fullname, attractions=attractions)
