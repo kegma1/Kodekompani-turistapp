@@ -1,11 +1,14 @@
 from __main__ import session
-from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
+from db_utils import db_session
 
-def get_curr_user():
-    return db_session.query(User).filter_by(username = session['user']).first()
+#STANDARDIZED AGE GROUPS
+age_groups = [1.5, 4, 6, 9, 13, 18]
 
-def get_change_user(change_id):
-    return db_session.query(User).filter_by(id = change_id).first()
+def get_curr(table):
+    return db_session.query(table).filter_by(username = session['user']).first()
+
+def get_change(table, change_id):
+    return db_session.query(table).filter_by(id = change_id).first()
 
 def is_admin():
     return True if ("is_logged_in" in session 

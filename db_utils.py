@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from libs.pfp import make_profile
@@ -84,6 +84,8 @@ class Attraction(Base):
     location_coordinates = Column(String(100))
     address = Column(String(100))
     _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
+    group = Column(Integer, autoincrement=True, default=1) #I DONT KNOW WHY THIS DOESNT WORK
+    keywords = Column(String(100))
     achievements = relationship('Achievement', back_populates='attraction')
 
     @property
@@ -101,7 +103,6 @@ class Attraction(Base):
 
         buffer.seek(0)
         self._image = buffer.read()
-
 
 class Achievement(Base):
     __tablename__ = 'achievements'

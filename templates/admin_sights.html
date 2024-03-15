@@ -1,4 +1,34 @@
 {% extends "base.html" %}
 {% block body %}
-    <p> hi </p>
+<section>
+    <table>
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Description:</th>
+            <th>Category:</th>
+            <th>Recommended age:</th>
+            <th>Location:</th>
+            <th>Address:</th>
+            <th>Group:</th>
+            <th>Keywords:</th>
+            <th>Image:</th>
+        </tr>
+    {% for attraction in attractions %}
+        <tr>
+            <td> {{ attraction.id }} </td>
+            <td> {{ attraction.name }} </td>
+            <td> {{ attraction.description }} </td>
+            <td> {{ attraction.category }} </td>
+            <td> {{ attraction.age_recommendation }} </td>
+            <td> {{ attraction.location_coordinates }} </td>
+            <td> {{ attraction.address }} </td>
+            <td> {{ attraction.group }} </td>
+            <td> {{ attraction.keywords }} </td>
+            <td> <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/> </td>
+            <!-- <td> <a href="############">DEL PIC</a></td> -->
+        </tr>
+    {% endfor %}
+    </table>
+</section>
 {% endblock %}
