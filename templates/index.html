@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block body %}
-<section>
+<section class="translucent-section">
     {% if is_logged_in %}
+        <h1>welcome back, 
+            <p>{{ fullname }}!</p></h1><br>
         <img src="data:image/jpg;base64,{{ pfp }}" alt="Profile picture">
         <p> username: {{ username }} </p>
         {% if bio %}
@@ -14,7 +16,7 @@
 
 
     {% endif %}
-    <!-- <h1>Hallo, Verden!</h1><br> -->
+
     <a href="{{ url_for("sign_up")}}">Sign up</a><br>
     <br>
     <a href="{{ url_for("login")}}">Login </a><br>
@@ -30,4 +32,3 @@
 
 </section>
 {% endblock %}
-

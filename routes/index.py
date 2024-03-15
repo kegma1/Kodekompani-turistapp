@@ -9,6 +9,7 @@ def index():
     bio = None
     is_logged_in = False
     username = ""
+    fullname = ""
     xp = 0; user_status = "Newbie in city"
 
     if "is_logged_in" in session and session["is_logged_in"]:
@@ -27,5 +28,8 @@ def index():
 
         is_logged_in = True
         username = session["user"]
+        fullname = data.full_name
 
-    return render_template("index.html", title="Home page", pfp=pfp, bio = bio or None, is_logged_in=is_logged_in, username=username, xp=xp, user_status=user_status)  
+    return render_template("index.html", title="Home page", pfp=pfp, bio = bio or None, 
+                           is_logged_in=is_logged_in, username=username, xp=xp, user_status=user_status,
+                           fullname = fullname) 
