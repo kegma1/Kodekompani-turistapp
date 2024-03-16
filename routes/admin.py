@@ -1,6 +1,6 @@
 from __main__ import app, redirect, render_template, url_for, redirect, session
 from flask import request
-from db_utils import User, db_session
+from db_utils import Attraction, User, db_session
 from PIL import Image
 from io import BytesIO
 from base64 import b64encode
@@ -71,3 +71,26 @@ def admin_del_bio(change_id):
 def funi():
     return render_template("iocularis.html")
         
+@app.route("/add_attraction", methods=["GET", "POST"])
+@require_login
+@require_admin
+def add_attraction():
+    if request.method == "POST":
+        name = request.form.get("name")
+        description = request.form.get("description")
+        category = request.form.get("category")
+        age_recommendation = request.form.get("age_recommendation")
+        location_coordinates = request.form.get("location_coordinates")
+        address = request.form.get("address")
+        group = request.form.get("group")
+        keywords = request.form.get("keywords")
+
+        new_attraction = Attraction(name=name, description=description, category=category, 
+                                    age_recommendation=age_recommendation, location_coordinates=location_coordinates, 
+                                    address=address, group=group, keywords=keywords)
+        db_session.add(new_attraction)
+        db_session.commit()
+
+        return redirect(url_for("admin_sights"))
+
+    return render_template("add_attraction.html")

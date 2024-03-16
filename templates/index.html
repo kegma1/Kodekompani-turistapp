@@ -27,12 +27,15 @@
     <a href="https://youtu.be/dQw4w9WgXcQ?si=JHy6sufDJF2QDlSB?autoplay=0">Misc</a><br>
     <br>
     <a href="{{ url_for("view_attraction", attraction_id=1)}}">narvikfjellresturante</a> -->
-    
+
+    <br>
+    <br>
     <h1>Local News</h1>
     <p>A new Italian restaurant you need to check out!</p>
     <p>Local stand up comedian Mikael Lunde Isaksen with his one-lines.</p>
     <p>Swinger party down by the local pub right now come take a look; Your mother.</p>
-
+    
+    <br>
     <h1>Places to Explore</h1>
     {% for attraction in attractions %}
         <h3>{{ attraction.name }}</h3>

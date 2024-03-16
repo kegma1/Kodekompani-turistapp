@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+<section>
+    <form action="{{ url_for('add_attraction') }}" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category"><br>
+        <label for="age_recommendation">Recommended Age:</label><br>
+        <input type="number" id="age_recommendation" name="age_recommendation"><br>
+        <label for="location_coordinates">Location Coordinates:</label><br>
+        <input type="text" id="location_coordinates" name="location_coordinates"><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br>
+        <label for="group">Group:</label><br>
+        <input type="number" id="group" name="group"><br>
+        <label for="keywords">Keywords:</label><br>
+        <input type="text" id="keywords" name="keywords"><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+{% endblock %}

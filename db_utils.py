@@ -87,10 +87,13 @@ class Attraction(Base):
     group = Column(Integer, autoincrement=True, default=1) #I DONT KNOW WHY THIS DOESNT WORK
     keywords = Column(String(100))
     achievements = relationship('Achievement', back_populates='attraction')
-
+    
     @property
     def image(self):
-        return b64encode(self._image).decode('utf-8')
+        if self._image is not None:
+            return b64encode(self._image).decode('utf-8')
+        else:
+            return None
     
     @image.setter
     def image(self, new_pic):
