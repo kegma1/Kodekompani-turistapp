@@ -6,11 +6,34 @@
             <div>
                 <h1>{{ info.name }}</h1>
                 <p id="description">{{ info.description }}</p>
+
+                {% if achievements %}
+                    <h1> Your achievements </h1>
+                    <ul>
+                        {% for achievement in achievements %}
+                            <li>
+                                <h2>{{achievement.name}}</h2>
+                                <p>{{achievement.description}}</p>
+                                <p>{{achievement.xp_reward}} points</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
             <div>
                 <p>Catagory: {{ info.category }}</p>
                 <p>Age: {{ info.age_recommendation }}</p>
                 <p>Address: {{ info.address }}</p>
+
+
+                {% from "macros/_form_helper.html" import render_field %}
+                <form action="{{ url_for("view_attraction", attraction_id=info.id) }}" method="post">
+                    {{ form.csrf_token }}
+                    <dl>
+                        {{ render_field(form.passcode) }}
+                    </dl>
+                    <button type="submit">Unlock</button>
+                </form>
             </div>
         </div>
 
