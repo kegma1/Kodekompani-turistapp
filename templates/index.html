@@ -3,15 +3,29 @@
 {% block body %}
 <section class="translucent-section">
     {% if is_logged_in %}
-        <h1>Welcome back, 
-            <p>{{ fullname }}!</p></h1><br>
-        <img src="data:image/jpg;base64,{{ pfp }}" alt="Profile picture">
-        <p> Username: {{ username }} </p>
-        {% if bio %}
-        <p> Bio: {{ bio }} </p>
-        {% endif %}
-        <p> Achievements: You've earned {{ xp }} points.</p>
-        <p> Congrats! You are {{ user_status }} in Narvik</p>
+        <div id="flex_container">
+            <div>
+                <h1>Welcome back, 
+                    <p>{{ fullname }}!</p></h1><br>
+                <img src="data:image/jpg;base64,{{ pfp }}" alt="Profile picture">
+                <p> Username: {{ username }} </p>
+                {% if bio %}
+                <p> Bio: {{ bio }} </p>
+                {% endif %}
+                <p> Achievements: You've earned {{ xp }} points.</p>
+                <p> Congrats! You are {{ user_status }} in Narvik</p>
+            </div>
+            <div>
+                {% if t5achievements %}
+                    <h1>Your top 5 achievement</h1>
+                    <ul>
+                        {% for achiev in t5achievements %}
+                            <li><p>{{achiev.name}}: {{achiev.xp_reward}}xp</p></li>
+                        {%endfor%}
+                    </ul>
+                {%endif%}
+            </div>
+        </div>
         {% else %}
         <h1>Welcome to Narvik!</h1>
     {% endif %}
@@ -46,4 +60,19 @@
     {% endfor %}
 
 </section>
+<style>
+    #flex_container {
+        display: flex;
+        width: 100%;
+    }
+
+    #flex_container>div {
+        flex: 1;
+    }
+
+    #description {
+        word-break: break-word;
+        white-space: normal;
+    }
+</style>
 {% endblock %}
