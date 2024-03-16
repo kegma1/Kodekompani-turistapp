@@ -1,8 +1,9 @@
 from wtforms import Form, StringField, PasswordField, validators, ValidationError
+from flask_wtf import FlaskForm
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash
 
-class LogInForm(Form):
+class LogInForm(FlaskForm):
     pass_min = 8
     pass_max = 255
     username = StringField("Username", [validators.data_required(), validators.Length(min=3, max=255)])

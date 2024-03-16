@@ -1,8 +1,9 @@
 from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField
+from flask_wtf import FlaskForm
 from db_utils import db_session, User
 from datetime import date, timedelta
 
-class SignUpForm(Form):
+class SignUpForm(FlaskForm):
     username = StringField("Username:", [validators.data_required(), validators.Length(min=3, max=50, message= "Username length must be between 3 and 50 charecters.")])
     first_name = StringField("First name:", [validators.data_required(), validators.Length(min=1, max=50, message= "First name required.")])
     last_name = StringField("Last name:", [validators.data_required(), validators.Length(min=1, max=50, message= "Last name required.")])

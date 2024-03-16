@@ -4,6 +4,7 @@
     <h1>Edit Profile</h1>
     {% from "macros/_form_helper.html" import render_field %}
     <form method="post" action="{{ url_for("profile") }}" enctype="multipart/form-data">
+        {{ form.csrf_token }}
         <dl>
             {{ render_field(form.username) }}
             {{ render_field(form.first_name) }}

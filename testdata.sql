@@ -12,7 +12,3 @@ INSERT INTO `attractions` (`id`, `name`, `description`, `category`, `age_recomme
 INSERT INTO `achievements` (`id`, `name`, `description`, `pass_code`, `xp_reward`, `attraction_id`) VALUES (1, 'Toppen av Narvik', 'Besøk Narvik Fjellheisrestauranten', '123456789', '100', '1');
 
 INSERT INTO `achievements` (`id`, `name`, `description`, `pass_code`, `xp_reward`, `attraction_id`) VALUES (2, 'Nam Nam godt i magen', 'Bestill mat ', 'namMat:P', '200', '1');
-
-INSERT INTO `user_attractions` (`user_id`, `attraction_id`) VALUES ('1', '1');
-
-INSERT INTO `user_achievements` (`user_id`, `achievement_id`) VALUES ('1', '1');

@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, url_for, session, redirect
+from flask_wtf import CSRFProtect
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 from datetime import date
 from db_utils import db_session, User
 app = Flask(__name__)
+csrf = CSRFProtect(app)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 * 1024 
 
 app.secret_key = secrets.token_urlsafe(16)
 
@@ -17,6 +20,7 @@ import routes.admin_sights_edit
 import routes.profile
 import routes.attractions_list
 import routes.attraction_page
+import routes.add_attraction
 import routes.map_test
 
 if __name__ == "__main__":

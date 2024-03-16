@@ -4,6 +4,7 @@
     <h1>Sign up</h1>
     {% from "macros/_form_helper.html" import render_field %}
     <form method="post">
+        {{ form.csrf_token }}
         <dl>
             {{ render_field(form.username) }}
             {{ render_field(form.first_name) }}
