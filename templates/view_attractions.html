@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
-    {% for attraction in attractions %}
-        <p><h3>{{ attraction.name }}</h3>
-        <pre>{{ attraction.description }}</pre></p><br>
-    {% endfor %}
-{% endblock %}
+        <ul>
+            {% for attraction in attractions %}
+            <li>
+                <h3>{{ attraction.name }}</h3>
+                <p>{{ attraction.description }}</p><br>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
