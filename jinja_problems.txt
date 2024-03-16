@@ -1,4 +1,1 @@
 1:
-admin_sights.html | line 29 :
-{{ url_for("admin_sights_edit", id = attraction.id) }}
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'admin_sights_edit' with values ['id']. Did you mean 'admin_sights' instead? -->

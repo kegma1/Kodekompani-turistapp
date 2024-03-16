@@ -13,6 +13,7 @@ import routes.login
 import routes.logout
 import routes.admin
 import routes.admin_sights
+import routes.admin_sights_edit
 import routes.profile
 import routes.attractions_list
 import routes.attraction_page

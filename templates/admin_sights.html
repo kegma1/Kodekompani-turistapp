@@ -26,7 +26,7 @@
             <td> {{ attraction.group }} </td>
             <td> {{ attraction.keywords }} </td>
             <td> <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/> </td>
-            <!-- <td> <a href="############">EDIT</a></td> -->
+            <td> <a href="{{ url_for("admin_sights_edit", id = attraction.id) }}">EDIT</a></td>
         </tr>
     {% endfor %}
     </table>

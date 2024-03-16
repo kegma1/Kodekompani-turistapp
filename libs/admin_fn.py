@@ -2,7 +2,7 @@ from __main__ import session
 from db_utils import db_session
 
 #STANDARDIZED AGE GROUPS
-age_groups = [1.5, 4, 6, 9, 13, 18]
+age_groups = [0, 1, 3, 6, 9, 13, 18]
 
 def get_curr(table):
     return db_session.query(table).filter_by(username = session['user']).first()

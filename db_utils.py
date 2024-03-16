@@ -80,7 +80,7 @@ class Attraction(Base):
     name = Column(String(100), nullable=False)
     description = Column(String(255))
     category = Column(String(50))
-    age_recommendation = Column(String(20))
+    age_recommendation = Column(Integer)
     location_coordinates = Column(String(100))
     address = Column(String(100))
     _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
