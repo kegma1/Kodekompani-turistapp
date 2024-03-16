@@ -5,6 +5,5 @@ from db_utils import Attraction, db_session
 
 @app.route("/attractions/list", methods = ["GET", "POST"])
 def attractions_list():
-    info = db_session.query(Attraction).all()
-    print('results: ', info)
-    return render_template("view_attractions.html", title = "test")
+    attractions = db_session.query(Attraction).all()
+    return render_template("view_attractions.html", attractions = attractions)

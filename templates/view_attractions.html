@@ -1,4 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
-    <p> hi </p>
+    {% for attraction in attractions %}
+        <p><h3>{{ attraction.name }}</h3>
+        <pre>{{ attraction.description }}</pre></p><br>
+    {% endfor %}
 {% endblock %}
