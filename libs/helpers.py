@@ -8,7 +8,7 @@ def require_login(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "is_logged_in" not in session or not session["is_logged_in"]:
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
 

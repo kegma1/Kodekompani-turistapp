@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block body %}
-    {% for attraction in attractions %}
-        <p><h3>{{ attraction.name }}</h3>
-        <pre>{{ attraction.description }}</pre></p><br>
-    {% endfor %}
+    <section>
+        {% for attraction in attractions %}
+            <p><a href="{{ url_for("view_attraction", attraction_id=attraction.id) }}"><h3>{{ attraction.name }}</h3></a>
+            <pre>{{ attraction.description }}</pre></p><br>
+        {% endfor %}
+
+    </section>
 {% endblock %}
