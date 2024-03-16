@@ -10,21 +10,21 @@ from form.add_attraction_form import AddAttraction
 def add_attraction():
     attraction_form = AddAttraction()
     if request.method == "POST" and attraction_form.validate_on_submit():
-            new_attraction = Attraction()
+        new_attraction = Attraction()
 
-            new_attraction.name = attraction_form.name.data
-            new_attraction.description = attraction_form.description.data
-            new_attraction.category = attraction_form.category.data
-            new_attraction.age_recommendation = attraction_form.age_recommendation.data
-            new_attraction.location_coordinates = attraction_form.location_coordinates.data
-            new_attraction.address = attraction_form.address.data
-            new_attraction.group = attraction_form.group.data
-            new_attraction.keywords = attraction_form.keywords.data
-            new_attraction.image = attraction_form.image.data.stream
+        new_attraction.name = attraction_form.name.data
+        new_attraction.description = attraction_form.description.data
+        new_attraction.category = attraction_form.category.data
+        new_attraction.age_recommendation = attraction_form.age_recommendation.data
+        new_attraction.location_coordinates = attraction_form.location_coordinates.data
+        new_attraction.address = attraction_form.address.data
+        new_attraction.group = attraction_form.group.data
+        new_attraction.keywords = attraction_form.keywords.data
+        new_attraction.image = attraction_form.image.data.stream
 
-            db_session.add(new_attraction)
-            db_session.commit()
-            return redirect(url_for("admin_sights"))
+        db_session.add(new_attraction)
+        db_session.commit()
+        return redirect(url_for("admin_sights"))
         
 
 
