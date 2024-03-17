@@ -1,4 +1,4 @@
-from __main__ import session
+from flask import session
 from db_utils import db_session
 
 #STANDARDIZED AGE GROUPS
