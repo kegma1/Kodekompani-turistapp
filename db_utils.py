@@ -84,7 +84,7 @@ class Attraction(Base):
     location_coordinates = Column(String(100))
     address = Column(String(100))
     _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
-    group = Column(Integer, autoincrement=True, default=1) #I DONT KNOW WHY THIS DOESNT WORK
+    group = Column(Integer, default=None)
     keywords = Column(String(100))
     achievements = relationship('Achievement', back_populates='attraction')
     

@@ -1,4 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
-    <p> hi </p>
+<section>
+    <p> {{ attraction.name }} </p>
+    <p> {{ attraction.description }} </p>
+
+    <p> {{ attraction.address }} </p>
+    <p> {{ attraction.location_coordinates }} </p>
+
+    <p> {{ attraction.age_recommendation }} </p>
+    <p> {{ attraction.category }} </p>
+    <p> {{ attraction.keywords }} </p>
+    <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/>
+<section>
 {% endblock %}

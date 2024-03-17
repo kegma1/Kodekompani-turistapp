@@ -2,13 +2,13 @@ from __main__ import app
 from libs.helpers import require_admin, require_login
 from flask import redirect, render_template, url_for, request
 from db_utils import db_session, Attraction
-from form.add_attraction_form import AddAttraction
+from form.attraction_form import AttractionForm
 
 @app.route("/add_attraction", methods=["GET", "POST"])
 @require_login
 @require_admin
 def add_attraction():
-    attraction_form = AddAttraction()
+    attraction_form = AttractionForm()
     if request.method == "POST" and attraction_form.validate_on_submit():
         new_attraction = Attraction()
 
@@ -26,7 +26,4 @@ def add_attraction():
         db_session.commit()
         return redirect(url_for("admin_sights"))
         
-
-
-
-    return render_template("add_attraction.html", title="Add attraction", form=attraction_form)
+    return render_template("admin_add_attraction.html", title="Add attraction", form=attraction_form)

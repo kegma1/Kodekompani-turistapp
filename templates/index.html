@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
-<section class="translucent-section">
+<section>
     {% if is_logged_in %}
         <div id="flex_container">
             <div>
@@ -60,19 +60,4 @@
     {% endfor %}
 
 </section>
-<style>
-    #flex_container {
-        display: flex;
-        width: 100%;
-    }
-
-    #flex_container>div {
-        flex: 1;
-    }
-
-    #description {
-        word-break: break-word;
-        white-space: normal;
-    }
-</style>
 {% endblock %}

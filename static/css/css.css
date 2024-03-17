@@ -42,16 +42,12 @@ h2 {
 }
 
 article, section {
-    background-color: #3a3a3a;
+    background-color: rgba(58, 58, 58, 0.5);
     padding: 1vw;
     margin-top: 1vw;
     margin-bottom: 1vw;
     width: max-content;
     border-radius: 10px;
-}
-
-.translucent-section {
-    background-color: rgba(58, 58, 58, 0.5);
 }
 
 .menu-container {
@@ -112,4 +108,16 @@ article, section {
     right: 10px;
 }
 
+#flex_container {
+    display: flex;
+    width: 100%;
+}
 
+#flex_container>div {
+    flex: 1;
+}
+
+#description {
+    word-break: break-word;
+    white-space: normal;
+}
