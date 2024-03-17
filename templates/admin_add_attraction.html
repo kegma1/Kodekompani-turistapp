@@ -18,5 +18,8 @@
         {{ form.hidden_tag() }}
         <input type="submit" value="Submit">
     </form>
+    <hr>
+    <a href="{{ url_for("index") }}">Back to menu</a>
+    <a href="{{ url_for("admin_sights") }}">Back to Admin sights</a>
 </section>
 {% endblock %}

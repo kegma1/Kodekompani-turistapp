@@ -1,5 +1,5 @@
 from __main__ import app
-from flask import request, session, redirect, url_for
+from flask import session, redirect, url_for
 from db_utils import db_session, Achievement, User
 from libs.helpers import require_login
 

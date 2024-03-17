@@ -1,25 +1,40 @@
-from __main__ import app, redirect, render_template, url_for, redirect, session
-from flask import request
+from __main__ import app
+from flask import request, redirect, render_template, url_for, redirect
 from db_utils import Attraction, db_session
-from PIL import Image
-from io import BytesIO
-from base64 import b64encode
 from libs.helpers import require_admin, require_login
 from form.attraction_form import AttractionForm
+from werkzeug.datastructures import CombinedMultiDict
 
 @app.route("/admin_sights_edit_<id>", methods = ["GET", "POST"])
 @require_login
 @require_admin
 def admin_sights_edit(id):
-    attraction_form = AttractionForm()
+    attraction_form = AttractionForm(data_required=False, formdata=CombinedMultiDict((request.files, request.form)))
     attraction = db_session.query(Attraction).filter_by(id = id).first()
+    
+    if request.method == "POST" and attraction_form.validate():
+        attraction.address = attraction_form.address.data
+        attraction.age_recommendation = attraction_form.age_recommendation.data
+        attraction.category = attraction_form.category.data
+        attraction.description = attraction_form.description.data
+        attraction.group = attraction_form.group.data
+        
+        if attraction_form.image.data:
+            attraction.image = attraction_form.image.data
+            
+        attraction.keywords = attraction_form.keywords.data
+        attraction.location_coordinates = attraction_form.location_coordinates.data
+        attraction.name = attraction_form.name.data
+        
+        db_session.commit()
+        
+        return redirect(url_for("admin_sights"))
     
     attraction_form.address.data = attraction.address
     attraction_form.age_recommendation.data = attraction.age_recommendation
     attraction_form.category.data = attraction.category
     attraction_form.description.data = attraction.description
     attraction_form.group.data = attraction.group
-    attraction_form.image.data = attraction.image
     attraction_form.keywords.data = attraction.keywords
     attraction_form.location_coordinates.data = attraction.location_coordinates
     attraction_form.name.data = attraction.name

@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from flask_wtf.form import _Auto
 from wtforms import StringField, validators, ValidationError
 from db_utils import db_session, Achievement, Attraction
 

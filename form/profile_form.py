@@ -1,6 +1,5 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField, TextAreaField, BooleanField
+from wtforms import StringField, PasswordField, EmailField, validators, ValidationError, DateField, TextAreaField, BooleanField
 from db_utils import db_session, User
-from werkzeug.security import check_password_hash
 from flask import session
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed

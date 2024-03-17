@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, validators, ValidationError
+from wtforms import StringField, PasswordField, validators, ValidationError
 from flask_wtf import FlaskForm
 from db_utils import db_session, User
 from werkzeug.security import check_password_hash

@@ -1,7 +1,6 @@
 from __main__ import app
 from flask import request,  redirect, render_template, url_for, session
-from db_utils import Friend, User, UserAttraction, UserAchievement, db_session
-from werkzeug.security import generate_password_hash
+from db_utils import User, db_session
 from form.profile_form import ProfileForm
 from libs.helpers import require_login
 

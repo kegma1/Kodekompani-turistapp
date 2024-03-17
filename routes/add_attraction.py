@@ -3,12 +3,13 @@ from libs.helpers import require_admin, require_login
 from flask import redirect, render_template, url_for, request
 from db_utils import db_session, Attraction
 from form.attraction_form import AttractionForm
+from werkzeug.datastructures import CombinedMultiDict
 
 @app.route("/add_attraction", methods=["GET", "POST"])
 @require_login
 @require_admin
 def add_attraction():
-    attraction_form = AttractionForm()
+    attraction_form = AttractionForm(data_required=True, formdata=CombinedMultiDict((request.files, request.form)))
     if request.method == "POST" and attraction_form.validate_on_submit():
         new_attraction = Attraction()
 

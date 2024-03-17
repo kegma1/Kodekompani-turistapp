@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, EmailField, validators, ValidationError, DateField
+from wtforms import StringField, PasswordField, EmailField, validators, ValidationError, DateField
 from flask_wtf import FlaskForm
 from db_utils import db_session, User
 from datetime import date, timedelta

@@ -1,7 +1,6 @@
 from __main__ import app
 from flask import render_template, session
 from db_utils import db_session, User, Attraction
-from base64 import b64encode
 
 @app.route("/", methods = ["GET"])
 def index():
@@ -20,9 +19,9 @@ def index():
         
         xp = data.xp_collected
         xp = 0 if xp == None else xp
-        if xp < 10: user_status = "Newbie in city"
-        elif xp < 50: user_status = "Tourist"
-        elif xp < 100: user_status = "Svarta bjorn"
+        if xp < 100: user_status = "Newbie in city"
+        elif xp < 500: user_status = "Tourist"
+        elif xp < 1000: user_status = "Svarta bjorn"
         else: user_status = "Rallar"
 
         if data.profile_pic:
@@ -41,6 +40,14 @@ def index():
         
     attractions = db_session.query(Attraction).all()
 
-    return render_template("index.html", title="Home page", pfp=pfp, bio = bio or None, 
-                           is_logged_in=is_logged_in, username=username, xp=xp, user_status=user_status,
-                           fullname = fullname, attractions=attractions, t5achievements=top_5_achievements)
+    return render_template("index.html", 
+                           title = "Home page", 
+                           pfp = pfp, 
+                           bio = bio or None, 
+                           is_logged_in = is_logged_in, 
+                           username = username, 
+                           xp = xp, 
+                           user_status = user_status,
+                           fullname = fullname, 
+                           attractions = attractions,
+                           t5achievements = top_5_achievements)

@@ -1,11 +1,8 @@
-from __main__ import app, redirect, render_template, url_for, redirect, session
-from flask import request
-from db_utils import Attraction, User, db_session
-from PIL import Image
-from io import BytesIO
-from base64 import b64encode
+from __main__ import app
+from flask import redirect, render_template, url_for, redirect, session
+from db_utils import User, db_session
 from libs.helpers import require_login, require_admin
-from libs.admin_fn import is_admin, get_curr, get_change
+from libs.admin_fn import get_curr, get_change
 
 # Needs more checks for admin privileges in the future
 @app.route("/admin", methods = ["GET", "POST"]) 

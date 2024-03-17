@@ -1,7 +1,7 @@
-from __main__ import app, request, generate_password_hash, redirect, render_template, url_for, session
+from __main__ import app
 from form.login_form import LogInForm
 from db_utils import db_session, User
-from flask import redirect, url_for
+from flask import request, redirect, render_template, url_for, session
 
 @app.route("/login", methods = ["GET", "POST"])
 def login(): 
