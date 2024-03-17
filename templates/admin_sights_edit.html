@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 {% block body %}
+{% from "macros/_form_helper.html" import render_field %}
 <section>
-    <p> {{ attraction.name }} </p>
-    <p> {{ attraction.description }} </p>
+    <form method="post" action="{{ url_for("admin_sights_edit", id = id) }}" enctype="multipart/form-data">
+    {{ attraction.csrf_token }}
+    <dl>
+        {{ render_field(attraction.name) }} 
+        {{ render_field(attraction.description) }}
 
-    <p> {{ attraction.address }} </p>
-    <p> {{ attraction.location_coordinates }} </p>
+        {{ render_field(attraction.address) }}
+        {{ render_field(attraction.location_coordinates) }}
 
-    <p> {{ attraction.age_recommendation }} </p>
-    <p> {{ attraction.category }} </p>
-    <p> {{ attraction.keywords }} </p>
-    <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/>
-<section>
+        {{ render_field(attraction.age_recommendation) }}
+        {{ render_field(attraction.category) }}
+        {{ render_field(attraction.keywords) }}
+        {{ render_field(attraction.image) }}
+        <img src="data:image/jpg;base64,{{ image }}" alt="Profile picture" width="150", height="150"/>
+    </dl>
+{{ attraction.hidden_tag() }}
+</section>
 {% endblock %}

@@ -36,5 +36,10 @@ def profile():
     profile_form.email.data = info.email
     profile_form.year.data = info.age
     profile_form.bio.data = info.bio
-    return render_template("profile.html", title="Edit Profile", form = profile_form, username = info.username, email = info.email, profile_picture = info.profile_pic)
+    return render_template("profile.html", 
+                           title="Edit Profile", 
+                           form = profile_form, 
+                           username = info.username, 
+                           email = info.email, 
+                           profile_picture = info.profile_pic)
     
