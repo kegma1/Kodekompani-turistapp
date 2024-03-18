@@ -19,7 +19,6 @@ import routes.attractions_list
 import routes.attraction_page
 import routes.add_attraction
 import routes.unlock_achivement
-import routes.map_test
 
 if __name__ == "__main__":
     app.run()

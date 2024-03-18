@@ -39,6 +39,9 @@
         </tr>
     {% endfor %}
     </table>
+    <a href="{{ url_for("admin", page = page - 1) }}" >Previous page</a>
+    <a href="{{ url_for("admin", page = page + 1) }}" >Next page</a>
+    <hr>
     <a href="{{ url_for("admin_sights", page = 1) }}" >Admin sights</a>
     <a href="{{ url_for("index") }}">back to menu</a>
 </section>
