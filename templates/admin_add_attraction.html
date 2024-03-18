@@ -13,6 +13,7 @@
             {{ render_field(form.address) }}
             {{ render_field(form.group) }}
             {{ render_field(form.keywords) }}
+            {{ render_field(form.isDeleted) }}
             {{ render_field(form.image) }}
         </dl>
         {{ form.hidden_tag() }}
@@ -20,6 +21,6 @@
     </form>
     <hr>
     <a href="{{ url_for("index") }}">Back to menu</a>
-    <a href="{{ url_for("admin_sights") }}">Back to Admin sights</a>
+    <a href="{{ url_for("admin_sights", page = 1) }}">Back to Admin sights</a>
 </section>
 {% endblock %}

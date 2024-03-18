@@ -25,6 +25,6 @@ def add_attraction():
 
         db_session.add(new_attraction)
         db_session.commit()
-        return redirect(url_for("admin_sights"))
+        return redirect(url_for("admin_sights", page = 1))
         
     return render_template("admin_add_attraction.html", title="Add attraction", form=attraction_form)

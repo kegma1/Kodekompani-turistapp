@@ -3,7 +3,6 @@
 <section>
     <table>
         <tr>
-            <th> ID: </th>
             <th> Username: </th>
             <th> Email: </th>
             <th> Age group: </th>
@@ -15,7 +14,6 @@
         </tr>
     {% for user in users %}
         <tr>
-            <td> {{ user.id }} </td>
             <td> {{ user.username }} </td>
             <td> {{ user.email }} </td>
             <td> {{ user.age }} </td>
@@ -41,7 +39,7 @@
         </tr>
     {% endfor %}
     </table>
-    <a href="{{ url_for("admin_sights") }}" >Admin sights</a>
+    <a href="{{ url_for("admin_sights", page = 1) }}" >Admin sights</a>
     <a href="{{ url_for("index") }}">back to menu</a>
 </section>
 {% endblock %}

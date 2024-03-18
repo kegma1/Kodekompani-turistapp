@@ -86,6 +86,7 @@ class Attraction(Base):
     _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
     group = Column(Integer, default=None)
     keywords = Column(String(100))
+    isDeleted = Column(Boolean, default=False)
     achievements = relationship('Achievement', back_populates='attraction')
     
     @property

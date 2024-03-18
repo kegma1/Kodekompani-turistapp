@@ -1,4 +1,4 @@
-from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField
+from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField, BooleanField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
@@ -13,6 +13,7 @@ class AttractionForm(FlaskForm):
             self.age_recommendation.validators = [validators.data_required()]
             self.address.validators = [validators.data_required()]
             self.keywords.validators = [validators.data_required()]
+            self.isDeleted.validators = [validators.data_required()]
     
     name = StringField("Name")
     description = TextAreaField("Description")
@@ -22,5 +23,6 @@ class AttractionForm(FlaskForm):
     address = StringField("address")
     group = IntegerField("group")
     keywords = StringField("keywords")
+    isDeleted = BooleanField(default=False, label="Delete?")
 
     image = FileField("Image banner", validators= [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"], "Only images")])

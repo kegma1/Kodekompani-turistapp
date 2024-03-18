@@ -15,6 +15,7 @@
         {{ render_field(attraction.category) }}
         {{ render_field(attraction.group) }}
         {{ render_field(attraction.keywords) }}
+        {{ render_field(attraction.isDeleted) }}
         {{ render_field(attraction.image) }}
         <img src="data:image/jpg;base64,{{ image }}" alt="Profile picture" width="150", height="150"/>
     </dl>
@@ -23,6 +24,6 @@
 <input type="submit" value="submit">
 <hr>
 <a href="{{ url_for("index") }}">Back to menu</a>
-<a href="{{ url_for("admin_sights") }}">Back to Admin sights</a>
+<a href="{{ url_for("admin_sights", page = 1) }}">Back to Admin sights</a>
 </section>
 {% endblock %}

@@ -18,6 +18,7 @@ def admin_sights_edit(id):
         attraction.category = attraction_form.category.data
         attraction.description = attraction_form.description.data
         attraction.group = attraction_form.group.data
+        attraction.isDeleted = attraction_form.isDeleted.data
         
         if attraction_form.image.data:
             attraction.image = attraction_form.image.data
@@ -28,13 +29,14 @@ def admin_sights_edit(id):
         
         db_session.commit()
         
-        return redirect(url_for("admin_sights"))
+        return redirect(url_for("admin_sights", page = 1))
     
     attraction_form.address.data = attraction.address
     attraction_form.age_recommendation.data = attraction.age_recommendation
     attraction_form.category.data = attraction.category
     attraction_form.description.data = attraction.description
     attraction_form.group.data = attraction.group
+    attraction_form.isDeleted.data = attraction.isDeleted
     attraction_form.keywords.data = attraction.keywords
     attraction_form.location_coordinates.data = attraction.location_coordinates
     attraction_form.name.data = attraction.name

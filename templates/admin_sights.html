@@ -3,7 +3,6 @@
 <section>
     <table>
         <tr>
-            <th>ID:</th>
             <th>Name:</th>
             <th>Description:</th>
             <th>Category:</th>
@@ -12,11 +11,11 @@
             <th>Address:</th>
             <th>Group:</th>
             <th>Keywords:</th>
+            <th>Deleted?:</th>
             <th>Image:</th>
         </tr>
     {% for attraction in attractions %}
         <tr>
-            <td> {{ attraction.id }} </td>
             <td> {{ attraction.name }} </td>
             <td> {{ attraction.description }} </td>
             <td> {{ attraction.category }} </td>
@@ -25,13 +24,19 @@
             <td> {{ attraction.address }} </td>
             <td> {{ attraction.group }} </td>
             <td> {{ attraction.keywords }} </td>
+            <td> {{ attraction.isDeleted }} </td>
             <td> <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/> </td>
             <td> <a href="{{ url_for("admin_sights_edit", id = attraction.id) }}">EDIT</a></td>
         </tr>
     {% endfor %}
+
     </table>
+    <a href="{{ url_for('admin_sights', page = page - 1) }}">Previous page</a>
+    <a href="{{ url_for('admin_sights', page = page + 1) }}">Next page</a>
     <a href="{{ url_for('add_attraction') }}">Add New Attraction</a>
     <hr>
     <a href="{{ url_for("admin") }}">Admin panel</a>
+    <a href="{{ url_for("index") }}">Back to menu</a>
+
 </section>
 {% endblock %}

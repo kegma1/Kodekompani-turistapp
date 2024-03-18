@@ -17,7 +17,7 @@
                 {% if is_logged_in %}
                     <a href="{{ url_for('profile') }}">Edit Profile</a>
                     <a href="{{ url_for("logout") }}">Log Out</a><br>
-                    <a href="{{ url_for('admin_sights') }}">Admin sights</a>
+                    <a href="{{ url_for('admin_sights', page = 1) }}">Admin sights</a>
                     <a href="{{ url_for("admin")}}">Admin panel</a>
                 {% else %}
                     <a href="{{ url_for("login")}}">Login </a><br>
