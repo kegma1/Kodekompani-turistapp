@@ -56,7 +56,7 @@ article, section {
     right: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 2000;
     transform: translateX(0%);
     transition: transform 0.3s ease-in-out; 
 }
@@ -98,7 +98,7 @@ article, section {
     border: lawngreen;
     font-size: 48px; /* size of the hamburger icon */
     cursor: pointer;
-    z-index: 1000;
+    z-index: 2000;
     display: block;
     background-color: #000;
     color: #fff;
@@ -120,4 +120,10 @@ article, section {
 #description {
     word-break: break-word;
     white-space: normal;
+}
+
+#mapdiv {
+    width:100%;
+    height:100%;
+    /* position: absolute; */
 }
