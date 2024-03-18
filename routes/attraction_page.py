@@ -15,7 +15,9 @@ def view_attraction(attraction_id: int):
         Achievement.attraction_id == attraction_id
     ).all()
 
-    print(user_achivements)
+    coords = attraction_info.location_coordinates.split(",")
+    assert len(coords) == 2
+
 
     if request.method == "POST" and passcode_form.validate():
         return redirect(url_for("unlock_achivement", attraction = attraction_id, passcode = passcode_form.passcode.data))
@@ -25,5 +27,8 @@ def view_attraction(attraction_id: int):
                            info=attraction_info, 
                            image=attraction_info.image, 
                            form=passcode_form, 
-                           achievements=None if not user_achivements else user_achivements
+                           achievements=None if not user_achivements else user_achivements,
+                           lon=coords[1],
+                           lat=coords[0],
+                           zoom = 15
                            )

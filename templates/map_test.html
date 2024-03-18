@@ -1,20 +1,127 @@
-{% extends "base.html" %}
-{% block body %}
-<section>
-    <h1>My First Google Map</h1>
+<html>
 
-    <div id="googleMap" style="width:100%;height:400px;"></div>
+ <head>
+  <title>map2wiki | Map search</title>      
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script src="https://cdn.rawgit.com/kikocorreoso/map2wiki/master/src/static/brython_dist.js"></script>
+  <style>
+body {font-family: 'Open Sans', sans-serif;}
+
+html, body {
+    width:100%;  
+    height:100%;
+    margin:0;
+}
+
+#mapdiv {
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+
+.button {
+	width: 50%;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0px;
+}
+
+#search {
+    left: 0px;
+}
+
+#getpos {
+    right: 0px;
+}
+
+#container {
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+}
+
+#link {
+	position: fixed;
+	right: 50px;
+	top: 5px;
+	color: #000;
+}
+#link:link {
+	border-style: solid;
+    border-width : 1px 1px 1px 1px;
+    text-decoration : none;
+    padding : 2px;
+    border-color : #ccc;
+    background-color: #ccc;
+}
+#link:hover { 
+	border-color: #000; 
+	color: blue;
+}
+  </style>
+ </head>
+
+ <body onload="brython(1)">
+  <div id="container">
+   <div id="mapdiv"></div>
+  </div>
+
+ <script type="text/python">
+####################################################
+# Script to manage the openlayers map using Brython
+####################################################
+from javascript import JSObject, JSConstructor
+from browser import document, window, alert
+
+######################
+## Openlayers stuff ##
+######################
+# Create the map and an OpenStreetMap layer
+ol = window.OpenLayers
+layer = JSConstructor(ol.Layer.OSM)()
+map = JSConstructor(ol.Map)("mapdiv")
+map.addLayer(layer)
+
+# Initial map settings with location zoom and an initial markers layer
+# with a marker in the center of the map
+proj4326 = JSConstructor(ol.Projection)("EPSG:4326")
+lon_lat = JSConstructor(ol.LonLat)({{ lon }},{{ lat }}).transform(
+    proj4326, map.getProjectionObject() 
+    )
+zoom = {{ zoom }}
+map.setCenter(lon_lat, zoom)
+markers = JSConstructor(ol.Layer.Markers)("Markers")
+map.addLayer(markers)
+marker = JSConstructor(ol.Marker)(lon_lat)
+markers.addMarker(marker)
+
+def get_auto_location(ev):
     
-    <script>
-    function myMap() {
-    var mapProp= {
-      center:new google.maps.LatLng(51.508742,-0.120850),
-      zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    </script>
+    def success(xy):
+        global marker
+        pos = {'lon': xy.coords.longitude,
+               'lat': xy.coords.latitude}
+        lon_lat = JSConstructor(ol.LonLat)(pos['lon'], pos['lat']).transform(
+            proj4326, map.getProjectionObject() 
+            )
+        markers.removeMarker(marker)
+        marker = JSConstructor(ol.Marker)(lon_lat)
+        markers.addMarker(marker)
+        zoom = 18
+        map.setCenter(lon_lat, zoom)
+        
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-</section>
-{% endblock %}
+    def error(xy):
+        alert('Location could not be retrieved')
+    
+    options = {'enableHighAccuracy': True, 'timeout': 5000, 'maximumAge': 0}
+    xy = window.navigator.geolocation.getCurrentPosition(
+             success, error, options
+         )
+
+ </script>
+
+
+ </body>
+
+</html>

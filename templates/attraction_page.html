@@ -1,7 +1,15 @@
 {% extends "base.html" %}
+{% block script %}
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="https://cdn.rawgit.com/kikocorreoso/map2wiki/master/src/static/brython_dist.js"></script>
+{% endblock %}
+{% block body_args %} onload="brython(1)"{% endblock %}
 {% block body %}
     <section>
-        <img width="100%" height="50%" src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}">
+        <div id="flex_container">
+            <div><img width="100%" height="100%" src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}"></div>
+            <div><div id="mapdiv"></div></div>
+        </div>
         <div id="flex_container">
             <div>
                 <h1>{{ info.name }}</h1>
@@ -37,4 +45,50 @@
             </div>
         </div>
     </section>
+
+
+    <script type="text/python">
+        from javascript import JSObject, JSConstructor
+        from browser import document, window, alert
+
+        ol = window.OpenLayers
+        layer = JSConstructor(ol.Layer.OSM)()
+        map = JSConstructor(ol.Map)("mapdiv")
+        map.addLayer(layer)
+        
+        proj4326 = JSConstructor(ol.Projection)("EPSG:4326")
+        lon_lat = JSConstructor(ol.LonLat)({{ lon }},{{ lat }}).transform(
+            proj4326, map.getProjectionObject() 
+            )
+        zoom = {{ zoom }}
+        map.setCenter(lon_lat, zoom)
+        markers = JSConstructor(ol.Layer.Markers)("Markers")
+        map.addLayer(markers)
+        marker = JSConstructor(ol.Marker)(lon_lat)
+        markers.addMarker(marker)
+        
+        def get_auto_location(ev):
+            
+            def success(xy):
+                global marker
+                pos = {'lon': xy.coords.longitude,
+                       'lat': xy.coords.latitude}
+                lon_lat = JSConstructor(ol.LonLat)(pos['lon'], pos['lat']).transform(
+                    proj4326, map.getProjectionObject() 
+                    )
+                markers.removeMarker(marker)
+                marker = JSConstructor(ol.Marker)(lon_lat)
+                markers.addMarker(marker)
+                zoom = 18
+                map.setCenter(lon_lat, zoom)
+                
+            
+            def error(xy):
+                alert('Location could not be retrieved')
+            
+            options = {'enableHighAccuracy': True, 'timeout': 5000, 'maximumAge': 0}
+            xy = window.navigator.geolocation.getCurrentPosition(
+                     success, error, options
+                 )
+    </script>
 {% endblock %}
