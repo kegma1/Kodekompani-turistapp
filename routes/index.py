@@ -1,6 +1,7 @@
 from __main__ import app
 from flask import render_template, session
 from db_utils import db_session, User, Attraction
+from libs.helpers import get_user_status
 
 @app.route("/", methods = ["GET"])
 def index():
@@ -17,12 +18,7 @@ def index():
         data = db_session.query(User).filter_by(username=session["user"]).first()
         bio = data.bio
         
-        xp = data.xp_collected
-        xp = 0 if xp == None else xp
-        if xp < 100: user_status = "Newbie in city"
-        elif xp < 500: user_status = "Tourist"
-        elif xp < 1000: user_status = "Svarta bjorn"
-        else: user_status = "Rallar"
+        user_status = get_user_status(data)
 
         if data.profile_pic:
             pfp = data.profile_pic

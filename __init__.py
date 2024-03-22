@@ -18,6 +18,8 @@ import routes.profile
 import routes.attractions_list
 import routes.attraction_page
 import routes.add_attraction
+import routes.people_list
+import routes.people_page
 import routes.unlock_achivement
 
 if __name__ == "__main__":

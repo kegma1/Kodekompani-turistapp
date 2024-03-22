@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block body %}
+<section>
+    <div id="flex_container">
+        <div>
+            <h1>{{ user.full_name }}!</h1><br>
+            <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture">
+            <p> Username: {{ user.username }} </p>
+            {% if user.bio %}
+            <p> Bio: {{ user.bio }} </p>
+            {%endif%}
+
+            <p> Xp: {% if user.xp_collected == None %}
+                0
+            {% else %}
+                {{ user.xp_collected }}
+            {%endif%}xp.</p>
+            <p> Status: {{ user_status }} in Narvik</p>
+        </div>
+        <div>
+            {% if not same_user %}
+                {% if logged_in %}
+                    {% if following%}
+                        <a href="{{ url_for("unfollow_user", username=user.username) }}"><button>Unfollow</button></a>
+                    {% else %}
+                        <a href="{{ url_for("follow_user", username=user.username) }}"><button>Follow</button></a>
+                    {%endif%}
+                {% else %}
+                    <a href="{{ url_for("login") }}"><button>Log in</button></a>
+                    <a href="{{ url_for("sign_up") }}"><button>sign up</button></a>
+                {%endif%}
+            {%endif%}
+            {% if t5achievements %}
+                <h1>Top 5 achievement</h1>
+                <ul>
+                    {% for achiev in t5achievements %}
+                        <li><p>{{achiev.name}}: {{achiev.xp_reward}}xp</p></li>
+                    {%endfor%}
+                </ul>
+            {%endif%}
+        </div>
+    </div>
+    <hr>
+    <a href="{{ url_for("index") }}">Back to menu</a>
+
+</section>
+{% endblock %}

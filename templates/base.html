@@ -15,6 +15,7 @@
             <div id="menu-items" class="menu-items">
                 <br>
                 <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for("people_list", page = 1) }}">People</a>
                 {% if is_logged_in %}
                     <a href="{{ url_for('profile') }}">Edit Profile</a>
                     <a href="{{ url_for("logout") }}">Log Out</a><br>
