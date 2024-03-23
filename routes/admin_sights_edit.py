@@ -40,9 +40,13 @@ def admin_sights_edit(id):
     attraction_form.keywords.data = attraction.keywords
     attraction_form.location_coordinates.data = attraction.location_coordinates
     attraction_form.name.data = attraction.name
+
+    lat, lon  = attraction.location_coordinates.split(",")
     
     return render_template("admin_sights_edit.html",
                            attraction = attraction_form,
                            image = attraction.image,
                            id = id,
-                           title = "Admin sights edit")
+                           title = "Admin sights edit",
+                           lon=lon,
+                           lat=lat)

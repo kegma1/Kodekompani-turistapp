@@ -66,29 +66,5 @@
         map.addLayer(markers)
         marker = JSConstructor(ol.Marker)(lon_lat)
         markers.addMarker(marker)
-        
-        def get_auto_location(ev):
-            
-            def success(xy):
-                global marker
-                pos = {'lon': xy.coords.longitude,
-                       'lat': xy.coords.latitude}
-                lon_lat = JSConstructor(ol.LonLat)(pos['lon'], pos['lat']).transform(
-                    proj4326, map.getProjectionObject() 
-                    )
-                markers.removeMarker(marker)
-                marker = JSConstructor(ol.Marker)(lon_lat)
-                markers.addMarker(marker)
-                zoom = 18
-                map.setCenter(lon_lat, zoom)
-                
-            
-            def error(xy):
-                alert('Location could not be retrieved')
-            
-            options = {'enableHighAccuracy': True, 'timeout': 5000, 'maximumAge': 0}
-            xy = window.navigator.geolocation.getCurrentPosition(
-                     success, error, options
-                 )
     </script>
 {% endblock %}

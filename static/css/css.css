@@ -122,6 +122,11 @@ article, section {
     white-space: normal;
 }
 
+#map_container {
+    width: 25vh;
+    height: 25vh;
+}
+
 #mapdiv {
     width:100%;
     height:100%;

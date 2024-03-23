@@ -1,4 +1,4 @@
-from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField, BooleanField
+from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField, BooleanField, HiddenField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
@@ -21,7 +21,7 @@ class AttractionForm(FlaskForm):
     description = TextAreaField("Description")
     category = StringField("Category")
     age_recommendation = SelectField(choices=[0, 1, 3, 6, 9, 13, 18], validate_choice=False)
-    location_coordinates = StringField("Location coordinates")
+    location_coordinates = HiddenField("Location coordinates", default="68.430,17.200")
     address = StringField("address")
     group = IntegerField("group")
     keywords = StringField("keywords")

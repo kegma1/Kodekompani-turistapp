@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block script%}
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="https://cdn.rawgit.com/kikocorreoso/map2wiki/master/src/static/brython_dist.js"></script>
+{% endblock %}
+{% block body_args %} onload="brython(1)"{% endblock %}
 {% block body %}
 <section>
     {% from "macros/_form_helper.html" import render_field %}
@@ -10,16 +15,75 @@
             {{ render_field(form.category) }}
             {{ render_field(form.age_recommendation) }}
             {{ render_field(form.location_coordinates) }}
+            <div id="map_container">
+                <div id="mapdiv"></div>
+            </div>
             {{ render_field(form.address) }}
             {{ render_field(form.group) }}
             {{ render_field(form.keywords) }}
             {{ render_field(form.image) }}
         </dl>
         {{ form.hidden_tag() }}
+    
         <input type="submit" value="Submit">
     </form>
     <hr>
     <a href="{{ url_for("index") }}">Back to menu</a>
     <a href="{{ url_for("admin_sights", page = 1) }}">Back to Admin sights</a>
 </section>
+
+<script type="text/python">
+    ####################################################
+    # Script to manage the openlayers map using Brython
+    ####################################################
+    from javascript import JSObject, JSConstructor
+    from browser import document, window, alert
+    
+    ######################
+    ## Openlayers stuff ##
+    ######################
+    # Create the map and an OpenStreetMap layer
+    ol = window.OpenLayers
+    layer = JSConstructor(ol.Layer.OSM)()
+    map = JSConstructor(ol.Map)("mapdiv")
+    map.addLayer(layer)
+    
+    # Initial map settings with location zoom and an initial markers layer
+    # with a marker in the center of the map
+    proj4326 = JSConstructor(ol.Projection)("EPSG:4326")
+    lon_lat = JSConstructor(ol.LonLat)(17.200,68.430).transform(
+        proj4326, map.getProjectionObject() 
+        )
+    zoom = 8
+    map.setCenter(lon_lat, zoom)
+    markers = JSConstructor(ol.Layer.Markers)("Markers")
+    map.addLayer(markers)
+    marker = JSConstructor(ol.Marker)(lon_lat)
+    markers.addMarker(marker)
+    
+    def redraw_marker(ev):
+        global marker
+        coords = map.getCenter()
+        markers.removeMarker(marker)
+        marker = JSConstructor(ol.Marker)(coords)
+        markers.addMarker(marker)
+
+    def update_coords(ev):
+        global marker
+        coords = map.getCenter().transform(
+            map.getProjectionObject(), proj4326
+        )
+        print(coords.lat, coords.lon)
+        hidden_field = document["location_coordinates"]
+        hidden_field.value = "%s,%s" % (coords.lat, coords.lon)
+    
+    layer.events.register("move", layer, redraw_marker) 
+    layer.events.register("moveend", layer, redraw_marker) 
+    layer.events.register("moveend", layer, update_coords) 
+    
+    #############################
+    ## End of Openlayers stuff ##
+    #############################
+    
+     </script>
 {% endblock %}
