@@ -8,11 +8,13 @@ def login():
     login_form = LogInForm(request.form)
     
     if request.method == "POST" and login_form.validate():
+
         session["is_logged_in"] = True
         session['user'] = login_form.username.data
-        
+
         curr_user = db_session.query(User).filter_by(username = session['user']).first()
         session['admin'] = curr_user.isAdmin
+        session['user_id'] = curr_user.id
         
         return redirect(url_for("index"))
 

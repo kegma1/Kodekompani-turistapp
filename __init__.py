@@ -22,6 +22,8 @@ import routes.people_list
 import routes.people_page
 import routes.unlock_achivement
 
+import routes.user_achievements
+
 if __name__ == "__main__":
     app.run()
 
