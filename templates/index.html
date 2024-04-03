@@ -2,7 +2,7 @@
 
 {% block body %}
 <section>
-    {% if is_logged_in %}
+    <!-- {% if is_logged_in %}
         <div id="flex_container">
             <div>
                 <h1>Welcome back, 
@@ -28,7 +28,7 @@
         </div>
         {% else %}
         <h1>Welcome to Narvik!</h1>
-    {% endif %}
+    {% endif %} -->
 
     {% if is_logged_in %}
         <a href="{{ url_for("logout") }}">Log Out</a><br>

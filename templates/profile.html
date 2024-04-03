@@ -23,6 +23,6 @@
         {{ form.hidden_tag() }}
         <input type="submit" value="Submit">
     </form>
-    <a href="{{ url_for("index") }}">back to menu</a>
+    <a href="{{ url_for('people_page', username=session["user"]) }}">back to menu</a>
 </section>
 {% endblock %}

@@ -29,6 +29,8 @@
                     <a href="{{ url_for("login") }}"><button>Log in</button></a>
                     <a href="{{ url_for("sign_up") }}"><button>sign up</button></a>
                 {%endif%}
+            {% else %}
+                <a href="{{ url_for("profile") }}"><button>Edit profile</button></a>
             {%endif%}
             {% if t5achievements %}
                 <h1>Top 5 achievement</h1>

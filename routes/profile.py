@@ -24,7 +24,7 @@ def profile():
         info.bio = profile_form.bio.data
         db_session.commit()
 
-        return redirect(url_for("index"))
+        return redirect(url_for('people_page', username=session["user"]))
 
     fullName = info.full_name.split()
     first_name = fullName[0]
