@@ -25,16 +25,16 @@
                 <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture" width="100", height="100"/>
             </td>
             <td> 
-                <a href="{{ url_for("admin_del_user", change_id= user.id) }}">DEL USER</a>
+                <a href="{{ url_for("admin_del_user", change_id= user.id) }}"><button>DEL USER</button></a>
             </td>
             <td>
-                <a href="{{ url_for("admin_del_pfp", change_id= user.id) }}">DEL PIC</a>
+                <a href="{{ url_for("admin_del_pfp", change_id= user.id) }}"><button>DEL PIC</button></a>
             </td>
             <td>
-                <a href="{{ url_for("admin_del_admin", change_id= user.id) }}">DEL/GIVE PRIVILEGES</a>
+                <a href="{{ url_for("admin_del_admin", change_id= user.id) }}"><button>DEL/GIVE PRIVILEGES</button></a>
             </td>
             <td>
-                <a href="{{ url_for("admin_del_bio", change_id= user.id) }}">DEL BIO</a>
+                <a href="{{ url_for("admin_del_bio", change_id= user.id) }}"><button>DEL BIO</button></a>
             </td>
         </tr>
     {% endfor %}
