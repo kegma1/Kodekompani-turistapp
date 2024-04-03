@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="achievements">
+    <h1>Your Achievements</h1>
+    <div class="achievement-list">
+        {% for achievement in all_achievements %}
+        <div class="achievement {% if achievement.id in completed_achievements_ids %}completed{% else %}not-completed{% endif %}">
+            <h3>{{ achievement.name }}</h3>
+            <p>{{ achievement.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<style>
+    .achievement {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .completed {
+        background-color: #d4edda; /* Light green for completed achievements */
+        border-color: #c3e6cb;
+    }
+    .not-completed {
+        background-color: #f8d7da; /* Light red for uncompleted achievements */
+        border-color: #f5c6cb;
+    }
+</style>
+{% endblock %}

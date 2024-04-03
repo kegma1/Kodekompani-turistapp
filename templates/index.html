@@ -60,4 +60,13 @@
     {% endfor %}
 
 </section>
+
+<section>
+{% if is_logged_in %}
+    <section class="achievements-link">
+        <a href="{{ url_for('user_achievements') }}" class="btn btn-primary">Achievements</a>
+    </section>
+{% endif %}
+</section>
+
 {% endblock %}
