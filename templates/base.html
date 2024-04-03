@@ -16,6 +16,7 @@
                 <br>
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for("people_list", page = 1) }}">People</a>
+                <a href="{{ url_for('attractions_list') }}">Places to Explore</a>
                 {% if session["is_logged_in"] %}
                     <a href="{{ url_for('people_page', username=session["user"]) }}">Profile</a>
                     <a href="{{ url_for("logout") }}">Log Out</a>
