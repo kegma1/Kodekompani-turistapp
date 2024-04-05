@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<section>
+    <table>
+    {% for user in users %}
+        <tr>
+            <td> <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture" width="100", height="100"/> </td>
+            <td><a href="{{ url_for("people_page", username=user.username) }}">
+                {{ user.username }}
+            </a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</section>
+{% endblock %}
