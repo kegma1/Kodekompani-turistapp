@@ -21,6 +21,7 @@ import routes.add_attraction
 import routes.people_list
 import routes.people_page
 import routes.unlock_achivement
+import routes.following_list
 
 import routes.user_achievements
 
