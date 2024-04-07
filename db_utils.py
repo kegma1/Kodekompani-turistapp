@@ -37,7 +37,6 @@ class User(Base):
     isAdmin = Column(Boolean)
     isDeleted = Column(Boolean, default= False)
     xp_collected = Column(Integer, default=0)
-    user_level = Column(Integer, default=1)
     _profile_pic = Column("profile_pic" , LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
