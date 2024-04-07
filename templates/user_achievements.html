@@ -3,7 +3,7 @@
 <main class="achievements">
     <h1>Your Achievements</h1>
     <div class="achievement-list">
-        {% for achievement in all_achievements %}
+        {% for achievement in all_achievements if not achievement.is_deleted %}
         <div class="achievement {% if achievement.id in completed_achievements_ids %}completed{% else %}not-completed{% endif %}">
             <h3>{{ achievement.name }}</h3>
             <p>{{ achievement.description }}</p>
