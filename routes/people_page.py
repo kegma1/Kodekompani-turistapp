@@ -10,8 +10,7 @@ def people_page(username: str):
     if not user:
         return "no user by that name"
     
-    following_users = db_session.query(Friend).filter_by(user_id = user.id).all()
-    followers_users = db_session.query(Friend).filter_by(friend_id = user.id).all()
+
 
     top_5_achievements = None
     if user.achievements is not []:
@@ -34,8 +33,6 @@ def people_page(username: str):
                            user_status = user_status,
                            following=following,
                            same_user=same_user,
-                           followers_users = followers_users,
-                           following_users = following_users
                            )
 
 @app.route('/follow_user/<username>', methods=["GET"])
