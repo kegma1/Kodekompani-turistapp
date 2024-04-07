@@ -1,6 +1,6 @@
 from __main__ import app
 
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from db_utils import Achievement, db_session, func  
 from libs.helpers import require_admin, require_login
 
@@ -25,16 +25,15 @@ def admin_achievements(page):
 
 
 
-## DONT HAVE ACCESS TO DELETION, DISCUSSION NEEDED
-@app.route("/delete_achievement/<int:id>", methods=["POST"])
+@app.route("/toggle_achievement_status/<int:id>", methods=["POST"])
 @require_login
 @require_admin
-def delete_achievement(id):
+def toggle_achievement_status(id):
     achievement = db_session.query(Achievement).filter_by(id=id).first()
     if achievement:
-        db_session.delete(achievement)
+        achievement.is_deleted = not achievement.is_deleted
         db_session.commit()
-        flash("Achievement deleted successfully.", "success")
+        flash("Achievement status updated successfully.", "success")
     else:
         flash("Achievement not found.", "error")
 

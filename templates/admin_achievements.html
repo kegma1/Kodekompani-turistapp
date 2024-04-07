@@ -17,7 +17,10 @@
             <td>{{ achievement.age_rating }}</td>
             <td>
                 <a href="{{ url_for('admin_achievements_edit', id=achievement.id) }}">Edit</a>
-                <a href="{{ url_for('delete_achievement', id=achievement.id) }}" onclick="return confirm('Are you sure?');">Delete</a>
+                <form method="POST" action="{{ url_for('toggle_achievement_status', id=achievement.id) }}" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="toggle-btn">{{ "Enable" if achievement.is_deleted else "Disable" }}</button>
+                </form>
             </td>
         </tr>
         {% else %}
