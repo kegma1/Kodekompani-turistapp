@@ -2,7 +2,7 @@
 {% block body %}
 <section>
     <table>
-    {% for user in users %}
+    {% for user in userlist %}
         <tr>
             <td> <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture" width="100", height="100"/> </td>
             <td><a href="{{ url_for("people_page", username=user.username) }}">
@@ -11,5 +11,6 @@
         </tr>
     {% endfor %}
     </table>
+    <a href="{{ url_for("people_page", username = previoususer) }}">go back</a>
 </section>
 {% endblock %}
