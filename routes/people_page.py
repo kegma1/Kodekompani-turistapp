@@ -24,7 +24,7 @@ def people_page(username: str):
     same_user = False
     if is_logged_in():
         current_user = db_session.query(User).filter_by(username = session["user"]).first()
-        following = user in current_user.friends
+        following = user in current_user.following
         same_user = user.username == current_user.username
 
     return render_template("public_profile.html", 
@@ -44,7 +44,7 @@ def people_page(username: str):
 def follow_user(username: str):
     current_user = db_session.query(User).filter_by(username = session["user"]).first()
     user = db_session.query(User).filter_by(username = username).first()
-    current_user.friends.append(user)
+    current_user.following.append(user)
     db_session.commit()
     return redirect(url_for("people_page", username = username))
 
@@ -54,8 +54,8 @@ def unfollow_user(username: str):
     current_user = db_session.query(User).filter_by(username = session["user"]).first()
     user = db_session.query(User).filter_by(username = username).first()
 
-    if user in current_user.friends:
-        current_user.friends.remove(user)
+    if user in current_user.following:
+        current_user.following.remove(user)
         db_session.commit()
 
     return redirect(url_for("people_page", username = username))

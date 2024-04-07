@@ -40,11 +40,17 @@ class User(Base):
     _profile_pic = Column("profile_pic" , LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
-    friends = relationship("User", 
-                           secondary="friends",
-                           primaryjoin=id==Friend.user_id,
-                           secondaryjoin=id==Friend.friend_id)
+    
+    following = relationship("User", 
+                             secondary="friends",
+                             primaryjoin=id==Friend.user_id,
+                             secondaryjoin=id==Friend.friend_id)
+                             
 
+    followers = relationship("User", 
+                             secondary="friends",
+                             primaryjoin=id==Friend.friend_id,
+                             secondaryjoin=id==Friend.user_id)
     def __init__(self, username, email, password, full_name, data_of_birth):
         self.username = username
         self.email = email
