@@ -118,6 +118,7 @@ class Achievement(Base):
     xp_reward = Column(Integer)
     attraction_id = Column(Integer, ForeignKey('attractions.id'))
     attraction = relationship('Attraction', back_populates='achievements')
+    age_rating = Column(Integer)
 
 class UserAttraction(Base):
     __tablename__ = 'user_attractions'
