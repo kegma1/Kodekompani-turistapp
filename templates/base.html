@@ -25,7 +25,8 @@
                     {% if session['admin'] %}
                         <a href="{{ url_for('admin_sights', page = 1) }}">Admin sights</a>
                         <a href="{{ url_for("admin", page = 1)}}">Admin panel</a>
-                    {% endif %}
+                        <a href="{{ url_for('admin_achievements', page = 1) }}">Manage Achievements</a>
+                        {% endif %}
                 {% endif %}
                 
                 <a href="https://youtu.be/oW3B34D0RVk">Narvik sentrum [LIVE]</a>

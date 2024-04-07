@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block body %}
+<section>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>XP Reward</th>
+            <th>Age Rating</th>
+            <th>Actions</th>
+        </tr>
+        {% for achievement in achievements %}
+        <tr>
+            <td>{{ achievement.name }}</td>
+            <td>{{ achievement.description }}</td>
+            <td>{{ achievement.xp_reward }}</td>
+            <td>{{ achievement.age_rating }}</td>
+            <td>
+                <a href="{{ url_for('admin_achievements_edit', id=achievement.id) }}">Edit</a>
+                <form method="POST" action="{{ url_for('toggle_achievement_status', id=achievement.id) }}" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="toggle-btn">{{ "Enable" if achievement.is_deleted else "Disable" }}</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No achievements found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('admin_achievements', page=page - 1) }}" {% if page <= 1 %}class="disabled"{% endif %}>Previous page</a>
+    <a href="{{ url_for('admin_achievements', page=page + 1) }}">Next page</a>
+    <a href="{{ url_for('add_achievement') }}">Add New Achievement</a>
+    <hr>
+    <a href="{{ url_for('admin', page=1) }}">Admin panel</a>
+    <a href="{{ url_for('index') }}">Back to menu</a>
+</section>
+{% endblock %}

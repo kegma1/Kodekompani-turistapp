@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% from "macros/_form_helper.html" import render_field %}
+<section>
+    <form method="post" action="{{ url_for('admin_achievements_edit', id=id) }}" enctype="multipart/form-data">
+    {{ achievement.csrf_token }}
+    <dl>
+        {{ render_field(achievement.name) }}
+        {{ render_field(achievement.description) }}
+        {{ render_field(achievement.pass_code) }}
+        {{ render_field(achievement.xp_reward) }}
+        {{ render_field(achievement.attraction_id) }}
+        {{ render_field(achievement.age_rating) }}
+    </dl>
+    {{ achievement.hidden_tag() }}
+
+    <input type="submit" value="Submit">
+    <hr>
+    <a href="{{ url_for('index') }}">Back to menu</a>
+    <a href="{{ url_for('admin_achievements', page=1) }}">Back to Admin achievements</a> <!-- Adjust if necessary -->
+</section>
+{% endblock %}
