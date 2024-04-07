@@ -17,8 +17,8 @@
             {%endif%}xp.</p>
             <p> Status: {{ user_status }} in Narvik</p>
 
-            <a href="{{ url_for("followers_list", follow = user.followers) }}">Followed by {{user.followers|length}} users</a>
-            <a href="{{ url_for("following_list", follow = user.following) }}">Following {{user.following|length}} users</a>
+            <a href="{{ url_for("followers_list", follow = user.followers) }}">Followers: {{user.followers|length}}</a>
+            <a href="{{ url_for("following_list", follow = user.following) }}">Following: {{user.following|length}}</a>
         </div>
         <div>
             {% if not same_user %}

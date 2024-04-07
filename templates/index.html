@@ -53,11 +53,13 @@
     <a href="{{ url_for('attractions_list') }}">
         <h1>Places to Explore</h1>
     </a>
-    
+
+    {% if is_logged_in %}
     {% for attraction in attractions %}
         <h3>{{ attraction.name }}</h3>
         <p>{{ attraction.description }}</p>
     {% endfor %}
+    {% endif %}
 
 </section>
 

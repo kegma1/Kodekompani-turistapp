@@ -7,7 +7,6 @@
             <th> Email: </th>
             <th> Age group: </th>
             <th> bio: </th>
-            <th> Friends: </th>
             <th> Is admin?: </th>
             <th> Deleted?: </th>
             <th> Profile pic: </th>
@@ -18,7 +17,6 @@
             <td> {{ user.email }} </td>
             <td> {{ user.age }} </td>
             <td> {{ user.bio }} </td>
-            <td> {{ user.friends }} </td>
             {% if user.isAdmin == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
             {% if user.isDeleted == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
             <td> 

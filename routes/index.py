@@ -1,7 +1,7 @@
 from __main__ import app
 from flask import render_template, session
 from db_utils import db_session, User, Attraction
-from libs.helpers import get_user_status
+from libs.helpers import get_user_status, get_user_age
 
 @app.route("/", methods = ["GET"])
 def index():
@@ -10,6 +10,7 @@ def index():
     is_logged_in = False
     username = ""
     fullname = ""
+    attractions = []
     xp = 0; user_status = "Newbie in city"
 
     top_5_achievements = None
@@ -30,11 +31,10 @@ def index():
         # Finding top 5 achievements
         if data.achievements is not []:
             top_5_achievements = sorted(data.achievements, key=lambda x: x.xp_reward, reverse=True)[:5]
+            
+        age = get_user_age(data)
 
-                
-
-        
-    attractions = db_session.query(Attraction).all()
+        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
     return render_template("index.html", 
                            title = "Home page", 

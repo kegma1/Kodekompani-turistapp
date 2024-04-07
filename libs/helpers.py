@@ -3,6 +3,7 @@
 from functools import wraps
 from flask import redirect, session, url_for
 from libs.admin_fn import is_admin
+import datetime as buh
 
 def is_logged_in():
     return "is_logged_in" in session and session["is_logged_in"]
@@ -16,6 +17,13 @@ def get_user_status(user):
     else: user_status = "Rallar"
 
     return user_status
+
+def get_user_age(user):
+    birth = user.age
+    curr_date = buh.date.today()
+    age = curr_date.year - birth.year
+    
+    return age if (curr_date.month, curr_date.day) >= (birth.month, birth.day) else age - 1
 
 def require_login(f):
     @wraps(f)

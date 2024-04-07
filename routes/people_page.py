@@ -9,8 +9,6 @@ def people_page(username: str):
     
     if not user:
         return "no user by that name"
-    
-
 
     top_5_achievements = None
     if user.achievements is not []:
