@@ -7,12 +7,10 @@ from flask import render_template, url_for, redirect, session
 def people_page(username: str):
     user = db_session.query(User).filter_by(username = username).first()
     
-
     if not user:
         return "no user by that name"
     
-    following_users = db_session.query(Friend).filter_by(user_id = user.id).all()
-    followed_users = db_session.query(Friend).filter_by(friend_id = user.id).all()
+
 
     top_5_achievements = None
     if user.achievements is not []:
@@ -24,7 +22,7 @@ def people_page(username: str):
     same_user = False
     if is_logged_in():
         current_user = db_session.query(User).filter_by(username = session["user"]).first()
-        following = user in current_user.friends
+        following = user in current_user.following
         same_user = user.username == current_user.username
 
     return render_template("public_profile.html", 
@@ -35,8 +33,6 @@ def people_page(username: str):
                            user_status = user_status,
                            following=following,
                            same_user=same_user,
-                           followed_users = followed_users,
-                           following_users = following_users
                            )
 
 @app.route('/follow_user/<username>', methods=["GET"])
@@ -44,7 +40,7 @@ def people_page(username: str):
 def follow_user(username: str):
     current_user = db_session.query(User).filter_by(username = session["user"]).first()
     user = db_session.query(User).filter_by(username = username).first()
-    current_user.friends.append(user)
+    current_user.following.append(user)
     db_session.commit()
     return redirect(url_for("people_page", username = username))
 
@@ -54,8 +50,8 @@ def unfollow_user(username: str):
     current_user = db_session.query(User).filter_by(username = session["user"]).first()
     user = db_session.query(User).filter_by(username = username).first()
 
-    if user in current_user.friends:
-        current_user.friends.remove(user)
+    if user in current_user.following:
+        current_user.following.remove(user)
         db_session.commit()
 
     return redirect(url_for("people_page", username = username))
