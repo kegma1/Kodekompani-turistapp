@@ -23,6 +23,9 @@ import routes.people_page
 import routes.unlock_achivement
 import routes.following_list
 
+import routes.add_achievement
+import routes.admin_achievements_edit
+import routes.admin_achievements
 import routes.user_achievements
 
 if __name__ == "__main__":
