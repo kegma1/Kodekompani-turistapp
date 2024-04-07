@@ -7,12 +7,11 @@ from flask import render_template, url_for, redirect, session
 def people_page(username: str):
     user = db_session.query(User).filter_by(username = username).first()
     
-
     if not user:
         return "no user by that name"
     
     following_users = db_session.query(Friend).filter_by(user_id = user.id).all()
-    followed_users = db_session.query(Friend).filter_by(friend_id = user.id).all()
+    followers_users = db_session.query(Friend).filter_by(friend_id = user.id).all()
 
     top_5_achievements = None
     if user.achievements is not []:
@@ -35,7 +34,7 @@ def people_page(username: str):
                            user_status = user_status,
                            following=following,
                            same_user=same_user,
-                           followed_users = followed_users,
+                           followers_users = followers_users,
                            following_users = following_users
                            )
 

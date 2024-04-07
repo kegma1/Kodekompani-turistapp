@@ -17,8 +17,8 @@
             {%endif%}xp.</p>
             <p> Status: {{ user_status }} in Narvik</p>
 
-            <a href="{{ url_for("follow_list", list_o_follow = followed_users, friend_or_foe = False) }}">Followed by {{followed_users|length}} users</a>
-            <a href="{{ url_for("follow_list", list_o_follow = following_users, friend_or_foe = True) }}">Following {{following_users|length}} users</a>
+            <a href="{{ url_for("followers_list", follow = followers_users) }}">Followed by {{followers_users|length}} users</a>
+            <a href="{{ url_for("following_list", follow = following_users) }}">Following {{following_users|length}} users</a>
         </div>
         <div>
             {% if not same_user %}
