@@ -1,10 +1,45 @@
 {% extends "base.html" %}
-{% block body %}
-    <section>
-        {% for attraction in attractions %}
-            <p><a href="{{ url_for("view_attraction", attraction_id=attraction.id) }}"><h3>{{ attraction.name }}</h3></a>
-            <pre>{{ attraction.description }}</pre></p><br>
-        {% endfor %}
 
-    </section>
+{% block body %}
+<section id="attractions-section">
+    {% for attraction in attractions %}
+        <div class="attraction-item">
+            <a href="{{ url_for('view_attraction', attraction_id=attraction.id) }}">
+                <h3 class="attraction-title">{{ attraction.name }}</h3>
+            </a>
+            <p class="attraction-description">{{ attraction.description }}</p>
+        </div>
+    {% endfor %}
+</section>
 {% endblock %}
+
+<style>
+    #attractions-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    }
+
+.attraction-item {
+    background-color: rgba(58, 58, 58, 0.8);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Set a max-width to avoid overly wide elements on large screens */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+.attraction-title {
+    margin: 0;
+    padding: 0;
+    color: #FFF; /* Example color, adjust as needed */
+    }
+
+.attraction-description {
+    white-space: pre-wrap; /* Keeps the formatting but allows wrapping */
+    color: #DDD; /* Example color, adjust as needed */
+    }
+
+</style>
