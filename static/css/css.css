@@ -1,6 +1,6 @@
 body {
     background-color: #2f2f2f;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial Narrow', sans-serif;
     color: whitesmoke;
     padding: 1vw;
     
@@ -100,7 +100,7 @@ article, section {
     cursor: pointer;
     z-index: 2000;
     display: block;
-    background-color: #000;
+    background-color: transparent;
     color: #fff;
     margin: 0;
     position: absolute;
