@@ -41,8 +41,15 @@ h2 {
     font-size: 1.1vw;
 }
 
+.narvik {
+    font-family: 'Futura', sans-serif;
+    text-align: left;
+    font-size: 30px;
+    padding: 11px;
+}
+
 article, section {
-    background-color: rgba(58, 58, 58, 0.5);
+    background-color: rgba(58, 58, 58, 0); /* would have it completely transparent */
     padding: 1vw;
     margin-top: 1vw;
     margin-bottom: 1vw;
@@ -131,4 +138,38 @@ article, section {
     width:100%;
     height:100%;
     /* position: absolute; */
+}
+
+.menu-button {
+    display: block;
+    width: 100px;
+    height: 20px;
+    margin: 5px 0;
+    background-color: #e2b7d2;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: none;  
+    position: relative;
+    left: 0px; /* Adjust as needed */
+    top: 50px;  /* Adjust as needed */
+}
+
+.menu-button + .menu-button {
+    margin-left: 0px; /* Adjust as needed */
+}
+
+.menu-button:hover {
+    background-color: white;
+    color: black;
+}
+
+#menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }

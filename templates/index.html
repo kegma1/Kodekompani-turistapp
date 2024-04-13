@@ -37,8 +37,8 @@
         </section>
     
     {% else %}
-        <a href="{{ url_for("login")}}">Login </a><br>
-        <a href="{{ url_for('sign_up') }}">Sign Up</a>
+            <button class="menu-button" onclick="location.href='{{ url_for('login') }}'">Login</button>
+            <button class="menu-button" onclick="location.href='{{ url_for('sign_up') }}'">Sign Up</button>
     {% endif %}
 
     <br>
