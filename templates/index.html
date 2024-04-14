@@ -31,18 +31,17 @@
     {% endif %} -->
 
     {% if is_logged_in %}
-        <a href="{{ url_for("logout") }}">Log Out</a><br>
-        <section class="achievements-link">
-            <a href="{{ url_for('user_achievements') }}" class="btn btn-primary">Achievements</a>
-        </section>
-    
+        <div class="button-container">
+            <a href="{{ url_for('logout') }}" class="menu-button">Log Out</a>
+            <a href="{{ url_for('user_achievements') }}" class="menu-button">Achievements</a>
+        </div>
     {% else %}
-            <button class="menu-button" onclick="location.href='{{ url_for('login') }}'">Login</button>
-            <button class="menu-button" onclick="location.href='{{ url_for('sign_up') }}'">Sign Up</button>
+        <div class="button-container">
+            <a href="{{ url_for('login') }}" class="menu-button">Login</a>
+            <a href="{{ url_for('sign_up') }}" class="menu-button">Sign Up</a>
+        </div>
     {% endif %}
 
-    <br>
-    <br>
     <h1>Local News</h1>
     <p>A new Italian restaurant you need to check out!</p>
     <p>Local stand up comedian Mikael Lunde Isaksen with his one-lines.</p>

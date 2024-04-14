@@ -24,7 +24,7 @@ body {
 }
 
 a {
-    color: aqua;
+    color: lightpink;
     text-decoration: none;
     margin: 5px;
 }
@@ -48,11 +48,18 @@ h2 {
     font-size: 1.1vw;
 }
 
-.narvik {
+.narvik a, .narvik-link {
+    color: whitesmoke;
+    text-decoration: none; /* No underline */
     font-family: 'Futura', sans-serif;
-    text-align: left;
     font-size: 30px;
     padding: 11px;
+    display: inline-block;
+}
+
+.narvik a:hover, .narvik-link:hover {
+    color: pink; /* Color on hover, optional, adjust as needed */
+    text-decoration: none; /* Still no underline */
 }
 
 article, section {
@@ -151,8 +158,8 @@ article, section {
     display: block;
     width: 100px;
     height: 20px;
-    margin: 5px 0;
-    background-color: #e2b7d2;
+    margin: 4px 0;
+    background-color: #e2b7d2; /* Light-pink background */
     color: white;
     border: none;
     text-align: center;
@@ -160,19 +167,22 @@ article, section {
     font-size: 12px;
     transition-duration: 0.4s;
     cursor: pointer;
-    float: none;  
-    position: relative;
-    left: 0px; /* Adjust as needed */
-    top: 50px;  /* Adjust as needed */
-}
-
-.menu-button + .menu-button {
-    margin-left: 0px; /* Adjust as needed */
+    position: relative; /* Adjust as needed */
+    left: 0; /* Center the button */
+    margin-left: 10px; /* Space between buttons */
 }
 
 .menu-button:hover {
     background-color: white;
     color: black;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-end; 
+    padding-right: 0px; 
+    margin-right: 4px
 }
 
 #menu-container {
