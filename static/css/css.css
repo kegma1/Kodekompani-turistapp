@@ -89,12 +89,12 @@ h2 {
 }
 
 article, section {
-    background-color: rgba(58, 58, 58, 0); /* would have it completely transparent */
+    background-color: rgba(58, 58, 58, 0.381); /* would have it completely transparent */
     padding: 1vw;
     margin-top: 1vw;
     margin-bottom: 1vw;
     width: max-content;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 .menu-container {
