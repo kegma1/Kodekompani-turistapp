@@ -1,6 +1,13 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/static/fonts/JetBrainsMono-ExtraLight.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #2f2f2f;
-    font-family: 'Arial Narrow', sans-serif;
+    font-family: 'JetBrains Mono', sans-serif;
     color: whitesmoke;
     padding: 1vw;
     
