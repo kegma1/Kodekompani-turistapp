@@ -5,49 +5,46 @@
 {% endblock %}
 {% block body_args %} onload="brython(1)"{% endblock %}
 {% block body %}
-    <section>
-        <div id="flex_container">
-            <div><img width="100%" height="100%" src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}"></div>
-            <div><div id="mapdiv"></div></div>
+<section class="content-section">
+    <div class="image-container">
+        <img src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}" style="width: 100%; height: auto;">
+    </div>
+    <div class="info-container">
+        <h1>{{ info.name }}</h1>
+        <p id="description">{{ info.description }}</p>
+        <div>
+            <p>Category: {{ info.category }}</p>
+            <p>Age: {{ info.age_recommendation }}</p>
+            <p>Address: {{ info.address }}</p>
+            {% from "macros/_form_helper.html" import render_field %}
+            <form action="{{ url_for("view_attraction", attraction_id=info.id) }}" method="post">
+                {{ form.csrf_token }}
+                <dl>
+                    {{ render_field(form.passcode) }}
+                </dl>
+                <button type="submit">Unlock</button>
+            </form>
         </div>
-        <div id="flex_container">
-            <div>
-                <h1>{{ info.name }}</h1>
-                <p id="description">{{ info.description }}</p>
-
-                {% if achievements %}
-                    <h1> Your achievements </h1>
-                    <ul>
-                        {% for achievement in achievements %}
-                            <li>
-                                <h2>{{achievement.name}}</h2>
-                                <p>{{achievement.description}}</p>
-                                <p>{{achievement.xp_reward}} points</p>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-            <div>
-                <p>Catagory: {{ info.category }}</p>
-                <p>Age: {{ info.age_recommendation }}</p>
-                <p>Address: {{ info.address }}</p>
-
-
-                {% from "macros/_form_helper.html" import render_field %}
-                <form action="{{ url_for("view_attraction", attraction_id=info.id) }}" method="post">
-                    {{ form.csrf_token }}
-                    <dl>
-                        {{ render_field(form.passcode) }}
-                    </dl>
-                    <button type="submit">Unlock</button>
-                </form>
-            </div>
+    </div>
+    {% if achievements %}
+        <div class="achievements-container">
+            <h2>Your achievements</h2>
+            <ul>
+                {% for achievement in achievements %}
+                    <li>
+                        <h3>{{achievement.name}}</h3>
+                        <p>{{achievement.description}}</p>
+                        <p>{{achievement.xp_reward}} points</p>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-    </section>
-
-
-    <script type="text/python">
+    {% endif %}
+    <div class="map-container">
+        <div id="mapdiv" style="width: 100%; height: 300px;"></div> <!-- Adjusted height for visibility -->
+    </div>
+</section>
+<script type="text/python">
         from javascript import JSObject, JSConstructor
         from browser import document, window, alert
 
