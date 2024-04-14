@@ -14,6 +14,10 @@ def index():
     xp = 0; user_status = "Newbie in city"
 
     top_5_achievements = None
+    
+    # fetch attractions for all visitors
+    age = 18  # Default age for guests
+    attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
     if "is_logged_in" in session and session["is_logged_in"]:
         data = db_session.query(User).filter_by(username=session["user"]).first()
