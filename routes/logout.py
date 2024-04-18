@@ -6,4 +6,4 @@ def logout():
     session.pop('user', None)
     session.pop('is_logged_in', None)
     session.pop('admin', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
