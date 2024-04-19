@@ -37,6 +37,6 @@ def require_admin(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not is_admin():
-            return redirect(url_for('funi'))
+            return redirect(url_for('funi', id = 1))
         return f(*args, **kwargs)
     return decorated_function
