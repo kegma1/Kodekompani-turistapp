@@ -14,6 +14,7 @@
         {% endblock %}
         <title>{{ title }}</title>
     </head>
+
     <body {% block body_args %} {% endblock %} >
         <div id="menu-container" class="menu-container">
             <div id="menu-items" class="menu-items">
@@ -37,15 +38,19 @@
                 <!-- add more links as needed -->
             </div>
         </div>
+
         <button id="menu-toggle" class="menu-toggle">☰</button>
         <script src="{{ url_for('static', filename='scripts/menu-toggle.js') }}" defer></script>
+
         <div id="narvik" class="narvik">
             <a href="{{ url_for('index') }}" class="narvik-link">NARVIK</a>
         </div>
-                <div id="ContentBody">
+
+        <div id="ContentBody">
             {% block body %}
             {% endblock %}
         </div>
+
     </body>
 </html>
 
