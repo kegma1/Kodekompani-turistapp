@@ -1,14 +1,22 @@
 ''''a module for utility functions or helper functions
 '''
 from functools import wraps
-from flask import redirect, session, url_for, render_template
-from libs.admin_fn import is_admin
+from flask import redirect, session, url_for
 import datetime as buh
-from db_utils import db_session
+from db_utils import db_session, User
 from routes import *
+
+#STANDARDIZED AGE GROUPS
+age_groups = [0, 1, 3, 6, 9, 13, 18]
 
 def is_logged_in():
     return "is_logged_in" in session and session["is_logged_in"]
+
+def get_change(change_id):
+    return db_session.query(User).filter_by(id = change_id).first()
+
+def is_admin():
+    return (is_logged_in() and "admin" in session and session['admin'])
 
 
 def get_user_status(user):
@@ -29,6 +37,8 @@ def get_user_age(user):
     
     return age if (curr_date.month, curr_date.day) >= (birth.month, birth.day) else age - 1
 
+def get_curr_user():
+    return db_session.query(User).filter_by(username = session['user']).first()
 
 def paging(page: int, amount: int, table): #KOTLIN PILLED RAHHH
     '''

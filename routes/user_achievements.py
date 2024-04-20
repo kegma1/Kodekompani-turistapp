@@ -1,20 +1,14 @@
 # routes/user_achievements.py
-from flask import render_template, session, redirect, url_for
-from db_utils import db_session, Achievement, User
+from flask import render_template
+from db_utils import db_session, Achievement
+from libs.helpers import require_login, get_curr_user
 
 from __main__ import app
 
+@require_login
 @app.route('/user_achievements')
 def user_achievements():
-    user_id = session.get('user_id')
-    
-    if user_id is None:
-        return redirect(url_for('login'))
-    
-    user = db_session.query(User).filter_by(id=user_id).first()
-
-    if not user:
-        return render_template('error.html', message="User not found.")
+    user = get_curr_user()
     
     all_achievements = db_session.query(Achievement).all()
     completed_achievements_ids = {achievement.id for achievement in user.achievements}

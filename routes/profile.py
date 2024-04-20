@@ -2,13 +2,13 @@ from __main__ import app
 from flask import request,  redirect, render_template, url_for, session
 from db_utils import User, db_session
 from form.profile_form import ProfileForm
-from libs.helpers import require_login
+from libs.helpers import require_login, get_curr_user
 
 @app.route("/profile", methods = ["GET", "POST"])
 @require_login
 def profile():
     profile_form = ProfileForm(request.form)
-    info = db_session.query(User).filter_by(username = session['user']).first()
+    info = get_curr_user()
 
     if request.method == "POST" and profile_form.validate():
         info.username = profile_form.username.data

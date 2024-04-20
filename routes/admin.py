@@ -1,8 +1,7 @@
 from __main__ import app
-from flask import redirect, render_template, url_for, redirect, session, request
-from db_utils import User, db_session, func
-from libs.helpers import require_login, require_admin, paging
-from libs.admin_fn import get_curr, get_change
+from flask import redirect, render_template, url_for, redirect, session
+from db_utils import User, db_session
+from libs.helpers import require_login, require_admin, paging, get_curr_user, get_change
 
 # Needs more checks for admin privileges in the future
 @app.route("/admin/<int:page>", methods = ["GET", "POST"]) 
@@ -23,7 +22,7 @@ def admin(page):
 @require_login
 @require_admin
 def admin_del_user(change_id):
-    change = get_change(User ,change_id)
+    change = get_change(change_id)
 
     if session['user'] != change.username:
         change.isDeleted = not change.isDeleted
@@ -35,7 +34,7 @@ def admin_del_user(change_id):
 @require_login
 @require_admin
 def admin_del_pfp(change_id):
-    user = get_change(User, change_id)
+    user = get_change(change_id)
     user.profile_pic = None
     db_session.commit()
     
@@ -45,8 +44,8 @@ def admin_del_pfp(change_id):
 @require_login
 @require_admin
 def admin_del_admin(change_id):
-    change = get_change(User, change_id)
-    curr = get_curr(User)
+    change = get_change(change_id)
+    curr = get_curr_user()
     admins = db_session.query(User).filter_by(isAdmin = True).all()
     
     if len(admins) > 1:
@@ -64,7 +63,7 @@ def admin_del_admin(change_id):
 @require_login
 @require_admin
 def admin_del_bio(change_id):
-    user = get_change(User, change_id)
+    user = get_change(change_id)
     user.bio = ""
     db_session.commit()
     

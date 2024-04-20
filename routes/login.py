@@ -2,6 +2,7 @@ from __main__ import app
 from form.login_form import LogInForm
 from db_utils import db_session, User
 from flask import request, redirect, render_template, url_for, session
+from libs.helpers import get_curr_user
 
 @app.route("/login", methods = ["GET", "POST"])
 def login(): 
@@ -12,7 +13,7 @@ def login():
         session["is_logged_in"] = True
         session['user'] = login_form.username.data
 
-        curr_user = db_session.query(User).filter_by(username = session['user']).first()
+        curr_user = get_curr_user()
         session['admin'] = curr_user.isAdmin
         session['user_id'] = curr_user.id
         
