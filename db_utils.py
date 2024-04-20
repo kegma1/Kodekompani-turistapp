@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text, func
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text, func, TIMESTAMP
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from libs.pfp import make_profile
@@ -135,6 +135,37 @@ class UserAchievement(Base):
     __tablename__ = 'user_achievements'
     user_id = Column(Integer, ForeignKey('users_turistapp.id'), primary_key=True)
     achievement_id = Column(Integer, ForeignKey('achievements.id'), primary_key=True)
+
+class UserPosts(Base):
+    __tablename__ = 'user_posts'
+    post_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users_turistapp.id'), nullable=False)
+    user = relationship('User')
+    post = Column(String(255), nullable=False)
+    _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
+    time = Column(TIMESTAMP, default=func.now(), nullable=False)
+    attraction_id = Column(Integer, ForeignKey('attractions.id'))
+    attraction = relationship('Attraction')
+    isDeleted = Column(Boolean, default= False)
+
+    @property
+    def image(self):
+        if self._image is not None:
+            return b64encode(self._image).decode('utf-8')
+        else:
+            return None
+    
+    @image.setter
+    def image(self, new_pic):
+
+        buffer = BytesIO()
+        image = Image.open(new_pic)
+        image = image.resize((500, 500))
+        
+        image.save(buffer, format="PNG", quality=20, optimize=True)
+
+        buffer.seek(0)
+        self._image = buffer.read()
 
 # Create All Tables in the Database
 def create_tables():
