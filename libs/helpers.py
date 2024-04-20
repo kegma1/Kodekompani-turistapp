@@ -4,7 +4,6 @@ from functools import wraps
 from flask import redirect, session, url_for
 import datetime as buh
 from db_utils import db_session, User
-from routes import *
 
 #STANDARDIZED AGE GROUPS
 age_groups = [0, 1, 3, 6, 9, 13, 18]
