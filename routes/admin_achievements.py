@@ -2,36 +2,22 @@ from __main__ import app
 
 from flask import render_template, redirect, url_for, flash
 from db_utils import Achievement, db_session, func  
-from libs.helpers import require_admin, require_login
+from libs.helpers import require_admin, require_login, paging
 
 @app.route("/admin_achievements/<int:page>", methods=["GET", "POST"])
 @require_login
 @require_admin
 def admin_achievements(page):
-    # UPDATED BUT LEFT HERE INCASE OF BÜG
-    # achievements = []
+    data = paging(page, 5, Achievement)   
 
-    # for i in range(page*5 - 5, page*5):
-    #     achievement = db_session.query(Achievement).filter_by(id=i).first()
-        
-    #     if achievement is not None:
-    #         achievements.append(achievement)
-            
-    # if not achievements and db_session.query(func.count(Achievement.id)).scalar() != 0:
-    #     return redirect(url_for("admin_achievements", page=1))
-    
-    if page < 1:
+    if not data:
         return redirect(url_for("admin_achievements", page = 1))
-
-    achievements = db_session.query(Achievement).offset((page * 5) - 5).limit(5).all()
-    
-    if not achievements and page != 1:
-        return redirect(url_for("admin_achievements", page = 1))
-    
+     
     return render_template("admin_achievements.html", 
-                           achievements=achievements,
+                           achievements= data,
                            page=page)
 
+    
 
 
 @app.route("/toggle_achievement_status/<int:id>", methods=["POST"])
