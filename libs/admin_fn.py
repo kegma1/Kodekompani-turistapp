@@ -14,6 +14,3 @@ def is_admin():
     return True if ("is_logged_in" in session 
                     and session["is_logged_in"] 
                     and session['admin']) else False
-    
-def get_max_id(table):
-    return int(db_session.query(table.id).order_by(table.id.desc()).first()[0])
