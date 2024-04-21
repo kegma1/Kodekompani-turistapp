@@ -221,3 +221,9 @@ article, section {
     flex-direction: column;
     align-items: flex-end;
 }
+
+.topnav {
+    display: flex;
+    flex-direction: row;
+    justify-items: space-between;
+}
