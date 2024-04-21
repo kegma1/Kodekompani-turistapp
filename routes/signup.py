@@ -22,5 +22,6 @@ def sign_up():
         session["is_logged_in"] = True
         session["user"] = new_user.username
         session["admin"] = new_user.isAdmin
+        
         return redirect(url_for("index"))
     return render_template("signup.html", title="sign up", form=signup_form)
