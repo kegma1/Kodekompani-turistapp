@@ -35,11 +35,6 @@
             <a href="{{ url_for('logout') }}" class="menu-button">Log Out</a>
             <a href="{{ url_for('user_achievements') }}" class="menu-button">Achievements</a>
         </div>
-    {% else %}
-        <div class="button-container">
-            <a href="{{ url_for('login') }}" class="menu-button">Login</a>
-            <a href="{{ url_for('sign_up') }}" class="menu-button">Sign Up</a>
-        </div>
     {% endif %}
 
     <h1>Local News</h1>

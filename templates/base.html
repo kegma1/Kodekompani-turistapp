@@ -38,12 +38,21 @@
             </div>
         </div>
         <div id="topnav" class="topnav">   
-            <button id="menu-toggle" class="menu-toggle">☰</button>
-            <script src="{{ url_for('static', filename='scripts/menu-toggle.js') }}" defer></script>
-
+            {% if session["is_logged_in"] %}
+                <div id="userinfo" class="userinfo">
+                    <a href="{{ url_for('people_page', username=session['user']) }}">{{ session['user'] }}</a>
+                </div>
+            {% else %}
+                <div class="button-container">
+                    <a href="{{ url_for('login') }}" class="menu-button">Login</a>
+                    <a href="{{ url_for('sign_up') }}" class="menu-button">Sign Up</a>
+                </div>
+            {% endif %}
             <div id="narvik" class="narvik">
                 <a href="{{ url_for('index') }}" class="narvik-link">NARVIK</a>
             </div>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+            <script src="{{ url_for('static', filename='scripts/menu-toggle.js') }}" defer></script>
         </div> 
         <div id="ContentBody">
             {% block body %}
