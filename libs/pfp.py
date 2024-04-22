@@ -1,4 +1,4 @@
-# credit to orhanemree: https://github.com/orhanemree/profile-picture-from-username/blob/master/app.py
+# credit to orhanemree: https://github.com/orhanemree/profile-picture-from-username/tree/master
 
 # Copyright (c) 2022, Orhan Emre Dikicigil
 # 
