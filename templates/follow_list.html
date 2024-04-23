@@ -11,7 +11,9 @@
         </tr>
     {% endfor %}
     </table>
+    <a href="{{ url_for(url_name, id = id, page = page - 1)}}">Previous page</a>
+    <a href="{{ url_for(url_name, id = id, page = page + 1)}}">Next page</a>
     <hr>
-    <a href="{{ url_for("people_page", username = previoususer.username) }}">go back to user</a>
+    <a href="{{ url_for("people_page", username = prev_user.username) }}">go back to user</a>
 </section>
 {% endblock %}

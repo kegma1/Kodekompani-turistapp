@@ -46,11 +46,11 @@ class User(Base):
                              primaryjoin=id==Friend.user_id,
                              secondaryjoin=id==Friend.friend_id)
                              
-
     followers = relationship("User", 
                              secondary="friends",
                              primaryjoin=id==Friend.friend_id,
                              secondaryjoin=id==Friend.user_id)
+    
     def __init__(self, username, email, password, full_name, data_of_birth):
         self.username = username
         self.email = email

@@ -2,36 +2,27 @@ from __main__ import app
 from flask import render_template, redirect, url_for
 from db_utils import db_session, User
 
-@app.route('/followers_list/<userid>', methods=["GET"])
-def followers_list(userid):
-    urlname = 'followers_list'
-    # page = int(page)
-    # if page < 1:
-    #     return redirect(url_for("followers_list", userid = userid, page = 1))
+@app.route('/followers_list/<id>/<int:page>', methods=["GET"])
+def followers_list(id, page):
+    url_name = 'followers_list'
     
-    user = db_session.query(User).filter_by(id = userid).first()
-
-    # if not user and page != 1:
-    #     return redirect(url_for("followers_list", userid = userid, page = 1))
+    user = db_session.query(User).filter_by(id = id).first()
     
-    return render_template("follow_list.html", userlist = user.followers, previoususer = user, urlname = urlname)
-
-
-@app.route('/following_list/<userid>', methods=["GET"])
-def following_list(userid):
-    urlname = 'following_list'
-    # page = int(page)
-    # if page < 1:
-    #     return redirect(url_for("following_list", userid = userid, page = 1))
+    followers = user.followers[(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
     
-    user = db_session.query(User).filter_by(id = userid).first()
+    if not followers and page != 1:
+        return redirect(url_for(url_name, id = id, page = 1))
 
-    # if not user and page != 1:
-    #     return redirect(url_for("following_list", userid = userid, page = 1))
+    return render_template("follow_list.html", userlist = followers, prev_user = user, url_name = url_name, id = id, page = page)
+
+@app.route('/following_list/<id>/<int:page>', methods=["GET"])
+def following_list(id, page):
+    url_name = 'following_list'
+    user = db_session.query(User).filter_by(id = id).first()
     
-    return render_template("follow_list.html", userlist = user.following, previoususer = user, urlname = urlname)
+    following = user.following[(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
+    
+    if not following and page != 1:
+        return redirect(url_for(url_name, id = id, page = 1))
 
-# def get_follow_info(follow, id):
-#     for _ in follow:
-#         x = db_session.query(User).filter_by(id = id).all()
-#     return x
+    return render_template("follow_list.html", userlist = following, prev_user = user, url_name = url_name, id = id, page = page)

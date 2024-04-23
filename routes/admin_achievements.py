@@ -1,7 +1,7 @@
 from __main__ import app
 
 from flask import render_template, redirect, url_for, flash
-from db_utils import Achievement, db_session, func  
+from db_utils import Achievement, db_session  
 from libs.helpers import require_admin, require_login, paging
 
 @app.route("/admin_achievements/<int:page>", methods=["GET", "POST"])
@@ -18,8 +18,6 @@ def admin_achievements(page):
                            page=page)
 
     
-
-
 @app.route("/toggle_achievement_status/<int:id>", methods=["POST"])
 @require_login
 @require_admin
