@@ -1,7 +1,7 @@
 from __main__ import app
 from flask import redirect, render_template, url_for, redirect, session
 from db_utils import User, db_session
-from libs.helpers import require_login, require_admin, paging, get_curr_user, get_change
+from libs.helpers import require_login, require_admin, paging, get_curr_user, get_change, is_mobile
 
 # Needs more checks for admin privileges in the future
 @app.route("/admin/<int:page>", methods = ["GET", "POST"]) 
@@ -70,7 +70,8 @@ def admin_del_bio(change_id):
     return redirect(url_for("admin", page = 1))
     
 @app.route("/video/<int:id>")
-def funi(id):
+@is_mobile
+def funi(id, is_mobile):
     video = ["https://player.vimeo.com/video/794492622?h=31cc9f209b&autoplay=1&loop=1",
              "https://www.youtube.com/embed/oW3B34D0RVk?si=FiTBZPdp6dOMviY4"]
     try:
@@ -78,5 +79,5 @@ def funi(id):
     except:
         show = video[0]
     
-    return render_template("iocularis.html", embed = show)
+    return render_template("iocularis.html", embed = show, is_mobile = is_mobile)
 

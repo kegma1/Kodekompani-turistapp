@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
 <section>
-    <iframe src="{{ embed }}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    {% if is_mobile %}
+        <!-- HTML for mobile devices -->
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/oW3B34D0RVk" title="Narvik kommune - Sentrum live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    {% else %}
+        <!-- HTML for desktop devices -->
+        <iframe src="{{ embed }}" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> 
+    {% endif %}
+    
 </section>
-{% endblock %}
 
+{% endblock %}

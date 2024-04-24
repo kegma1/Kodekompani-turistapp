@@ -1,7 +1,7 @@
 ''''a module for utility functions or helper functions
 '''
 from functools import wraps
-from flask import redirect, session, url_for
+from flask import redirect, session, url_for, request
 import datetime as buh
 from db_utils import db_session, User
 
@@ -69,5 +69,13 @@ def require_admin(f):
     def decorated_function(*args, **kwargs):
         if not is_admin():
             return redirect(url_for('funi', id = 1))
+        return f(*args, **kwargs)
+    return decorated_function 
+
+def is_mobile(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user_agent = request.headers.get('User-Agent').lower()
+        kwargs['is_mobile'] = 'mobi' in user_agent or 'iphone' in user_agent or 'android' in user_agent
         return f(*args, **kwargs)
     return decorated_function
