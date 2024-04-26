@@ -40,6 +40,7 @@ class User(Base):
     _profile_pic = Column("profile_pic" , LargeBinary)
     attractions = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
+    posts = relationship('UserPosts', back_populates='user')
     
     following = relationship("User", 
                              secondary="friends",
@@ -51,6 +52,8 @@ class User(Base):
                              primaryjoin=id==Friend.friend_id,
                              secondaryjoin=id==Friend.user_id)
     
+    
+
     def __init__(self, username, email, password, full_name, data_of_birth):
         self.username = username
         self.email = email
@@ -94,6 +97,7 @@ class Attraction(Base):
     keywords = Column(String(100))
     isDeleted = Column(Boolean, default=False)
     achievements = relationship('Achievement', back_populates='attraction')
+    posts = relationship('UserPosts', back_populates='attraction')
     
     @property
     def image(self):
@@ -140,13 +144,27 @@ class UserPosts(Base):
     __tablename__ = 'user_posts'
     post_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users_turistapp.id'), nullable=False)
-    user = relationship('User')
+    user = relationship('User', back_populates="posts")
     post = Column(String(255), nullable=False)
     _image = Column("image", LargeBinary(length=(2**32)-1), nullable=True)
     time = Column(TIMESTAMP, default=func.now(), nullable=False)
-    attraction_id = Column(Integer, ForeignKey('attractions.id'))
-    attraction = relationship('Attraction')
+    attraction_id = Column(Integer, ForeignKey('attractions.id'), nullable=True)
+    attraction = relationship('Attraction', back_populates=None)
     isDeleted = Column(Boolean, default= False)
+
+    def __init__(self, message, user, attraction = 0):
+        self.user_id = user
+        self.post = message
+
+        print(attraction)
+        print(attraction)
+        print(attraction)
+        print(attraction)
+
+        if int(attraction) > 0:
+            self.attraction_id = attraction
+        else:
+            self.attraction_id = None
 
     @property
     def image(self):

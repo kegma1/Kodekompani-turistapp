@@ -1,33 +1,35 @@
 from __main__ import app
-from flask import render_template, session
+from flask import render_template, session, redirect, url_for, request
 from db_utils import db_session, User, Attraction
-from libs.helpers import get_user_status, get_user_age
+from libs.helpers import get_user_status, get_user_age, is_logged_in
+from libs.create_post import create_post
+from form.post_form import PostForm
 
-@app.route("/", methods = ["GET"])
+@app.route("/", methods = ["GET", "POST"])
 def index():
     pfp = None
     bio = None
-    is_logged_in = False
     username = ""
     fullname = ""
     attractions = []
     xp = 0; user_status = "Newbie in city"
+    post_form = None
 
     top_5_achievements = None
     
     # fetch attractions for all visitors
     attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= 0).all()
 
-    if "is_logged_in" in session and session["is_logged_in"]:
+    if is_logged_in():
         data = db_session.query(User).filter_by(username=session["user"]).first()
         bio = data.bio
+        post_form = PostForm(None, request.form)
         
         user_status = get_user_status(data)
 
         if data.profile_pic:
             pfp = data.profile_pic
 
-        is_logged_in = True
         username = session["user"]
         fullname = data.full_name
 
@@ -39,14 +41,18 @@ def index():
 
         attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
+    if is_logged_in() and request.method == "POST" and post_form.validate():
+
+        create_post(post_form.attraction.data, post_form.message.data)
+
     return render_template("index.html", 
                            title = "Home page", 
                            pfp = pfp, 
-                           bio = bio or None, 
-                           is_logged_in = is_logged_in, 
+                           bio = bio or None,  
                            username = username, 
                            xp = xp, 
                            user_status = user_status,
                            fullname = fullname, 
                            attractions = attractions,
-                           t5achievements = top_5_achievements)
+                           t5achievements = top_5_achievements,
+                           post_form=post_form)

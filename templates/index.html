@@ -2,41 +2,7 @@
 
 {% block body %}
 <section>
-    <!-- {% if is_logged_in %}
-        <div id="flex_container">
-            <div>
-                <h1>Welcome back, 
-                    <p>{{ fullname }}!</p></h1><br>
-                <img src="data:image/jpg;base64,{{ pfp }}" alt="Profile picture">
-                <p> Username: {{ username }} </p>
-                {% if bio %}
-                <p> Bio: {{ bio }} </p>
-                {% endif %}
-                <p> Achievements: You've earned {{ xp }}xp.</p>
-                <p> Congrats! You are {{ user_status }} in Narvik</p>
-            </div>
-            <div>
-                {% if t5achievements %}
-                    <h1>Your top 5 achievement</h1>
-                    <ul>
-                        {% for achiev in t5achievements %}
-                            <li><p>{{achiev.name}}: {{achiev.xp_reward}}xp</p></li>
-                        {%endfor%}
-                    </ul>
-                {%endif%}
-            </div>
-        </div>
-        {% else %}
-        <h1>Welcome to Narvik!</h1>
-    {% endif %} -->
-
-    <!-- {% if is_logged_in %}
-        <div class="button-container">
-            <a href="{{ url_for('logout') }}" class="menu-button">Log Out</a>
-            <a href="{{ url_for('user_achievements') }}" class="menu-button">Achievements</a>
-        </div>
-    {% endif %} -->
-
+  
     <h1>Local News</h1>
     <p>A new Italian restaurant you need to check out!</p>
     <p>Local stand up comedian Mikael Lunde Isaksen with his one-lines.</p>
@@ -54,14 +20,12 @@
         <p>No attractions to display so far.</p>
     {% endfor %}  
 
+    <!-- user feed -->
+    {% if "is_logged_in" in session and session["is_logged_in"] %}
+        {% from "macros/post_widget.html" import post_widget %}
+        {{ post_widget(post_form) }}
+    {%endif%}
+
 </section>
 
-<!-- <section>
-{% if is_logged_in %}
-    <section class="achievements-link">
-        <a href="{{ url_for('user_achievements') }}" class="btn btn-primary">Achievements</a>
-    </section>
-{% endif %}
-</section>
- -->
 {% endblock %}

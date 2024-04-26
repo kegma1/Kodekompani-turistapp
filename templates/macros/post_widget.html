@@ -1,0 +1,14 @@
+{% from "macros/_form_helper.html" import render_field %}
+{% macro post_widget(form) %}
+    <section>
+        <h1>Post</h1>
+        <form method="post">
+            <dl>
+                {{ render_field(form.message) }}
+                {{ render_field(form.attraction) }}
+            </dl>
+            {{ form.hidden_tag() }}
+            <input type="submit" value="Submit">
+        </form>    
+    </section>
+{% endmacro %}

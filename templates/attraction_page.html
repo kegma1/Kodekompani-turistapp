@@ -18,9 +18,9 @@
             <p>Address: {{ info.address }}</p>
             {% from "macros/_form_helper.html" import render_field %}
             <form action="{{ url_for("view_attraction", attraction_id=info.id) }}" method="post">
-                {{ form.csrf_token }}
+                {{ passcode_form.csrf_token }}
                 <dl>
-                    {{ render_field(form.passcode) }}
+                    {{ render_field(passcode_form.passcode) }}
                 </dl>
                 <button type="submit">Unlock</button>
             </form>
@@ -43,6 +43,12 @@
     <div class="map-container">
         <div id="mapdiv" style="width: 100%; height: 300px;"></div> <!-- Adjusted height for visibility -->
     </div>
+
+    {% if "is_logged_in" in session and session["is_logged_in"] %}
+        {% from "macros/post_widget.html" import post_widget %}
+        {{ post_widget(post_form) }}
+    {%endif%}
+
 </section>
 <script type="text/python">
         from javascript import JSObject, JSConstructor
