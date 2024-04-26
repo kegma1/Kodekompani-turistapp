@@ -1,12 +1,13 @@
 from __main__ import app
 from flask import render_template, request, redirect, url_for, session
 from db_utils import db_session, Attraction, User, Achievement, UserAchievement
-from libs.helpers import require_login, get_user_age, is_logged_in
+from libs.helpers import require_login, get_user_age
 from form.passcode_form import Passcode
 from form.post_form import PostForm
 from libs.create_post import create_post
 
 @app.route('/attraction/<attraction_id>', methods=["GET", "POST"])
+@require_login
 def view_attraction(attraction_id: int):
     attraction_info = db_session.query(Attraction).filter_by(id=attraction_id).first()
     user = db_session.query(User).filter_by(username = session["user"]).first()
@@ -28,10 +29,10 @@ def view_attraction(attraction_id: int):
     assert len(coords) == 2
 
 
-    if is_logged_in() and request.method == "POST" and passcode_form.validate():
+    if request.method == "POST" and passcode_form.validate():
         return redirect(url_for("unlock_achivement", attraction = attraction_id, passcode = passcode_form.passcode.data))
 
-    if is_logged_in() and request.method == "POST" and post_form.validate():
+    if request.method == "POST" and post_form.validate():
         create_post(attraction_id, post_form.message.data)
 
     return render_template("attraction_page.html", 
