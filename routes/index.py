@@ -4,6 +4,7 @@ from db_utils import db_session, User, Attraction
 from libs.helpers import get_user_status, get_user_age, is_logged_in
 from libs.create_post import create_post
 from form.post_form import PostForm
+from werkzeug.datastructures import CombinedMultiDict
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
@@ -23,7 +24,7 @@ def index():
     if is_logged_in():
         data = db_session.query(User).filter_by(username=session["user"]).first()
         bio = data.bio
-        post_form = PostForm(None, request.form)
+        post_form = PostForm(None, formdata=CombinedMultiDict((request.files, request.form)))
         
         user_status = get_user_status(data)
 
@@ -41,9 +42,8 @@ def index():
 
         attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
-    if is_logged_in() and request.method == "POST" and post_form.validate():
-
-        create_post(post_form.attraction.data, post_form.message.data)
+    if is_logged_in() and request.method == "POST" and post_form.validate_on_submit():
+        create_post(post_form.attraction.data, post_form.message.data, post_form.image.data)
 
     return render_template("index.html", 
                            title = "Home page", 

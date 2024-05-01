@@ -1,6 +1,7 @@
-from wtforms import TextAreaField, SelectField, HiddenField, validators
+from wtforms import TextAreaField, SelectField, validators
 from flask_wtf import FlaskForm
 from db_utils import db_session, Attraction
+from flask_wtf.file import FileField, FileAllowed
 
 class PostForm(FlaskForm):
     def __init__(self, attraction = None, formdata=..., **kwargs):
@@ -16,3 +17,4 @@ class PostForm(FlaskForm):
         
     message = TextAreaField("Message", validators=[validators.data_required()])
     attraction = SelectField("Attraction", validate_choice=False, coerce=int)
+    image = FileField("Optional Photo", validators= [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"], "Only images")])

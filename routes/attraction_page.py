@@ -5,6 +5,7 @@ from libs.helpers import require_login, get_user_age
 from form.passcode_form import Passcode
 from form.post_form import PostForm
 from libs.create_post import create_post
+from werkzeug.datastructures import CombinedMultiDict
 
 @app.route('/attraction/<attraction_id>', methods=["GET", "POST"])
 @require_login
@@ -18,7 +19,7 @@ def view_attraction(attraction_id: int):
         return redirect(url_for("index"))
     
     passcode_form = Passcode(attraction_id, request.form)
-    post_form = PostForm(attraction_id, request.form)
+    post_form = PostForm(attraction_id, formdata=CombinedMultiDict((request.files, request.form)))
 
     user_achivements = db_session.query(Achievement).join(UserAchievement).filter(
         UserAchievement.user_id == user.id,
@@ -33,7 +34,7 @@ def view_attraction(attraction_id: int):
         return redirect(url_for("unlock_achivement", attraction = attraction_id, passcode = passcode_form.passcode.data))
 
     if request.method == "POST" and post_form.validate():
-        create_post(attraction_id, post_form.message.data)
+        create_post(attraction_id, post_form.message.data, post_form.image.data)
 
     return render_template("attraction_page.html", 
                            title=attraction_info.name, 

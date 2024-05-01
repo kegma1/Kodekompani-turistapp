@@ -2,10 +2,12 @@
 {% macro post_widget(form) %}
     <section>
         <h1>Post</h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
             <dl>
                 {{ render_field(form.message) }}
                 {{ render_field(form.attraction) }}
+                {{ render_field(form.image) }}
             </dl>
             {{ form.hidden_tag() }}
             <input type="submit" value="Submit">
