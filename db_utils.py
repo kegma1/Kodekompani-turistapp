@@ -151,10 +151,13 @@ class UserPosts(Base):
     attraction_id = Column(Integer, ForeignKey('attractions.id'), nullable=True)
     attraction = relationship('Attraction', back_populates=None)
     isDeleted = Column(Boolean, default= False)
+    is_status = Column(Boolean, default= False)
 
-    def __init__(self, message, user, attraction = 0):
+    def __init__(self, message, user, attraction = 0, is_status = False):
         self.user_id = user
         self.post = message
+
+        self.is_status = is_status
 
         print(attraction)
         print(attraction)
