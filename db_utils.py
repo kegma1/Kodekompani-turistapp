@@ -159,11 +159,6 @@ class UserPosts(Base):
 
         self.is_status = is_status
 
-        print(attraction)
-        print(attraction)
-        print(attraction)
-        print(attraction)
-
         if int(attraction) > 0:
             self.attraction_id = attraction
         else:
