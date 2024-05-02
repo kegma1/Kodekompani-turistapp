@@ -178,15 +178,17 @@ class UserPosts(Base):
     
     @image.setter
     def image(self, new_pic):
+        if new_pic:
+            buffer = BytesIO()
+            image = Image.open(new_pic)
+            image = image.resize((500, 500))
+            
+            image.save(buffer, format="PNG", quality=20, optimize=True)
 
-        buffer = BytesIO()
-        image = Image.open(new_pic)
-        image = image.resize((500, 500))
-        
-        image.save(buffer, format="PNG", quality=20, optimize=True)
-
-        buffer.seek(0)
-        self._image = buffer.read()
+            buffer.seek(0)
+            self._image = buffer.read()
+        else:
+            self._image = None
 
 # Create All Tables in the Database
 def create_tables():

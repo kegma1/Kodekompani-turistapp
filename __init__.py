@@ -27,6 +27,7 @@ import routes.add_achievement
 import routes.admin_achievements_edit
 import routes.admin_achievements
 import routes.user_achievements
+import routes.admin_posts
 
 if __name__ == "__main__":
     app.run()

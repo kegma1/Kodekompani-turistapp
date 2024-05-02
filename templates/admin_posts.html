@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+<section>
+    <table>
+        <tr>
+            <th> Username: </th>
+            <th> Post: </th>
+            <th> Time: </th>
+            <th> Deleted?: </th>
+            <th> Image: </th>
+        </tr>
+    {% for post in posts %}
+        <tr>
+            <td> {{ post.user.username }} </td>
+            <td> {{ post.post }} </td>
+            <td> {{ post.time }} </td>
+            {% if post.isDeleted == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
+            <td> 
+                <img src="data:image/jpg;base64,{{ post.image }}" alt="Post picture" width="100", height="100"/>
+            </td>
+            <td> 
+                <a href="{{ url_for("admin_del_post", change_id= post.post_id) }}"><button>DEL POST</button></a>
+            </td>
+            <td>
+                <a href="{{ url_for("admin_del_post_img", change_id= post.post_id) }}"><button>DEL PIC</button></a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <a href="{{ url_for("admin_posts", page = page - 1) }}" >Previous page</a>
+    <a href="{{ url_for("admin_posts", page = page + 1) }}" >Next page</a>
+    <hr>
+    <a href="{{ url_for("index") }}">back to menu</a>
+</section>
+{% endblock %}
