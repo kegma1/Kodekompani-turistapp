@@ -10,8 +10,13 @@ class LogInForm(FlaskForm):
     password = PasswordField("Password", [validators.data_required(), validators.Length(min = pass_min, max= pass_max, message=f"Password requires length of {pass_min} to {pass_max}.")])
     
     def validate_username(self, username):
-        if db_session.query(User.id).filter_by(username = username.data).first() == None:
+        user = db_session.query(User).filter_by(username = username.data).first()
+        if user == None:
             raise ValidationError("Username does not exist.")
+        if user.isDeleted:
+            raise ValidationError("This user is deleted")
+        
+
         
     def validate_password(self, password):
         user_password = db_session.query(User.encrypted_password).filter_by(username= self.username.data).first()

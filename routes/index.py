@@ -45,7 +45,9 @@ def index():
 
         posts_raw = db_session.query(UserPosts)\
                 .join(UserPosts.user)\
-                .filter(User.followers.any(User.id == user.id), UserPosts.isDeleted == False).all()
+                .filter(User.followers.any(User.id == user.id))\
+                .filter(UserPosts.isDeleted == False)\
+                .filter(User.isDeleted == False).all()
         
         posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
 

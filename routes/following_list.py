@@ -8,7 +8,7 @@ def followers_list(id, page):
     
     user = db_session.query(User).filter_by(id = id).first()
     
-    followers = user.followers[(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
+    followers = [user for user in user.followers if not user.isDeleted][(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
     
     if not followers and page != 1:
         return redirect(url_for(url_name, id = id, page = 1))
@@ -20,7 +20,7 @@ def following_list(id, page):
     url_name = 'following_list'
     user = db_session.query(User).filter_by(id = id).first()
     
-    following = user.following[(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
+    following = [user for user in user.following if not user.isDeleted][(page*5)-5 : (page*5)] #Crude ahh paging pga relationship mellom Friend table og User table
     
     if not following and page != 1:
         return redirect(url_for(url_name, id = id, page = 1))
