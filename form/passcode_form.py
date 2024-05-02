@@ -14,5 +14,7 @@ class Passcode(FlaskForm):
 
         if not achivement:
             raise ValidationError("No achivements found with this passcode for this attraction.")
+        if achivement.is_deleted:
+            raise ValidationError("This achivement is disabled")
         
 

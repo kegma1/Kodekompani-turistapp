@@ -8,9 +8,9 @@ def attractions_list():
     try: 
         user = db_session.query(User).filter_by(username=session["user"]).first()
         age = get_user_age(user)
-        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
+        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age, Attraction.isDeleted == False).all()
     except:
-        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation == 0).all()
+        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation == 0, Attraction.isDeleted == False).all()
     
     return render_template("view_attractions.html", 
                            attractions = attractions)

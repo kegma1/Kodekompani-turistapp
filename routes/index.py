@@ -41,7 +41,7 @@ def index():
             
         age = get_user_age(data)
 
-        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
+        attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age, Attraction.isDeleted == False).all()
 
         posts_raw = db_session.query(UserPosts)\
                 .join(UserPosts.user)\

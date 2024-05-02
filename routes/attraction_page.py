@@ -11,6 +11,9 @@ from werkzeug.datastructures import CombinedMultiDict
 @require_login
 def view_attraction(attraction_id: int):
     attraction_info = db_session.query(Attraction).filter_by(id=attraction_id).first()
+    if attraction_info.isDeleted:
+        return redirect(url_for("attractions_list"))
+    
     user = db_session.query(User).filter_by(username = session["user"]).first()
     posts_raw = db_session.query(UserPosts).filter_by(attraction_id = attraction_id, is_status = False, isDeleted = False).all()
 
