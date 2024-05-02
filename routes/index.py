@@ -49,6 +49,7 @@ def index():
 
     if is_logged_in() and request.method == "POST" and post_form.validate_on_submit():
         create_post(post_form.attraction.data, post_form.message.data, post_form.image.data)
+        return redirect(url_for("index"))
 
     return render_template("index.html", 
                            title = "Home page", 

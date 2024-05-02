@@ -36,6 +36,7 @@ def view_attraction(attraction_id: int):
 
     if request.method == "POST" and post_form.validate():
         create_post(attraction_id, post_form.message.data, post_form.image.data)
+        return redirect(url_for("view_attraction", attraction_id=attraction_id))
 
     return render_template("attraction_page.html", 
                            title=attraction_info.name, 
