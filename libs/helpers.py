@@ -39,7 +39,7 @@ def get_user_age(user):
 def get_curr_user():
     return db_session.query(User).filter_by(username = session['user']).first()
 
-def paging(page: int, amount: int, table, filter_deleted = False): #KOTLIN PILLED RAHHH
+def paging(page: int, amount: int, table = None, filter_deleted = False, query = None): #KOTLIN PILLED RAHHH
     '''
     Divides up the page (int) into amount (int) elements desplayed.
     If there are no elements in the given page, return None.
@@ -52,6 +52,8 @@ def paging(page: int, amount: int, table, filter_deleted = False): #KOTLIN PILLE
     
     if filter_deleted:
         data = db_session.query(table).filter(table.isDeleted == False).offset((page * amount) - amount).limit(amount).all()
+    elif query is not None:
+        data = query.offset((page * amount) - amount).limit(amount).all()
     else:
         data = db_session.query(table).offset((page * amount) - amount).limit(amount).all()
 

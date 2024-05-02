@@ -22,6 +22,7 @@ import routes.people_list
 import routes.people_page
 import routes.unlock_achivement
 import routes.following_list
+import routes.leaderboard
 
 import routes.add_achievement
 import routes.admin_achievements_edit
