@@ -1,11 +1,12 @@
 from __main__ import app
 from libs.helpers import is_logged_in, get_user_status, require_login
-from db_utils import db_session, User, Friend
+from db_utils import db_session, User, UserPosts
 from flask import render_template, url_for, redirect, session
 
 @app.route('/people/<username>', methods=["GET"])
 def people_page(username: str):
     user = db_session.query(User).filter_by(username = username).first()
+    posts = db_session.query(UserPosts).filter_by(user = user)
     
     if not user:
         return "no user by that name"
@@ -31,6 +32,7 @@ def people_page(username: str):
                            user_status = user_status,
                            following=following,
                            same_user=same_user,
+                           posts=posts
                            )
 
 @app.route('/follow_user/<username>', methods=["GET"])

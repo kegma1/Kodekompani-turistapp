@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import render_template, request, redirect, url_for, session
-from db_utils import db_session, Attraction, User, Achievement, UserAchievement
+from db_utils import db_session, Attraction, User, Achievement, UserAchievement, UserPosts
 from libs.helpers import require_login, get_user_age
 from form.passcode_form import Passcode
 from form.post_form import PostForm
@@ -12,6 +12,7 @@ from werkzeug.datastructures import CombinedMultiDict
 def view_attraction(attraction_id: int):
     attraction_info = db_session.query(Attraction).filter_by(id=attraction_id).first()
     user = db_session.query(User).filter_by(username = session["user"]).first()
+    posts = db_session.query(UserPosts).filter_by(attraction_id = attraction_id).all()
     
     age = get_user_age(user)
     attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
@@ -42,6 +43,7 @@ def view_attraction(attraction_id: int):
                            image=attraction_info.image, 
                            passcode_form=passcode_form,
                            post_form=post_form,
+                           posts=posts,
                            achievements=None if not user_achivements else user_achivements,
                            lon=coords[1],
                            lat=coords[0],

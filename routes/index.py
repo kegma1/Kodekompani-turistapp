@@ -1,7 +1,7 @@
 from __main__ import app
 from flask import render_template, session, redirect, url_for, request
-from db_utils import db_session, User, Attraction
-from libs.helpers import get_user_status, get_user_age, is_logged_in
+from db_utils import db_session, User, Attraction, UserPosts
+from libs.helpers import get_curr_user, get_user_age, is_logged_in
 from libs.create_post import create_post
 from form.post_form import PostForm
 from werkzeug.datastructures import CombinedMultiDict
@@ -15,6 +15,7 @@ def index():
     attractions = []
     xp = 0; user_status = "Newbie in city"
     post_form = None
+    posts = None
 
     top_5_achievements = None
     
@@ -26,7 +27,7 @@ def index():
         bio = data.bio
         post_form = PostForm(None, formdata=CombinedMultiDict((request.files, request.form)))
         
-        user_status = get_user_status(data)
+        user = get_curr_user()
 
         if data.profile_pic:
             pfp = data.profile_pic
@@ -42,6 +43,10 @@ def index():
 
         attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
+        posts = db_session.query(UserPosts)\
+                .join(UserPosts.user)\
+                .filter(User.followers.any(User.id == user.id)).all()
+
     if is_logged_in() and request.method == "POST" and post_form.validate_on_submit():
         create_post(post_form.attraction.data, post_form.message.data, post_form.image.data)
 
@@ -51,8 +56,8 @@ def index():
                            bio = bio or None,  
                            username = username, 
                            xp = xp, 
-                           user_status = user_status,
                            fullname = fullname, 
                            attractions = attractions,
                            t5achievements = top_5_achievements,
-                           post_form=post_form)
+                           post_form=post_form,
+                           posts= posts)

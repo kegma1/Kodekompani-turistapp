@@ -234,3 +234,45 @@ article, section {
     flex-direction: column;
     align-items: center;
 }
+
+.post {
+    width: auto;
+}
+
+.post-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.post-badge > img {
+    width: 5vw;
+    min-width: 50px;
+}
+
+
+.post-footer, .post-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-content > img {
+    width: 20vw;
+    min-width: 50px;
+}
+
+.post-footer > a {
+    margin: 0;
+}
+
+.post-footer > p {
+    margin: 0;
+}

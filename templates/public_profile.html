@@ -48,5 +48,8 @@
     <hr>
     <a href="{{ url_for("index") }}">Back to menu</a>
 
+    {% from "macros/feed_widget.html" import feed_widget %}
+    {{ feed_widget(posts) }}
+
 </section>
 {% endblock %}

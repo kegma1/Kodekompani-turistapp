@@ -1,0 +1,26 @@
+{% from "macros/_form_helper.html" import render_field %}
+{% macro feed_widget(posts) %}
+        {% for post in posts %}
+            <section class="post">
+                <div class="post-body">
+                    <div class="post-badge">
+                        <img src="data:image/jpg;base64,{{ post.user.profile_pic }}" alt="Profile picture">
+                        <a href="{{ url_for('people_page', username = post.user.username) }}">{{ post.user.username }}</a>
+                    </div>
+                    <div class="post-content">
+                        <p>{{ post.post }}</p>
+                        {% if post.image %}
+                            <img src="data:image/jpg;base64,{{ post.image }}" alt="post image">
+                        {%endif%}
+                    </div>
+                </div>
+                <hr>
+                <div class="post-footer">
+                    <p>{{ post.time }}</p>
+                    {% if post.attraction %}
+                        <a href="{{ url_for('view_attraction', attraction_id=post.attraction.id) }}">{{ post.attraction.name }}</a>
+                    {%endif%}
+                </div>
+            </section>
+        {%endfor%}
+{% endmacro %}

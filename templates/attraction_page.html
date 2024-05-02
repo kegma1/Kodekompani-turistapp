@@ -46,7 +46,9 @@
 
     {% if "is_logged_in" in session and session["is_logged_in"] %}
         {% from "macros/post_widget.html" import post_widget %}
+        {% from "macros/feed_widget.html" import feed_widget %}
         {{ post_widget(post_form) }}
+        {{ feed_widget(posts) }}
     {%endif%}
 
 </section>
