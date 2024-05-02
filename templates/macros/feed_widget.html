@@ -4,8 +4,13 @@
             <section class="post">
                 <div class="post-body">
                     <div class="post-badge">
-                        <img src="data:image/jpg;base64,{{ post.user.profile_pic }}" alt="Profile picture">
-                        <a href="{{ url_for('people_page', username = post.user.username) }}">{{ post.user.username }}</a>
+                        {% if post.user.isDeleted %}
+                        <img src="{{ url_for('static', filename='assets/deleted_user_pfp.png') }}" alt="Deleted picture">
+                        <p>Deleted</p>
+                        {% else %}
+                            <img src="data:image/jpg;base64,{{ post.user.profile_pic }}" alt="Profile picture">
+                            <a href="{{ url_for('people_page', username = post.user.username) }}">{{ post.user.username }}</a>
+                        {%endif%}
                     </div>
                     <div class="post-content">
                         <p>{{ post.post }}</p>

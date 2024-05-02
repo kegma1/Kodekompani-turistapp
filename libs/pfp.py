@@ -75,6 +75,6 @@ def make_profile(username:str, canvas_size:int, pixel_size:int):
         return buffered
 
 if __name__ == "__main__":
-    res = make_profile("Kegma1", 400, 50)
+    res = make_profile("Deleted", 400, 50)
     print(res.read())
-    Image.open(res).show()
+    Image.open(res).save("./static/assets/deleted_user_pfp.png")
