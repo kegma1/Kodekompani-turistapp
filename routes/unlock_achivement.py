@@ -14,13 +14,13 @@ def unlock_achivement(attraction: int, passcode: str):
     if achievement and achievement not in user.achievements and not achievement.is_deleted:
         if achievement.attraction not in user.attractions:
             user.attractions.append(achievement.attraction)
-            create_post(attraction, f"{session["user"]} visitied {attraction_name} for the first time.", is_status=True)
+            create_post(attraction, f"{session['user']} visitied {attraction_name} for the first time.", is_status=True)
         
         if user.xp_collected:
             user.xp_collected += achievement.xp_reward
         else:
             user.xp_collected = achievement.xp_reward
-        create_post(attraction, f"{session["user"]} collected '{achievement.name}' and earned {achievement.xp_reward}XP.", is_status=True)
+        create_post(attraction, f"{session['user']} collected '{achievement.name}' and earned {achievement.xp_reward}XP.", is_status=True)
         user.achievements.append(achievement)
     
         db_session.commit()

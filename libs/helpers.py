@@ -48,8 +48,6 @@ def paging(page: int, amount: int, table = None, filter_deleted = False, query =
     if page < 1:
         return None
     
-    data = db_session.query(table).offset((page * amount) - amount).limit(amount).all()
-    
     if filter_deleted:
         data = db_session.query(table).filter(table.isDeleted == False).offset((page * amount) - amount).limit(amount).all()
     elif query is not None:
