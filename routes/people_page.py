@@ -6,7 +6,8 @@ from flask import render_template, url_for, redirect, session
 @app.route('/people/<username>', methods=["GET"])
 def people_page(username: str):
     user = db_session.query(User).filter_by(username = username).first()
-    posts = db_session.query(UserPosts).filter_by(user = user)
+    posts_raw = db_session.query(UserPosts).filter_by(user = user)
+    posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
     
     if not user:
         return "no user by that name"

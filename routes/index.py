@@ -43,9 +43,11 @@ def index():
 
         attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()
 
-        posts = db_session.query(UserPosts)\
+        posts_raw = db_session.query(UserPosts)\
                 .join(UserPosts.user)\
                 .filter(User.followers.any(User.id == user.id)).all()
+        
+        posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
 
     if is_logged_in() and request.method == "POST" and post_form.validate_on_submit():
         create_post(post_form.attraction.data, post_form.message.data, post_form.image.data)
