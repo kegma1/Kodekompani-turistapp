@@ -12,7 +12,7 @@ from werkzeug.datastructures import CombinedMultiDict
 def view_attraction(attraction_id: int):
     attraction_info = db_session.query(Attraction).filter_by(id=attraction_id).first()
     user = db_session.query(User).filter_by(username = session["user"]).first()
-    posts_raw = db_session.query(UserPosts).filter_by(attraction_id = attraction_id, is_status = False).all()
+    posts_raw = db_session.query(UserPosts).filter_by(attraction_id = attraction_id, is_status = False, isDeleted = False).all()
 
     posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
     
