@@ -8,7 +8,13 @@
                 <td><a href="{{ url_for("people_page", username=user.username) }}">
                     {{ user.username }}
                 </a></td>
-                <td>{{ user.xp_collected }}XP</td>
+                <td>
+                    {% if user.xp_collected %}
+                        {{ user.xp_collected }}XP
+                    {% else %}
+                        0XP
+                    {%endif%}
+                </td>
             </tr>
         {% endfor %}
     </table>
