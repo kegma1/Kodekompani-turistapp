@@ -7,6 +7,7 @@
             <th>Description</th>
             <th>XP Reward</th>
             <th>Age Rating</th>
+            <th>Unlock link</th>
             <th>Actions</th>
         </tr>
         {% for achievement in achievements %}
@@ -15,6 +16,7 @@
             <td>{{ achievement.description }}</td>
             <td>{{ achievement.xp_reward }}</td>
             <td>{{ achievement.age_rating }}</td>
+            <td><a href="{{ url_for("unlock_achivement", attraction = achievement.attraction_id, passcode = achievement.pass_code) }}">Link</a></td>
             <td>
                 <a href="{{ url_for('admin_achievements_edit', id=achievement.id) }}">Edit</a>
                 <form method="POST" action="{{ url_for('toggle_achievement_status', id=achievement.id) }}" style="display:inline;">

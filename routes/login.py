@@ -17,6 +17,11 @@ def login():
         session['admin'] = curr_user.isAdmin
         session['user_id'] = curr_user.id
         
+        if session.get("next"):
+            next = session["next"]
+            session["next"] = None
+            return redirect(next)
+        
         return redirect(url_for("index"))
 
     return render_template("login.html", title="Login", form = login_form)
