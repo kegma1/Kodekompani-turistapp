@@ -16,7 +16,7 @@ def view_attraction(attraction_id: int):
     
     user = db_session.query(User).filter_by(username = session["user"]).first()
     posts_raw = db_session.query(UserPosts).join(UserPosts.user)\
-        .filter(UserPosts.attraction_id == UserPosts.attraction_id)\
+        .filter(UserPosts.attraction_id == attraction_id)\
         .filter(UserPosts.is_status == False, UserPosts.isDeleted == False)\
         .filter(User.isDeleted == False).all()
     
