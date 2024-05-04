@@ -42,6 +42,8 @@ class User(Base):
     achievements = relationship("Achievement", secondary="user_achievements")
     posts = relationship('UserPosts', back_populates='user')
     
+    attractions = relationship("Attraction", back_populates="local_admin")
+
     following = relationship("User", 
                              secondary="friends",
                              primaryjoin=id==Friend.user_id,
@@ -99,6 +101,9 @@ class Attraction(Base):
     achievements = relationship('Achievement', back_populates='attraction')
     posts = relationship('UserPosts', back_populates='attraction')
     
+    local_admin_id = Column(Integer, ForeignKey('users_turistapp.id'))
+    local_admin = relationship("User", back_populates="attractions")
+
     @property
     def image(self):
         if self._image is not None:

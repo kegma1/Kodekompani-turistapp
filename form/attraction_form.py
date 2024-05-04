@@ -1,12 +1,17 @@
-from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField, BooleanField, HiddenField
+from wtforms import StringField, IntegerField, validators, SelectField, TextAreaField, BooleanField, HiddenField, SelectField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
+from db_utils import db_session, User
 
 
 class AttractionForm(FlaskForm):
     def __init__(self, data_required, formdata=..., **kwargs):
         super().__init__(formdata, **kwargs)
         self.location_coordinates.validators = [validators.Regexp(r'^-?\d+.\d+,\s*-?\d+.\d+$', message="invalid coordinates format.")]
+        
+
+        self.local_admin.choices = [(attraction.id, attraction.username) for attraction in db_session.query(User).all()]
+
         if data_required:
             self.image.validators = [FileRequired(), FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"], "Only images")]
             self.name.validators = [validators.data_required()]
@@ -16,7 +21,8 @@ class AttractionForm(FlaskForm):
             self.address.validators = [validators.data_required()]
             self.keywords.validators = [validators.data_required()]
             self.location_coordinates.validators = [validators.data_required(), validators.Regexp(r'^-?\d+.\d+,\s*-?\d+.\d+$', message="invalid coordinates format.")]
-            
+            self.local_admin.validators = [validators.data_required()]
+
     name = StringField("Name")
     description = TextAreaField("Description")
     category = StringField("Category")
@@ -28,6 +34,8 @@ class AttractionForm(FlaskForm):
     isDeleted = BooleanField(default=False, label="Delete?")
 
     image = FileField("Image banner", validators= [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"], "Only images")])
+
+    local_admin = SelectField("Local admin", validate_choice=False, coerce=int)
 
 
 

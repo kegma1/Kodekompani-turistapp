@@ -22,6 +22,7 @@ def add_attraction():
         new_attraction.group = attraction_form.group.data
         new_attraction.keywords = attraction_form.keywords.data
         new_attraction.image = attraction_form.image.data.stream
+        new_attraction.local_admin_id = attraction_form.local_admin.data
 
         db_session.add(new_attraction)
         db_session.commit()

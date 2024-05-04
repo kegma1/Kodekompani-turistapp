@@ -26,6 +26,7 @@ def admin_sights_edit(id):
         attraction.keywords = attraction_form.keywords.data
         attraction.location_coordinates = attraction_form.location_coordinates.data
         attraction.name = attraction_form.name.data
+        attraction.local_admin_id = attraction_form.local_admin.data
         
         db_session.commit()
         
@@ -40,6 +41,7 @@ def admin_sights_edit(id):
     attraction_form.keywords.data = attraction.keywords
     attraction_form.location_coordinates.data = attraction.location_coordinates
     attraction_form.name.data = attraction.name
+    attraction_form.local_admin.data = attraction.local_admin_id
 
     lat, lon  = attraction.location_coordinates.split(",")
     
