@@ -6,6 +6,9 @@
 {% block body_args %} onload="brython(1)"{% endblock %}
 {% block body %}
 <section class="content-section">
+    {% if show_edit %}
+        <a href="{{ url_for('admin_sights_edit', attraction_id=attraction_id) }}">Edit attraction</a>
+    {%endif%}
     <div class="image-container">
         <img src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}" style="width: 100%; height: auto;">
     </div>

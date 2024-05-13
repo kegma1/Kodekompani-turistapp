@@ -1,7 +1,7 @@
 from __main__ import app
 from flask import render_template, request, redirect, url_for, session
 from db_utils import db_session, Attraction, User, Achievement, UserAchievement, UserPosts
-from libs.helpers import require_login, get_user_age
+from libs.helpers import require_login, get_user_age, is_local_admin, is_admin
 from form.passcode_form import Passcode
 from form.post_form import PostForm
 from libs.create_post import create_post
@@ -56,5 +56,7 @@ def view_attraction(attraction_id: int):
                            achievements=None if not user_achivements else user_achivements,
                            lon=coords[1],
                            lat=coords[0],
-                           zoom = 15
+                           zoom = 15,
+                           attraction_id = attraction_id,
+                           show_edit=is_admin() or is_local_admin(attraction_id)
                            )
