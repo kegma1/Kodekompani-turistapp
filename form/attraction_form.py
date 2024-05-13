@@ -2,6 +2,8 @@ from wtforms import StringField, IntegerField, validators, SelectField, TextArea
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from db_utils import db_session, User
+from libs.helpers import is_admin
+from flask import session
 
 
 class AttractionForm(FlaskForm):
@@ -9,7 +11,6 @@ class AttractionForm(FlaskForm):
         super().__init__(formdata, **kwargs)
         self.location_coordinates.validators = [validators.Regexp(r'^-?\d+.\d+,\s*-?\d+.\d+$', message="invalid coordinates format.")]
         
-
         self.local_admin.choices = [(attraction.id, attraction.username) for attraction in db_session.query(User).all()]
 
         if data_required:

@@ -1,7 +1,7 @@
 from __main__ import app
 from flask import request, redirect, render_template, url_for, redirect
 from db_utils import Attraction, db_session
-from libs.helpers import require_local_admin, require_login
+from libs.helpers import require_local_admin, require_login, is_admin
 from form.attraction_form import AttractionForm
 from werkzeug.datastructures import CombinedMultiDict
 
@@ -12,6 +12,9 @@ def admin_sights_edit(attraction_id):
     attraction_form = AttractionForm(data_required=False, formdata=CombinedMultiDict((request.files, request.form)))
     attraction = db_session.query(Attraction).filter_by(id = attraction_id).first()
     
+    
+    attraction_form.local_admin.disabled = is_admin() 
+
     if request.method == "POST" and attraction_form.validate():
         attraction.address = attraction_form.address.data
         attraction.age_recommendation = attraction_form.age_recommendation.data
@@ -26,11 +29,15 @@ def admin_sights_edit(attraction_id):
         attraction.keywords = attraction_form.keywords.data
         attraction.location_coordinates = attraction_form.location_coordinates.data
         attraction.name = attraction_form.name.data
-        attraction.local_admin_id = attraction_form.local_admin.data
+        if is_admin():
+            attraction.local_admin_id = attraction_form.local_admin.data
         
         db_session.commit()
         
-        return redirect(url_for("admin_sights", page = 1))
+        if is_admin():
+            return redirect(url_for("admin_sights", page = 1))
+        else:
+            return redirect(url_for("view_attraction", attraction_id=attraction_id))
     
     attraction_form.address.data = attraction.address
     attraction_form.age_recommendation.data = attraction.age_recommendation

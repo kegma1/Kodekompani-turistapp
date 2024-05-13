@@ -24,7 +24,9 @@
         {{ render_field(attraction.group) }}
         {{ render_field(attraction.keywords) }}
         {{ render_field(attraction.isDeleted) }}
-        {{ render_field(attraction.local_admin) }}
+        {% if attraction.local_admin.disabled %}
+            {{ render_field(attraction.local_admin) }}
+        {%endif%}
         {{ render_field(attraction.image) }}
         <img src="data:image/jpg;base64,{{ image }}" alt="Profile picture" width="150", height="150"/>
     </dl>
