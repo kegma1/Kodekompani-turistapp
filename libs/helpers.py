@@ -61,15 +61,11 @@ def paging(page: int, amount: int, table = None, filter_deleted = False, query =
 
 
 def is_local_admin(id):
-    user = get_curr_user()
-    attraction = db_session.query(Attraction).filter_by(id=id).first()
-
-    print(user, attraction.local_admin)
-    print(user, attraction.local_admin)
-    print(user, attraction.local_admin)
-    print(user, attraction.local_admin)
-
-    return user is attraction.local_admin
+    if id:
+        user = get_curr_user()
+        attraction = db_session.query(Attraction).filter_by(id=id).first()
+        return user is attraction.local_admin
+    return False
 
 
 def require_login(f):
@@ -95,7 +91,7 @@ def require_local_admin(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
 
-        print(type(kwargs.get("attraction_id")))
+        print((kwargs.get("attraction_id")))
 
         if not (is_local_admin(kwargs.get("attraction_id")) or is_admin()):
             return redirect(url_for('funi', id = 1))

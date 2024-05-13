@@ -23,8 +23,8 @@
                 </a>
             </td>
             <td>
-                <a href="{{ url_for('admin_achievements_edit', id=achievement.id) }}">Edit</a>
-                <form method="POST" action="{{ url_for('toggle_achievement_status', id=achievement.id) }}" style="display:inline;">
+                <a href="{{ url_for('admin_achievements_edit', id=achievement.id, attraction_id=attraction_id) }}">Edit</a>
+                <form method="POST" action="{{ url_for('toggle_achievement_status', id=achievement.id, attraction_id=attraction_id) }}" style="display:inline;">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="toggle-btn">{{ "Enable" if achievement.is_deleted else "Disable" }}</button>
                 </form>
@@ -36,11 +36,10 @@
         </tr>
         {% endfor %}
     </table>
-    <a href="{{ url_for('admin_achievements', page=page - 1) }}" {% if page <= 1 %}class="disabled"{% endif %}>Previous page</a>
-    <a href="{{ url_for('admin_achievements', page=page + 1) }}">Next page</a>
-    <a href="{{ url_for('add_achievement') }}">Add New Achievement</a>
+    <a href="{{ url_for('admin_achievements', page=page - 1, attraction_id=attraction_id) }}" {% if page <= 1 %}class="disabled"{% endif %}>Previous page</a>
+    <a href="{{ url_for('admin_achievements', page=page + 1, attraction_id=attraction_id) }}">Next page</a>
+    <a href="{{ url_for('add_achievement', attraction_id=attraction_id) }}">Add New Achievement</a>
     <hr>
-    <a href="{{ url_for('admin', page=1) }}">Admin panel</a>
     <a href="{{ url_for('index') }}">Back to menu</a>
 </section>
 {% endblock %}

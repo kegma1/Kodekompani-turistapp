@@ -2,14 +2,16 @@
 {% block body %}
 <section>
     {% from "macros/_form_helper.html" import render_field %}
-    <form action="{{ url_for('add_achievement') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url_for('add_achievement', attraction_id=attraction_id) }}" method="post" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <dl>
             {{ render_field(form.name) }}
             {{ render_field(form.description) }}
             {{ render_field(form.pass_code) }}
             {{ render_field(form.xp_reward) }}
-            {{ render_field(form.attraction_id) }}
+            {% if form.attraction_id.disabled %}
+                {{ render_field(form.attraction_id) }}
+            {%endif%}
             {{ render_field(form.age_rating) }}
         </dl>
         {{ form.hidden_tag() }}
@@ -18,6 +20,6 @@
     </form>
     <hr>
     <a href="{{ url_for("index") }}">Back to menu</a>
-    <a href="{{ url_for("admin_achievements", page=1) }}">Back to Admin achievements</a>
+    <a href="{{ url_for("admin_achievements", page=1, attraction_id=attraction_id) }}">Back to Admin achievements</a>
 </section>
 {% endblock %}
