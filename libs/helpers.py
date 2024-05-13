@@ -3,7 +3,7 @@
 from functools import wraps
 from flask import redirect, session, url_for, request
 import datetime as buh
-from db_utils import db_session, User
+from db_utils import db_session, User, Attraction
 
 #STANDARDIZED AGE GROUPS
 age_groups = [0, 1, 3, 6, 9, 13, 18]
@@ -60,6 +60,18 @@ def paging(page: int, amount: int, table = None, filter_deleted = False, query =
     return data
 
 
+def is_local_admin(id):
+    user = get_curr_user()
+    attraction = db_session.query(Attraction).filter_by(id=id).first()
+
+    print(user, attraction.local_admin)
+    print(user, attraction.local_admin)
+    print(user, attraction.local_admin)
+    print(user, attraction.local_admin)
+
+    return user is attraction.local_admin
+
+
 def require_login(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -77,6 +89,19 @@ def require_admin(f):
             return redirect(url_for('funi', id = 1))
         return f(*args, **kwargs)
     return decorated_function 
+
+
+def require_local_admin(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        print(type(kwargs.get("attraction_id")))
+
+        if not (is_local_admin(kwargs.get("attraction_id")) or is_admin()):
+            return redirect(url_for('funi', id = 1))
+        return f(*args, **kwargs)
+    return decorated_function 
+
 
 def is_mobile(f):
     @wraps(f)

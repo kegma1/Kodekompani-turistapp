@@ -7,7 +7,7 @@
 {% block body %}
 {% from "macros/_form_helper.html" import render_field %}
 <section>
-    <form method="post" action="{{ url_for("admin_sights_edit", id = id) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ url_for("admin_sights_edit", attraction_id = id) }}" enctype="multipart/form-data">
     {{ attraction.csrf_token }}
     <dl>
         {{ render_field(attraction.name) }} 

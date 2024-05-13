@@ -1,16 +1,16 @@
 from __main__ import app
 from flask import request, redirect, render_template, url_for, redirect
 from db_utils import Attraction, db_session
-from libs.helpers import require_admin, require_login
+from libs.helpers import require_local_admin, require_login
 from form.attraction_form import AttractionForm
 from werkzeug.datastructures import CombinedMultiDict
 
-@app.route("/admin_sights_edit_<id>", methods = ["GET", "POST"])
+@app.route("/admin_sights_edit_<attraction_id>", methods = ["GET", "POST"])
 @require_login
-@require_admin
-def admin_sights_edit(id):
+@require_local_admin
+def admin_sights_edit(attraction_id):
     attraction_form = AttractionForm(data_required=False, formdata=CombinedMultiDict((request.files, request.form)))
-    attraction = db_session.query(Attraction).filter_by(id = id).first()
+    attraction = db_session.query(Attraction).filter_by(id = attraction_id).first()
     
     if request.method == "POST" and attraction_form.validate():
         attraction.address = attraction_form.address.data
@@ -48,7 +48,7 @@ def admin_sights_edit(id):
     return render_template("admin_sights_edit.html",
                            attraction = attraction_form,
                            image = attraction.image,
-                           id = id,
+                           id = attraction_id,
                            title = "Admin sights edit",
                            lon=lon,
                            lat=lat)
