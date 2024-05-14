@@ -19,7 +19,7 @@ session_factory = sessionmaker(bind=engine)
 db_session = scoped_session(session_factory)
 Base = declarative_base()
 
-# Model Definitions
+
 class Friend(Base):
     __tablename__ = 'friends'
     user_id = Column(Integer, ForeignKey('users_turistapp.id'), primary_key=True)
