@@ -20,6 +20,8 @@
             <p>Category: {{ info.category }}</p>
             <p>Age: {{ info.age_recommendation }}</p>
             <p>Address: {{ info.address }}</p>
+            <p>Local admin: <a href="{{ url_for('people_page', username=info.local_admin.username) }}">{{ info.local_admin.username }}</a></p>
+
             {% from "macros/_form_helper.html" import render_field %}
             <form action="{{ url_for("view_attraction", attraction_id=info.id) }}" method="post">
                 {{ passcode_form.csrf_token }}

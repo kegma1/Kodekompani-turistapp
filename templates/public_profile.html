@@ -6,8 +6,13 @@
             <h1>{{ user.full_name }}!</h1><br>
             <img src="data:image/jpg;base64,{{ user.profile_pic }}" alt="Profile picture">
             <p> Username: {{ user.username }} </p>
+
+            {% if user.attractions %}
+                <p> Email: {{ user.email }} </p>
+            {%endif%}
+
             {% if user.bio %}
-            <p> Bio: {{ user.bio }} </p>
+                <p> Bio: {{ user.bio }} </p>
             {%endif%}
 
             <p> Xp: {% if user.xp_collected == None %}
@@ -17,6 +22,14 @@
             {%endif%}xp.</p>
             <p> Status: {{ user_status }} in Narvik</p>
 
+            {% if user.attractions %}
+                <h2>Local admin</h2>
+                <ul>
+                    {% for attraction in user.attractions %}
+                        <li><a href="{{ url_for('view_attraction', attraction_id = attraction.id) }}">{{ attraction.name }}</a></li>
+                    {%endfor%}
+                </ul>
+            {%endif%}
             <a href="{{ url_for("followers_list", id = user.id, page = 1) }}">Followers: {{number_of_followers}}</a>
             <a href="{{ url_for("following_list", id = user.id, page = 1) }}">Following: {{number_of_following}}</a>
         </div>
