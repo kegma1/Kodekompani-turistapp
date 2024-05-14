@@ -49,7 +49,7 @@ def index():
                 .filter(UserPosts.isDeleted == False)\
                 .filter(User.isDeleted == False).all()
         
-        posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
+        posts = sorted(posts_raw, key=lambda x: x.post_id, reverse=True)
 
     if is_logged_in() and request.method == "POST" and post_form.validate_on_submit():
         create_post(post_form.attraction.data, post_form.message.data, post_form.image.data)

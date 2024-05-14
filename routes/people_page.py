@@ -10,7 +10,7 @@ def people_page(username: str):
         return redirect(url_for("people_list", page = 1))
     
     posts_raw = db_session.query(UserPosts).filter_by(user = user, isDeleted = False).all()
-    posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
+    posts = sorted(posts_raw, key=lambda x: x.post_id, reverse=True)
     
     if not user:
         return "no user by that name"

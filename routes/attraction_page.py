@@ -20,7 +20,7 @@ def view_attraction(attraction_id: int):
         .filter(UserPosts.is_status == False, UserPosts.isDeleted == False)\
         .filter(User.isDeleted == False).all()
     
-    posts = sorted(posts_raw, key=lambda x: x.time, reverse=True)
+    posts = sorted(posts_raw, key=lambda x: x.post_id, reverse=True)
     
     age = get_user_age(user)
     attractions = db_session.query(Attraction).filter(Attraction.age_recommendation <= age).all()

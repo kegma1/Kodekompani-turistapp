@@ -23,7 +23,7 @@
             <p> Status: {{ user_status }} in Narvik</p>
 
             {% if user.attractions %}
-                <h2>Local admin</h2>
+                <h1>Local admin</h1>
                 <ul>
                     {% for attraction in user.attractions %}
                         <li><a href="{{ url_for('view_attraction', attraction_id = attraction.id) }}">{{ attraction.name }}</a></li>
