@@ -38,7 +38,7 @@ class User(Base):
     isDeleted = Column(Boolean, default= False)
     xp_collected = Column(Integer, default=0)
     _profile_pic = Column("profile_pic" , LargeBinary)
-    attractions = relationship("Attraction", secondary="user_attractions")
+    attractions_visted = relationship("Attraction", secondary="user_attractions")
     achievements = relationship("Achievement", secondary="user_achievements")
     posts = relationship('UserPosts', back_populates='user')
     
