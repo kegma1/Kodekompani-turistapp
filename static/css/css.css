@@ -76,7 +76,7 @@ h1 {
 
 h2 {
     text-decoration: underline;
-    font-size: 1.1vw;
+    /* font-size: 1.1vw; */
 }
 
 .narvik a, .narvik-link {
