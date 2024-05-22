@@ -11,8 +11,8 @@ class ProfileForm(FlaskForm):
     last_name = StringField("Last name:")
     year = DateField("Year o' birth:")
     email = EmailField("Email address:", [validators.data_required()])
-    old_password = PasswordField("Old Password:", [validators.Length(min = 8, max=255)])
-    password = PasswordField("Password:", [validators.equal_to("confirm", message="Passwords must match"), validators.Length(min = 8, max=255)])
+    old_password = PasswordField("Old Password:")
+    password = PasswordField("Password:", [validators.equal_to("confirm", message="Passwords must match")])
     confirm = PasswordField("Confirm password:")
     bio = TextAreaField("Description:", [validators.length(min = 0, max= 255)])
     picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"])])
@@ -23,9 +23,3 @@ class ProfileForm(FlaskForm):
             pass
         elif db_session.query(User.id).filter_by(username=username.data).first() is not None:
             raise ValidationError("Username is already taken.")
-    
-    #NEEDS FIX YO 
-    # def validate_old_password(self, password):
-    #     user_password = db_session.query(User.encrypted_password).filter_by(username= self.username.data).first()
-    #     if user_password is not None and not check_password_hash(user_password[0], password.data):
-    #         raise ValidationError("Old password is not correct.")  
