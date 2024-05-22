@@ -287,3 +287,8 @@ article, section {
 .post-footer > p {
     margin: 0;
 }
+
+.biotext {
+    word-wrap: break-word;
+    max-width: 300px;
+}

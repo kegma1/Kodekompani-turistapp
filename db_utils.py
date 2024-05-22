@@ -12,7 +12,7 @@ from db_connection_config import HOST, USER, PASSWORD, DATABASE
 
 # Database URL and Engine Setup
 DATABASE_URL = f"mysql+mysqlconnector://{USER}:{PASSWORD}@{HOST}/{DATABASE}"
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=False) #ECHO IF YOU WANT TO DEBUG SQL STATEMENTS
 
 # Session and Base Setup
 session_factory = sessionmaker(bind=engine)

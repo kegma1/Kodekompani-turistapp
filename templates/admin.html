@@ -16,7 +16,7 @@
             <td> {{ user.username }} </td>
             <td> {{ user.email }} </td>
             <td> {{ user.age }} </td>
-            <td> {{ user.bio }} </td>
+            <td class="biotext"> {{ user.bio }} </td>
             {% if user.isAdmin == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
             {% if user.isDeleted == 0 %} <td> No </td> {% else %} <td> Yes </td> {% endif %}
             <td> 
