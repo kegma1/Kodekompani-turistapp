@@ -11,10 +11,10 @@ class ProfileForm(FlaskForm):
     last_name = StringField("Last name:")
     year = DateField("Year o' birth:")
     email = EmailField("Email address:", [validators.data_required()])
-    old_password = PasswordField("Old Password:")
-    password = PasswordField("Password:", [validators.equal_to("confirm", message="Passwords must match")])
+    old_password = PasswordField("Old Password:", [validators.Length(min = 8, max=255)])
+    password = PasswordField("Password:", [validators.equal_to("confirm", message="Passwords must match"), validators.Length(min = 8, max=255)])
     confirm = PasswordField("Confirm password:")
-    bio = TextAreaField("Description:")
+    bio = TextAreaField("Description:", [validators.length(min = 0, max= 255)])
     picture = FileField("Profile Picture:", [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"])])
     keep_picture = BooleanField("Reset profile picture")
 
