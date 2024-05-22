@@ -9,7 +9,10 @@ from libs.helpers import require_login, require_admin, paging, get_change
 def admin_posts(page):
     data = paging(page, 5, UserPosts,)
     
-    if not data:
+    if not data and page == 1:
+        return redirect(url_for("index"))
+    
+    elif not data:
         return redirect(url_for("admin_posts", page = 1))
     
     return render_template("admin_posts.html",
