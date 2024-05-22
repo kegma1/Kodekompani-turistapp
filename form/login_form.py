@@ -11,7 +11,7 @@ class LogInForm(FlaskForm):
     
     def validate_username(self, username):
         user = db_session.query(User).filter_by(username = username.data).first()
-        if user == None:
+        if user == None or user.username != username.data:
             raise ValidationError("Username does not exist.")
         if user.isDeleted:
             raise ValidationError("This user is deleted")
