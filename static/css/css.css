@@ -77,7 +77,8 @@ h2 {
 .narvik a, .narvik-link {
     color: whitesmoke;
     text-decoration: none; /* No underline */
-    font-family: 'Futura', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    /*font-weight: 700; /* Bold weight */
     font-size: 30px;
     /* padding-top: 50px; */
     /* display: inline-block; */
