@@ -29,6 +29,11 @@
     .info-container, .achievements-container, .map-container {
         width: 100%;
     }
+
+    .post-content > p {
+        word-wrap: break-word;
+        max-width: 500px;
+    }
 }
 
 body {
@@ -263,6 +268,11 @@ article, section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.post-content > p {
+    word-wrap: break-word;
+    max-width: 200px;
 }
 
 .post-content > img {
