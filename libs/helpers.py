@@ -4,6 +4,7 @@ from functools import wraps
 from flask import redirect, session, url_for, request
 import datetime as buh
 from db_utils import db_session, User, Attraction
+from user_agents import parse
 
 #STANDARDIZED AGE GROUPS
 age_groups = [0, 1, 3, 6, 9, 13, 18]
@@ -102,7 +103,12 @@ def require_local_admin(f):
 def is_mobile(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        user_agent = request.headers.get('User-Agent').lower()
-        kwargs['is_mobile'] = 'mobi' in user_agent or 'iphone' in user_agent or 'android' in user_agent
+        user_agent = parse(request.headers.get('User-Agent'))
+        kwargs['is_mobile'] = user_agent.is_mobile
+        print(user_agent.is_mobile)
+        print(user_agent.is_mobile)
+        print(user_agent.is_mobile)
+        print(user_agent.is_mobile)
+        print(user_agent.is_mobile)
         return f(*args, **kwargs)
     return decorated_function

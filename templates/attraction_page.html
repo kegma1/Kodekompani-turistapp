@@ -11,7 +11,13 @@
         <a href="{{ url_for('admin_achievements', attraction_id=attraction_id, page=1) }}">Manage achievement</a>
     {%endif%}
     <div class="image-container">
-        <img src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}" style="width: 100%; height: auto;">
+        <center>
+        {% if is_mobile %}
+            <img src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}" style="width: 100%; height: auto;">
+        {% else %}
+            <img src="data:image/png;base64,{{ image }}" alt="image for {{ info.name }}" style="width: 30vw; height: auto;">
+        {% endif %}
+        </center>
     </div>
     <div class="info-container">
         <h1>{{ info.name }}</h1>
