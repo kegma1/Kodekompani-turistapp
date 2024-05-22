@@ -105,10 +105,5 @@ def is_mobile(f):
     def decorated_function(*args, **kwargs):
         user_agent = parse(request.headers.get('User-Agent'))
         kwargs['is_mobile'] = user_agent.is_mobile
-        print(user_agent.is_mobile)
-        print(user_agent.is_mobile)
-        print(user_agent.is_mobile)
-        print(user_agent.is_mobile)
-        print(user_agent.is_mobile)
         return f(*args, **kwargs)
     return decorated_function
