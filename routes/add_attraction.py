@@ -19,8 +19,6 @@ def add_attraction():
         new_attraction.age_recommendation = attraction_form.age_recommendation.data
         new_attraction.location_coordinates = attraction_form.location_coordinates.data
         new_attraction.address = attraction_form.address.data
-        new_attraction.group = attraction_form.group.data
-        new_attraction.keywords = attraction_form.keywords.data
         new_attraction.image = attraction_form.image.data.stream
         new_attraction.local_admin_id = attraction_form.local_admin.data
 

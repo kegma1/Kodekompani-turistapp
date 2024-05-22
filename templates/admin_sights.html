@@ -9,8 +9,6 @@
             <th>Recommended age:</th>
             <th>Location:</th>
             <th>Address:</th>
-            <th>Group:</th>
-            <th>Keywords:</th>
             <th>Deleted?:</th>
             <th>Image:</th>
         </tr>
@@ -22,8 +20,6 @@
             <td> {{ attraction.age_recommendation }} </td>
             <td> {{ attraction.location_coordinates }} </td>
             <td> {{ attraction.address }} </td>
-            <td> {{ attraction.group }} </td>
-            <td> {{ attraction.keywords }} </td>
             <td> {{ attraction.isDeleted }} </td>
             <td> <img src="data:image/jpg;base64,{{ attraction.image }}" alt="Profile picture" width="150", height="150"/> </td>
             <td> <a href="{{ url_for("admin_sights_edit", attraction_id = attraction.id) }}">EDIT</a></td>

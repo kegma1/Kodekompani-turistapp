@@ -20,13 +20,11 @@ def admin_sights_edit(attraction_id):
         attraction.age_recommendation = attraction_form.age_recommendation.data
         attraction.category = attraction_form.category.data
         attraction.description = attraction_form.description.data
-        attraction.group = attraction_form.group.data
         attraction.isDeleted = attraction_form.isDeleted.data
         
         if attraction_form.image.data:
             attraction.image = attraction_form.image.data
             
-        attraction.keywords = attraction_form.keywords.data
         attraction.location_coordinates = attraction_form.location_coordinates.data
         attraction.name = attraction_form.name.data
         if is_admin():
@@ -43,9 +41,7 @@ def admin_sights_edit(attraction_id):
     attraction_form.age_recommendation.data = attraction.age_recommendation
     attraction_form.category.data = attraction.category
     attraction_form.description.data = attraction.description
-    attraction_form.group.data = attraction.group
     attraction_form.isDeleted.data = attraction.isDeleted
-    attraction_form.keywords.data = attraction.keywords
     attraction_form.location_coordinates.data = attraction.location_coordinates
     attraction_form.name.data = attraction.name
     attraction_form.local_admin.data = attraction.local_admin_id

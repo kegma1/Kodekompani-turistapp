@@ -20,7 +20,6 @@ class AttractionForm(FlaskForm):
             self.category.validators = [validators.data_required()]
             self.age_recommendation.validators = [validators.data_required()]
             self.address.validators = [validators.data_required()]
-            self.keywords.validators = [validators.data_required()]
             self.location_coordinates.validators = [validators.data_required(), validators.Regexp(r'^-?\d+.\d+,\s*-?\d+.\d+$', message="invalid coordinates format.")]
             self.local_admin.validators = [validators.data_required()]
 
@@ -30,8 +29,6 @@ class AttractionForm(FlaskForm):
     age_recommendation = SelectField(choices=[0, 1, 3, 6, 9, 13, 18], validate_choice=False)
     location_coordinates = HiddenField("Location coordinates", default="68.430,17.200")
     address = StringField("address")
-    group = IntegerField("group")
-    keywords = StringField("keywords")
     isDeleted = BooleanField(default=False, label="Delete?")
 
     image = FileField("Image banner", validators= [FileAllowed(["png", "jpg", "jpeg", "jfif", "webp"], "Only images")])
