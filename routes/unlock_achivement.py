@@ -12,7 +12,7 @@ def unlock_achivement(attraction: int, passcode: str):
     (attraction_name,) = db_session.query(Attraction.name).filter_by(id = attraction).first()
      
     if achievement and achievement not in user.achievements and not achievement.is_deleted:
-        if achievement.attraction not in user.attractions:
+        if achievement.attraction not in user.attractions_visted:
             user.attractions_visted.append(achievement.attraction)
             create_post(attraction, f"{session['user']} visitied {attraction_name} for the first time.", is_status=True)
         
