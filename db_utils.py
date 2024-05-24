@@ -1,10 +1,13 @@
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Boolean, LargeBinary, DATE, text, func, TIMESTAMP
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
+from werkzeug.security import generate_password_hash
 from libs.pfp import make_profile
 from base64 import b64encode
 from io import BytesIO
 from PIL import Image
+import sys
+from datetime import date
 
 # Import database configuration variables
 # from db_connection_config import HOST, USER, PASSWORD, DATABASE
@@ -210,5 +213,14 @@ def insert_test_data():
 if __name__ == "__main__":
     delete_tables()
     create_tables()
-    insert_test_data()
-
+    if "--release" not in sys.argv:
+        insert_test_data()
+    else:
+        username = input("Username: ")
+        full_name = input("Full name: ")
+        email = input("Email: ")
+        password = input("Password: ")
+        admin = User(username, email, generate_password_hash(password), full_name, date.today())
+        admin.isAdmin = True
+        db_session.add(admin)
+        db_session.commit()
